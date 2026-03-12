@@ -4,207 +4,866 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohit Kumar | Astrophysics Research</title>
+    <title>Rohit Kumar | Astrophysicist | Ariel University & NIT Hamirpur</title>
+    <meta name="description" content="Rohit Kumar - Astrophysics Researcher specializing in AGN, Black Holes, Accretion Disks. M.Sc. Physics at Ariel University, Israel and NIT Hamirpur, India.">
+    <meta name="keywords" content="Astrophysics, AGN, Black Holes, Accretion Disk, Galaxy Formation, Research, Ariel University, NIT Hamirpur">
+    <meta name="author" content="Rohit Kumar">
+    
+    <!-- Open Graph for LinkedIn/Social Sharing -->
+    <meta property="og:title" content="Rohit Kumar | Astrophysicist">
+    <meta property="og:description" content="Exploring galaxies, black holes, and the mysteries of the universe.">
+    <meta property="og:image" content="photo.jpeg">
+    <meta property="og:url" content="https://rohitkumaragk.github.io">
+    
+    <!-- Fonts for better typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Particle Background (for cosmic effect) -->
+    <div id="particles-js"></div>
+    
+    <!-- Progress Bar for scroll -->
+    <div class="progress-bar" id="progressBar"></div>
 
     <header>
-        <nav>
-            <h2>Rohit Kumar</h2>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h2 class="logo">Rohit Kumar</h2>
+                <span class="nav-location"><i class="fas fa-map-marker-alt"></i> Ariel University, Israel</span>
+            </div>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
             <ul>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>  <!-- NEW: Added in nav -->
+                <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button onclick="toggleDarkMode()">🌙</button>
-        </nav>
-
-        <div class="hero">
-            <img src="photo.jpeg" alt="Rohit Kumar">
-            <h1>Rohit Kumar</h1>
-            <p>Physics Student | Astrophysics | Astronomy | Mathematics | Blog Writer</p>
-            <a class="cv" href="Rohit_CV.pdf">Download CV</a>
         </div>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
-            🌌 Astronomy & Astrophysics Researcher | Physics Graduate @ NIT Hamirpur<br><br>
-            Namaste! I'm Rohit – a passionate physics student, who dreams of understanding galaxies, black holes, and the mysteries of the universe. My research interests include Galaxy Formation, Star formation, Accretion disk in eccentric binary system, Accretion disk in AGN, AGN Feedback, FRBs, and Black Hole Physics.<br><br>
-            
-            <strong>Current Work:</strong><br>
-            - Accretion disk in eccentric binary system<br><br>
-            
-            <strong>🛠️ Skills:</strong><br>
-            Python | MATLAB | Origin | Data Analysis | Scientific Writing | Linux<br><br>
-            
-            <strong>🎓 Education:</strong><br>
-            M.Sc. Physics @ NIT Hamirpur | B.Sc. @ IGNOU<br><br>
-            
-            <strong>🌱 Learning Always:</strong><br>
-            Currently diving deep into X-ray data analysis and computational astrophysics. Recently completed training from Rubin Observatory, IUCAA workshops, and summer schools at IIA & ICSP Kolkata.<br><br>
-            
-            <strong>📝 Blog:</strong> <a href="https://questioneverythingagk.blogspot.com/" target="_blank">questioneverythingagk.blogspot.com</a><br>
-            
-            <strong>💬 Ask me about:</strong> AGN, Black Holes, Telescope making, Accretion Disk, or how to start research with limited resources!<br><br>
-            
-            ⚡ <strong>Fun fact:</strong> From a small village in Bihar to exploring the cosmos – curiosity has no boundaries!<br><br>
-            
-            <strong>📫 Let's connect:</strong> rohitkumaragk@gmail.com | <a href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank">LinkedIn</a> | <a href="https://questioneverythingagk.blogspot.com/" target="_blank">Blog</a>
-        </p>
-    </section>
+    <main>
+        <!-- Hero Section with Cosmic Animation -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-image-wrapper">
+                    <img src="photo.jpeg" alt="Rohit Kumar" class="hero-image">
+                    <div class="hero-image-glow"></div>
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="greeting">Hi, I'm</span>
+                        <span class="name">Rohit Kumar</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        <span class="typed-text"></span>
+                        <span class="cursor">&nbsp;</span>
+                    </p>
+                    <div class="hero-badges">
+                        <span class="badge israel"><i class="fas fa-university"></i> Ariel University, Israel</span>
+                        <span class="badge india"><i class="fas fa-graduation-cap"></i> NIT Hamirpur</span>
+                        <span class="badge research"><i class="fas fa-star"></i> AGN & Black Hole Physics</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="Rohit_CV.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download CV
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <span>Scroll to explore</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
 
-    <section id="research">
-        <h2>Research Interests</h2>
-        <ul>
-            <li>Binary Star Systems</li>
-            <li>Accretion Disk Formation</li>
-            <li>Stellar Wind Interactions</li>
-            <li>Computational Astrophysics</li>
-            <li>Formation of Galaxies and Stars</li>
-            <li>Evolution of Black Holes</li>
-            <li>Active Galactic Nuclei (AGN)</li>
-        </ul>
-    </section>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">01.</span>
+                    <span class="section-name">About Me</span>
+                </h2>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="lead">
+                            🌌 <strong>Astrophysics Researcher</strong> | M.Sc. Physics @ Ariel University, Israel | 
+                            Physics Graduate @ NIT Hamirpur, India
+                        </p>
+                        
+                        <p>
+                            Namaste! I'm Rohit – a passionate physicist from a small village in Bihar, India, 
+                            now exploring the cosmos at Ariel University, Israel. My journey from wondering 
+                            about the stars on my village rooftop to actively researching black holes and 
+                            galaxies is driven by an insatiable curiosity.
+                        </p>
+                        
+                        <div class="research-statement">
+                            <h3>🔭 Research Philosophy</h3>
+                            <p>
+                                I believe that understanding the universe is not just about equations and data – 
+                                it's about connecting our existence to the cosmos. My research focuses on 
+                                unraveling the mysteries of <strong>Active Galactic Nuclei (AGN)</strong>, 
+                                <strong>black hole accretion physics</strong>, and <strong>galaxy evolution</strong> 
+                                using multi-wavelength observations and computational simulations.
+                            </p>
+                        </div>
+                        
+                        <div class="interests-grid">
+                            <div class="interest-item">
+                                <i class="fas fa-galaxy"></i>
+                                <span>Galaxy Formation</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-black-hole"></i>
+                                <span>Black Hole Physics</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-sun"></i>
+                                <span>AGN Feedback</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-star"></i>
+                                <span>FRBs</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-circle"></i>
+                                <span>Accretion Disks</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-wave-square"></i>
+                                <span>X-ray Astronomy</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>From a small village to the international stage – curiosity knows no boundaries. 
+                            The universe is vast, and so is our potential to understand it.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Research Projects</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">11</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Internships</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Countries</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="projects">
-        <h2>Research Projects</h2>
-        <div class="card">
-            <h3>Wind Accretion Simulation</h3>
-            <p>Accretion Disk in eccentric Binary Stars systems</p>
-        </div>
-        <div class="card">
-            <h3>AGN Data Analysis</h3>
-            <p>Study of Active Galactic Nuclei using NASA's Swift BAT, XRT, UVOT, Fermi-LAT and NuSTAR telescopes</p>
-        </div>
-        <div class="card">
-            <h3>150mm Newtonian Telescope</h3>
-            <p>Construction of a reflecting telescope at NIT Hamirpur</p>
-        </div>
-        <div class="card">
-            <h3>Zooniverse Citizen Science</h3>
-            <p>Part-time Independent Researcher on Zooniverse platform</p>
-        </div>
-    </section>
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">02.</span>
+                    <span class="section-name">Education</span>
+                </h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item current">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2025 - Present</div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>M.Sc. Physics</h3>
+                                <span class="university-badge israel">Ariel University, Israel</span>
+                            </div>
+                            <p class="timeline-research">Research: Accretion disk dynamics in eccentric binary systems</p>
+                            <div class="timeline-tags">
+                                <span>Computational Astrophysics</span>
+                                <span>Binary Systems</span>
+                                <span>Accretion Physics</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2021 - 2023</div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>M.Sc. Physics</h3>
+                                <span class="university-badge india">NIT Hamirpur, India</span>
+                            </div>
+                            <p class="timeline-detail">CGPA: 7.52/10</p>
+                            <p class="timeline-research">Thesis: AGN Data Analysis & 150mm Newtonian Telescope Construction</p>
+                            <div class="timeline-tags">
+                                <span>AGN</span>
+                                <span>X-ray Astronomy</span>
+                                <span>Telescope Making</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2016 - 2020</div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>B.Sc. Physics</h3>
+                                <span class="university-badge india">IGNOU, Delhi</span>
+                            </div>
+                            <p class="timeline-detail">Percentage: 62%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2017 - 2019</div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>D.El.Ed.</h3>
+                                <span class="university-badge india">G.J.P.H.S., Siwan, Bihar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- ========== NEW CERTIFICATIONS SECTION ========== -->
-    <section id="certifications">
-        <h2>🏅 Certifications & Trainings</h2>
-        
-        <div class="cert-grid">
-            <!-- Row 1 -->
-            <div class="cert-card">
-                <h3>🔭 Rubin Observatory & AAS</h3>
-                <p><strong>Exploding Stars Investigation</strong> (July 2024)</p>
+        <!-- Research Interests Section -->
+        <section id="research" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">03.</span>
+                    <span class="section-name">Research Interests</span>
+                </h2>
+                
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-black-hole"></i>
+                        </div>
+                        <h3>Active Galactic Nuclei (AGN)</h3>
+                        <p>Studying supermassive black hole accretion, feedback mechanisms, and their role in galaxy evolution using multi-wavelength data.</p>
+                        <div class="research-tools">
+                            <span>Swift BAT</span>
+                            <span>NuSTAR</span>
+                            <span>Fermi-LAT</span>
+                        </div>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-circle-nodes"></i>
+                        </div>
+                        <h3>Accretion Disk Physics</h3>
+                        <p>Investigating disk dynamics in eccentric binary systems and AGN environments through computational simulations.</p>
+                        <div class="research-tools">
+                            <span>Python</span>
+                            <span>Hydrodynamics</span>
+                            <span>Simulations</span>
+                        </div>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-galaxy"></i>
+                        </div>
+                        <h3>Galaxy Formation & Evolution</h3>
+                        <p>Understanding how galaxies form, evolve, and interact with their central black holes across cosmic time.</p>
+                        <div class="research-tools">
+                            <span>Cosmology</span>
+                            <span>Structure Formation</span>
+                            <span>Feedback</span>
+                        </div>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Fast Radio Bursts (FRBs)</h3>
+                        <p>Exploring the origins and mechanisms behind these mysterious millisecond-duration radio transients.</p>
+                        <div class="research-tools">
+                            <span>Radio Astronomy</span>
+                            <span>Transients</span>
+                            <span>Data Analysis</span>
+                        </div>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Binary Star Systems</h3>
+                        <p>Analyzing wind accretion and mass transfer in eccentric binary systems and their observational signatures.</p>
+                        <div class="research-tools">
+                            <span>Binary Evolution</span>
+                            <span>Mass Transfer</span>
+                            <span>Orbital Dynamics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="research-icon">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <h3>X-ray Astronomy</h3>
+                        <p>Analyzing hard X-ray data from space telescopes to study high-energy processes in black holes and AGN.</p>
+                        <div class="research-tools">
+                            <span>X-ray Spectroscopy</span>
+                            <span>Timing Analysis</span>
+                            <span>Imaging</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="cert-card">
-                <h3>🌠 IUCAA & St. Xavier's</h3>
-                <p><strong>Summer School in Theoretical (Astro)Physics</strong> (June 2024)</p>
-            </div>
-            
-            <div class="cert-card">
-                <h3>🏛️ Indian Institute of Astrophysics</h3>
-                <p><strong>Summer School Internship</strong> (July 2023)</p>
-            </div>
-            
-            <!-- Row 2 -->
-            <div class="cert-card">
-                <h3>🚀 Indian Centre for Space Physics</h3>
-                <p><strong>Student Internship</strong> (Nov 2022)</p>
-            </div>
-            
-            <div class="cert-card">
-                <h3>📊 IUCAA & GHRCE Nagpur</h3>
-                <p><strong>Theoretical and Data Analysis Techniques in Cosmology</strong> (July 2024)</p>
-            </div>
-            
-            <div class="cert-card">
-                <h3>🐍 IUCAA & Sardar Patel University</h3>
-                <p><strong>Data Analysis in Cosmology using Python</strong> (Oct 2024)</p>
-            </div>
-            
-            <!-- Row 3 -->
-            <div class="cert-card">
-                <h3>📡 Amity University</h3>
-                <p><strong>Recent Progress in Astrophysics</strong> (Nov 2022)</p>
-            </div>
-            
-            <div class="cert-card">
-                <h3>💻 IIIT Kota</h3>
-                <p><strong>Summer Internship</strong> (July 2021)</p>
-            </div>
-            
-            <div class="cert-card">
-                <h3>🎨 Rubin Observatory & AAS</h3>
-                <p><strong>Color the Universe</strong> (Feb 2025)</p>
-            </div>
-            
-            <!-- Row 4 -->
-            <div class="cert-card">
-                <h3>🌐 IUCAA & Central University HP</h3>
-                <p><strong>Beginning Astronomy v2</strong></p>
-            </div>
-            
-            <div class="cert-card">
-                <h3>🗣️ Oxford School of English</h3>
-                <p><strong>English Course</strong> (2019)</p>
-            </div>
-        </div>
+        </section>
 
-        <!-- Optional: Table format for detailed view -->
-        <details>
-            <summary style="cursor: pointer; color: #0066cc; margin-top: 20px; font-weight: bold;">📋 View all certifications in table format</summary>
-            <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
-                <thead>
-                    <tr style="background-color: #f2f2f2;">
-                        <th style="padding: 10px; border: 1px solid #ddd;">S.No</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Program</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Organization</th>
-                        <th style="padding: 10px; border: 1px solid #ddd;">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1</td><td>Exploding Stars Investigation</td><td>Vera C. Rubin Observatory & AAS</td><td>July 2024</td></tr>
-                    <tr><td>2</td><td>Summer School in Theoretical (Astro)Physics</td><td>IUCAA & St. Xavier's College</td><td>June 2024</td></tr>
-                    <tr><td>3</td><td>Beginning Astronomy v2</td><td>IUCAA & Central University HP</td><td>-</td></tr>
-                    <tr><td>4</td><td>Summer School Internship</td><td>Indian Institute of Astrophysics (IIA)</td><td>July 2023</td></tr>
-                    <tr><td>5</td><td>Student Internship</td><td>Indian Centre for Space Physics</td><td>Nov 2022</td></tr>
-                    <tr><td>6</td><td>Recent Progress in Astrophysics</td><td>Amity University</td><td>Nov 2022</td></tr>
-                    <tr><td>7</td><td>Summer Internship</td><td>IIIT Kota</td><td>July 2021</td></tr>
-                    <tr><td>8</td><td>Theoretical & Data Analysis Techniques in Cosmology</td><td>IUCAA & GHRCE Nagpur</td><td>July 2024</td></tr>
-                    <tr><td>9</td><td>Data Analysis in Cosmology using Python</td><td>IUCAA & Sardar Patel University</td><td>Oct 2024</td></tr>
-                    <tr><td>10</td><td>Color the Universe</td><td>Vera C. Rubin Observatory & AAS</td><td>Feb 2025</td></tr>
-                    <tr><td>11</td><td>English Course</td><td>Oxford School of English</td><td>2019</td></tr>
-                </tbody>
-            </table>
-        </details>
-    </section>
-    <!-- ========== END CERTIFICATIONS SECTION ========== -->
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">04.</span>
+                    <span class="section-name">Research Projects</span>
+                </h2>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <i class="fas fa-code-branch project-icon"></i>
+                            <span class="project-year">2025</span>
+                        </div>
+                        <h3>Accretion Disk in Eccentric Binary Systems</h3>
+                        <p class="project-venue">Ariel University, Israel</p>
+                        <p class="project-description">Simulating wind accretion and disk formation in eccentric binary star systems using computational hydrodynamics. Investigating orbital modulation and accretion variability.</p>
+                        <div class="project-tags">
+                            <span>Python</span>
+                            <span>Hydrodynamics</span>
+                            <span>Binary Stars</span>
+                            <span>Simulation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card featured">
+                        <div class="featured-badge">
+                            <i class="fas fa-crown"></i> Featured Research
+                        </div>
+                        <div class="project-header">
+                            <i class="fas fa-satellite project-icon"></i>
+                            <span class="project-year">2023-2024</span>
+                        </div>
+                        <h3>AGN & Blazar Analysis with NASA Telescopes</h3>
+                        <p class="project-venue">BHU Collaboration & Independent Research</p>
+                        <p class="project-description">Multi-wavelength study of Active Galactic Nuclei and blazars using hard X-ray data from Swift BAT, XRT, UVOT, Fermi-LAT, and NuSTAR telescopes. Focus on spectral analysis and variability.</p>
+                        <div class="project-tags">
+                            <span>Swift BAT</span>
+                            <span>NuSTAR</span>
+                            <span>Fermi-LAT</span>
+                            <span>X-ray Analysis</span>
+                            <span>AGN</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+                            <a href="#" class="project-link"><i class="fas fa-chart-line"></i> Results</a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <i class="fas fa-telescope project-icon"></i>
+                            <span class="project-year">2023</span>
+                        </div>
+                        <h3>150mm Newtonian Reflecting Telescope</h3>
+                        <p class="project-venue">NIT Hamirpur</p>
+                        <p class="project-description">Designed and constructed a 150mm aperture Newtonian reflecting telescope for astronomical observations. Hands-on experience in optics, mirror fabrication, and telescope mounting.</p>
+                        <div class="project-tags">
+                            <span>Optics</span>
+                            <span>Telescope Making</span>
+                            <span>Observational Astronomy</span>
+                            <span>Hands-on</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <i class="fas fa-users project-icon"></i>
+                            <span class="project-year">2023-Present</span>
+                        </div>
+                        <h3>Zooniverse Citizen Science</h3>
+                        <p class="project-venue">Part-time Independent Researcher</p>
+                        <p class="project-description">Active contributor to various Zooniverse projects, assisting in classification and data analysis for astronomy research projects including galaxy morphology and supernova searches.</p>
+                        <div class="project-tags">
+                            <span>Citizen Science</span>
+                            <span>Data Classification</span>
+                            <span>Galaxy Morphology</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="publications">
-        <h2>Publications</h2>
-        <p>(Coming soon)</p>
-    </section>
+        <!-- Certifications Section (as requested) -->
+        <section id="certifications" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">05.</span>
+                    <span class="section-name">Certifications & Trainings</span>
+                </h2>
+                
+                <div class="cert-showcase">
+                    <div class="cert-badge-large rubin">
+                        <i class="fas fa-star"></i>
+                        <span>Rubin Observatory</span>
+                    </div>
+                    <div class="cert-badge-large iucaa">
+                        <i class="fas fa-atom"></i>
+                        <span>IUCAA</span>
+                    </div>
+                    <div class="cert-badge-large iia">
+                        <i class="fas fa-building"></i>
+                        <span>IIA</span>
+                    </div>
+                    <div class="cert-badge-large icsp">
+                        <i class="fas fa-satellite"></i>
+                        <span>ICSP</span>
+                    </div>
+                    <div class="cert-badge-large aas">
+                        <i class="fas fa-globe"></i>
+                        <span>AAS</span>
+                    </div>
+                </div>
+                
+                <div class="cert-grid">
+                    <!-- Row 1: Major Certifications -->
+                    <div class="cert-card">
+                        <div class="cert-icon rubin">
+                            <i class="fas fa-explosion"></i>
+                        </div>
+                        <h3>Exploding Stars Investigation</h3>
+                        <p class="cert-org">Vera C. Rubin Observatory & AAS</p>
+                        <p class="cert-date">July 2024</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon iucaa">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3>Summer School in Theoretical (Astro)Physics</h3>
+                        <p class="cert-org">IUCAA & St. Xavier's College</p>
+                        <p class="cert-date">June 2024</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon iia">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Summer School Internship</h3>
+                        <p class="cert-org">Indian Institute of Astrophysics (IIA)</p>
+                        <p class="cert-date">July 2023</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon icsp">
+                            <i class="fas fa-satellite"></i>
+                        </div>
+                        <h3>Student Internship</h3>
+                        <p class="cert-org">Indian Centre for Space Physics (ICSP)</p>
+                        <p class="cert-date">Nov 2022</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon iucaa">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Beginning Astronomy v2: Data-Driven Journey</h3>
+                        <p class="cert-org">IUCAA & Central University HP</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon amity">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Recent Progress in Astrophysics</h3>
+                        <p class="cert-org">Amity University</p>
+                        <p class="cert-date">Nov 2022</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon iucaa">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Theoretical & Data Analysis Techniques in Cosmology</h3>
+                        <p class="cert-org">IUCAA & GHRCE Nagpur</p>
+                        <p class="cert-date">July 2024</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon iucaa">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3>Data Analysis in Cosmology using Python</h3>
+                        <p class="cert-org">IUCAA & Sardar Patel University</p>
+                        <p class="cert-date">Oct 2024</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon rubin">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Color the Universe</h3>
+                        <p class="cert-org">Vera C. Rubin Observatory & AAS</p>
+                        <p class="cert-date">Feb 2025</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon other">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Summer Internship</h3>
+                        <p class="cert-org">IIIT Kota</p>
+                        <p class="cert-date">July 2021</p>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div class="cert-icon other">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>English Course</h3>
+                        <p class="cert-org">Oxford School of English, Delhi</p>
+                        <p class="cert-date">2019</p>
+                    </div>
+                </div>
+                
+                <details class="cert-details">
+                    <summary>
+                        <i class="fas fa-table"></i> View Complete Certification List (Table Format)
+                    </summary>
+                    <div class="table-responsive">
+                        <table class="cert-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Program</th>
+                                    <th>Organization</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Exploding Stars Investigation</td><td>Vera C. Rubin Observatory & AAS</td><td>July 2024</td></tr>
+                                <tr><td>2</td><td>Summer School in Theoretical (Astro)Physics</td><td>IUCAA & St. Xavier's College</td><td>June 2024</td></tr>
+                                <tr><td>3</td><td>Beginning Astronomy v2</td><td>IUCAA & Central University HP</td><td>-</td></tr>
+                                <tr><td>4</td><td>Summer School Internship</td><td>Indian Institute of Astrophysics (IIA)</td><td>July 2023</td></tr>
+                                <tr><td>5</td><td>Student Internship</td><td>Indian Centre for Space Physics</td><td>Nov 2022</td></tr>
+                                <tr><td>6</td><td>Recent Progress in Astrophysics</td><td>Amity University</td><td>Nov 2022</td></tr>
+                                <tr><td>7</td><td>Summer Internship</td><td>IIIT Kota</td><td>July 2021</td></tr>
+                                <tr><td>8</td><td>Theoretical & Data Analysis Techniques in Cosmology</td><td>IUCAA & GHRCE Nagpur</td><td>July 2024</td></tr>
+                                <tr><td>9</td><td>Data Analysis in Cosmology using Python</td><td>IUCAA & Sardar Patel University</td><td>Oct 2024</td></tr>
+                                <tr><td>10</td><td>Color the Universe</td><td>Vera C. Rubin Observatory & AAS</td><td>Feb 2025</td></tr>
+                                <tr><td>11</td><td>English Course</td><td>Oxford School of English</td><td>2019</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: rohitkumaragk@gmail.com</p>
-        <p><a href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank">LinkedIn</a></p>
-        <p><a href="https://github.com/rohitkumaragk" target="_blank">GitHub</a></p>
-        <p><a href="https://questioneverythingagk.blogspot.com/" target="_blank">Blog</a></p>
-    </section>
+        <!-- Publications Section -->
+        <section id="publications" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">06.</span>
+                    <span class="section-name">Publications</span>
+                </h2>
+                
+                <div class="coming-soon">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Research Papers in Preparation</h3>
+                    <p>My research work is currently in progress. Stay tuned for upcoming publications on AGN physics and accretion disk dynamics!</p>
+                    
+                    <div class="publication-placeholder">
+                        <div class="pub-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Accretion Disk Variability in Eccentric Binary Systems (In Preparation)</span>
+                        </div>
+                        <div class="pub-item">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Multi-wavelength Analysis of AGN Using Swift and NuSTAR Data (In Preparation)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">07.</span>
+                    <span class="section-name">Technical Skills</span>
+                </h2>
+                
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-code"></i> Programming & Tools</h3>
+                        <div class="skill-items">
+                            <span class="skill-item">Python</span>
+                            <span class="skill-item">MATLAB</span>
+                            <span class="skill-item">Origin</span>
+                            <span class="skill-item">Linux OS</span>
+                            <span class="skill-item">MS Office</span>
+                            <span class="skill-item">LaTeX</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-chart-bar"></i> Data Analysis</h3>
+                        <div class="skill-items">
+                            <span class="skill-item">Statistical Techniques</span>
+                            <span class="skill-item">Numerical Analysis</span>
+                            <span class="skill-item">X-ray Data Analysis</span>
+                            <span class="skill-item">Time Series Analysis</span>
+                            <span class="skill-item">Spectral Fitting</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-flask"></i> Research Skills</h3>
+                        <div class="skill-items">
+                            <span class="skill-item">Scientific Writing</span>
+                            <span class="skill-item">Literature Review</span>
+                            <span class="skill-item">Proposal Writing</span>
+                            <span class="skill-item">Peer Review</span>
+                            <span class="skill-item">Research Ethics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-soft-skills"></i> Soft Skills</h3>
+                        <div class="skill-items">
+                            <span class="skill-item">Teaching</span>
+                            <span class="skill-item">Mentoring</span>
+                            <span class="skill-item">Effective Communication</span>
+                            <span class="skill-item">Problem Solving</span>
+                            <span class="skill-item">Collaboration</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-language"></i> Languages</h3>
+                        <div class="skill-items">
+                            <span class="skill-item">Hindi (Native)</span>
+                            <span class="skill-item">English (Fluent)</span>
+                            <span class="skill-item">Bhojpuri (Native)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teaching Experience -->
+        <section id="teaching" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">08.</span>
+                    <span class="section-name">Teaching Experience</span>
+                </h2>
+                
+                <div class="teaching-grid">
+                    <div class="teaching-card">
+                        <div class="teaching-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="teaching-content">
+                            <h3>Teacher</h3>
+                            <p class="teaching-org">Adarsh Gyan Kendra, Barari, Siwan</p>
+                            <p class="teaching-period">April 2015 - March 2019</p>
+                        </div>
+                    </div>
+                    
+                    <div class="teaching-card">
+                        <div class="teaching-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="teaching-content">
+                            <h3>Teacher</h3>
+                            <p class="teaching-org">S.S.C. Coaching Centre, Sani Basantpur, Siwan</p>
+                            <p class="teaching-period">April 2015 - March 2019</p>
+                        </div>
+                    </div>
+                    
+                    <div class="teaching-card">
+                        <div class="teaching-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="teaching-content">
+                            <h3>Tutor</h3>
+                            <p class="teaching-org">Coaching and Home Tuition, Delhi</p>
+                            <p class="teaching-period">2019</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">09.</span>
+                    <span class="section-name">From My Blog</span>
+                </h2>
+                
+                <div class="blog-preview">
+                    <div class="blog-card">
+                        <i class="fas fa-blog blog-icon"></i>
+                        <h3>Question Everything</h3>
+                        <p>My personal blog where I write about physics, astronomy, research journey, and the intersection of science and society.</p>
+                        <a href="https://questioneverythingagk.blogspot.com" target="_blank" class="blog-link">
+                            Visit Blog <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="blog-posts">
+                        <div class="blog-post-item">
+                            <span class="post-date">Latest Post</span>
+                            <p class="post-title">From Bihar to Israel: My Journey in Astrophysics</p>
+                        </div>
+                        <div class="blog-post-item">
+                            <span class="post-date">Popular</span>
+                            <p class="post-title">Understanding AGN Feedback: Why Black Holes Matter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="section-number">10.</span>
+                    <span class="section-name">Contact & Connect</span>
+                </h2>
+                
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <a href="mailto:rohitkumaragk@gmail.com">rohitkumaragk@gmail.com</a>
+                                <a href="mailto:21mph011@nith.ac.in">21mph011@nith.ac.in</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <a href="tel:+918809343571">+91 8809343571</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Currently: Ariel University, Israel<br>Permanent: Siwan, Bihar, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank" class="social-link linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/rohitkumaragk" target="_blank" class="social-link github">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://questioneverythingagk.blogspot.com" target="_blank" class="social-link blog">
+                            <i class="fas fa-blog"></i>
+                            <span>Blog</span>
+                        </a>
+                        <a href="#" target="_blank" class="social-link twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter/X</span>
+                        </a>
+                        <a href="#" target="_blank" class="social-link orcid">
+                            <i class="fab fa-orcid"></i>
+                            <span>ORCID</span>
+                        </a>
+                        <a href="#" target="_blank" class="social-link ads">
+                            <i class="fas fa-book"></i>
+                            <span>NASA ADS</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>© Rohit Kumar</p>
+        <div class="footer-content">
+            <p>© <span id="currentYear"></span> Rohit Kumar | Astrophysics Researcher</p>
+            <p class="footer-quote">"We are all in the gutter, but some of us are looking at the stars." - Oscar Wilde</p>
+            <p class="footer-location"><i class="fas fa-map-marker-alt"></i> Ariel University, Israel | NIT Hamirpur, India</p>
+        </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 
