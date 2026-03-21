@@ -511,48 +511,24 @@ body {
     margin-bottom: 0.5rem;
 }
 
-..about-quote {
+.about-quote {
+    background-color: #1a2a4a;
+    padding: 20px;
+    border-radius: 12px;
     display: flex;
-    gap: 1.2rem;
-    padding: 1.8rem 2rem;
-    background: linear-gradient(135deg, #001f3f, #000a1a);
-    border-radius: 15px;
-    margin-top: 2rem;
-    position: relative;
-    overflow: hidden;
-    border-left: 5px solid #ffaa44;
-}
-
-.about-quote::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #0066cc, #004d99);
-    opacity: 0.9;
-    z-index: 0;
-}
-
-.about-quote i,
-.about-quote p {
-    position: relative;
-    z-index: 1;
+    gap: 15px;
+    margin-top: 30px;
 }
 
 .about-quote i {
-    color: #ffcc66;
-    font-size: 2rem;
-    opacity: 0.9;
+    color: #ffaa44;
+    font-size: 28px;
 }
 
 .about-quote p {
     color: #ffffff;
-    font-size: 1.05rem;
-    font-weight: 500;
+    font-size: 16px;
     line-height: 1.6;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     margin: 0;
 }
 
