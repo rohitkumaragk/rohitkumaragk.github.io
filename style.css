@@ -1258,128 +1258,48 @@ body {
     color: var(--accent-primary);
 }
 
-/* ========== SOCIAL LINKS - IMPROVED STYLING ========== */
+/* Alternative: Horizontal Icon-Only Layout */
 .social-links {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 .social-link {
     background: var(--card-bg);
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     transition: all 0.3s ease;
     box-shadow: var(--card-shadow);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
     border: 1px solid var(--border-color);
-    position: relative;
-    overflow: hidden;
-}
-
-.social-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: currentColor;
-    transition: width 0.3s ease;
-}
-
-.social-link:hover::before {
-    width: 100%;
-    opacity: 0.1;
 }
 
 .social-link i {
     font-size: 1.5rem;
-    width: 32px;
-    text-align: center;
     transition: transform 0.3s ease;
-    position: relative;
-    z-index: 1;
 }
 
 .social-link span {
-    display: inline-block;
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-weight: 500;
-    position: relative;
-    z-index: 1;
+    display: none;
 }
 
-/* Individual Brand Colors */
-.social-link.linkedin i { color: #0077B5; }
-.social-link.github i { color: #333; }
-.social-link.twitter i { color: #1DA1F2; }
-.social-link.blog i { color: #FF5722; }
-.social-link.orcid i { color: #A6CE39; }
-.social-link.ads i { color: #0066cc; }
-
 .social-link:hover {
-    transform: translateX(8px);
+    transform: translateY(-5px);
     box-shadow: var(--hover-shadow);
     border-color: var(--accent-primary);
 }
 
 .social-link:hover i {
     transform: scale(1.1);
-}
-
-/* Dark mode adjustments */
-[data-theme="dark"] .social-link.github i { 
-    color: #fff; 
-}
-
-[data-theme="dark"] .social-link {
-    background: var(--bg-tertiary);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .social-links {
-        width: 100%;
-    }
-    
-    .social-link {
-        padding: 0.9rem 1.2rem;
-    }
-    
-    .social-link i {
-        font-size: 1.3rem;
-        width: 28px;
-    }
-    
-    .social-link span {
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .social-link {
-        padding: 0.8rem 1rem;
-    }
-    
-    .social-link i {
-        font-size: 1.2rem;
-        width: 24px;
-    }
-    
-    .social-link span {
-        font-size: 0.9rem;
-    }
 }
 
 /* ========== FOOTER ========== */
