@@ -1142,122 +1142,79 @@ body {
     font-size: 1.1rem;
 }
 
-/* ========== CONTACT SECTION ========== */
+/* ===== CSS: CONTACT SECTION ===== */
+
+/* CONTAINER */
 .contact-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 4rem;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
-/* Left Side - Contact Info */
+/* LEFT SIDE */
 .contact-info {
-    flex: 1.2;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
 }
 
 .contact-item {
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
+  display: flex;
+  gap: 1rem;
 }
 
 .contact-item i {
-    font-size: 1.5rem;
-    color: var(--accent-primary);
-    min-width: 2rem;
+  font-size: 1.5rem;
+  color: #6366f1;
 }
 
-.contact-item h4 {
-    margin-bottom: 0.3rem;
-    color: var(--text-primary);
-}
-
-.contact-item a,
-.contact-item p {
-    color: var(--text-secondary);
-    text-decoration: none;
-    display: block;
-}
-
-.contact-item a:hover {
-    color: var(--accent-primary);
-}
-
-/* Right Side - Social Links (HORIZONTAL ROW) */
+/* RIGHT SIDE GRID */
 .social-links {
-    flex: 0.8;
-    display: flex;
-    flex-direction: row;  /* 🔥 HORIZONTAL - Ek line mein */
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-left: 2rem;
-    border-left: 2px solid var(--border-color);
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
+/* SOCIAL CARD */
 .social-link {
-    background: var(--card-bg);
-    padding: 0.8rem 1.2rem;
-    border-radius: 10px;
-    text-align: center;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: var(--card-shadow);
-    display: flex;
-    flex-direction: row;  /* 🔥 Icon + Text Ek Line Mein */
-    align-items: center;
-    gap: 0.6rem;
-    border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
 }
-
-.social-link i {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-}
-
-.social-link span {
-    display: inline-block;
-    color: var(--text-primary);
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.social-link.linkedin i { color: #0077B5; }
-.social-link.github i { color: #333; }
-.social-link.blog i { color: #FF5722; }
-.social-link.twitter i { color: #1DA1F2; }
-.social-link.orcid i { color: #A6CE39; }
-.social-link.ads i { color: #0066cc; }
 
 .social-link:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--hover-shadow);
-    border-color: var(--accent-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-[data-theme="dark"] .social-link.github i { color: #fff; }
+/* ICON COLORS */
+.linkedin i { color: #0077B5; }
+.github i { color: #333; }
+.twitter i { color: #1DA1F2; }
+.blog i { color: #FF5722; }
+.orcid i { color: #A6CE39; }
+.ads i { color: #0066cc; }
 
-/* Mobile View */
+/* MOBILE */
 @media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .social-links {
-        justify-content: center;
-        padding-left: 0;
-        border-left: none;
-        border-top: 2px solid var(--border-color);
-        padding-top: 2rem;
-        margin-top: 1rem;
-    }
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .social-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ========== FOOTER ========== */
