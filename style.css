@@ -1258,60 +1258,129 @@ body {
     color: var(--accent-primary);
 }
 
+/* ========== SOCIAL LINKS - IMPROVED STYLING ========== */
 .social-links {
     flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .social-link {
     background: var(--card-bg);
-    padding: 0.8rem 1.2rem;
-    border-radius: 10px;
-    text-align: center;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-shadow: var(--card-shadow);
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1rem;
     border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: currentColor;
+    transition: width 0.3s ease;
+}
+
+.social-link:hover::before {
+    width: 100%;
+    opacity: 0.1;
 }
 
 .social-link i {
-    font-size: 1.2rem;
-    margin-bottom: 0;
+    font-size: 1.5rem;
+    width: 32px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .social-link span {
     display: inline-block;
     color: var(--text-primary);
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 500;
+    position: relative;
+    z-index: 1;
 }
 
-.social-link.blog i {
-    color: #FF5722;
-}
-
+/* Individual Brand Colors */
 .social-link.linkedin i { color: #0077B5; }
 .social-link.github i { color: #333; }
 .social-link.twitter i { color: #1DA1F2; }
+.social-link.blog i { color: #FF5722; }
 .social-link.orcid i { color: #A6CE39; }
 .social-link.ads i { color: #0066cc; }
 
 .social-link:hover {
-    transform: translateY(-3px);
+    transform: translateX(8px);
     box-shadow: var(--hover-shadow);
     border-color: var(--accent-primary);
 }
 
-[data-theme="dark"] .social-link.github i { color: #fff; }
+.social-link:hover i {
+    transform: scale(1.1);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .social-link.github i { 
+    color: #fff; 
+}
+
+[data-theme="dark"] .social-link {
+    background: var(--bg-tertiary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .social-links {
+        width: 100%;
+    }
+    
+    .social-link {
+        padding: 0.9rem 1.2rem;
+    }
+    
+    .social-link i {
+        font-size: 1.3rem;
+        width: 28px;
+    }
+    
+    .social-link span {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-link {
+        padding: 0.8rem 1rem;
+    }
+    
+    .social-link i {
+        font-size: 1.2rem;
+        width: 24px;
+    }
+    
+    .social-link span {
+        font-size: 0.9rem;
+    }
+}
 
 /* ========== FOOTER ========== */
 footer {
