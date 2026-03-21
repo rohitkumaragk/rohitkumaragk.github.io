@@ -1239,7 +1239,8 @@ body {
     .social-links {
         justify-items: center;  /* Mobile mein center */
     }
-}/* ========== FOOTER ========== */
+}
+/* ========== FOOTER ========== */
 footer {
     background: var(--bg-tertiary);
     padding: 3rem 5%;
