@@ -1149,7 +1149,6 @@ body {
     align-items: flex-start;
     gap: 4rem;
     flex-wrap: wrap;
-    position: relative;
 }
 
 /* Left Side - Contact Info */
@@ -1189,40 +1188,41 @@ body {
     color: var(--accent-primary);
 }
 
-/* Right Side - Social Links (EXTRA SEPARATION) */
+/* Right Side - Social Links (HORIZONTAL ROW) */
 .social-links {
     flex: 0.8;
     display: flex;
+    flex-direction: row;  /* 🔥 HORIZONTAL - Ek line mein */
     justify-content: flex-end;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
     padding-left: 2rem;
     border-left: 2px solid var(--border-color);
 }
 
 .social-link {
     background: var(--card-bg);
-    padding: 1.2rem 1.5rem;
-    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
     text-align: center;
     text-decoration: none;
     transition: all 0.3s;
     box-shadow: var(--card-shadow);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;  /* 🔥 Icon + Text Ek Line Mein */
     align-items: center;
     gap: 0.6rem;
-    min-width: 95px;
     border: 1px solid var(--border-color);
 }
 
 .social-link i {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     margin-bottom: 0;
 }
 
 .social-link span {
-    display: block;
+    display: inline-block;
     color: var(--text-primary);
     font-size: 0.8rem;
     font-weight: 500;
@@ -1236,7 +1236,7 @@ body {
 .social-link.ads i { color: #0066cc; }
 
 .social-link:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: var(--hover-shadow);
     border-color: var(--accent-primary);
 }
