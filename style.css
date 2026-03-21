@@ -1147,13 +1147,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 4rem;
     flex-wrap: wrap;
+    position: relative;
 }
 
+/* Left Side - Contact Info */
 .contact-info {
-    flex: 1;
-    min-width: 280px;
+    flex: 1.2;
+    min-width: 320px;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -1187,19 +1189,21 @@ body {
     color: var(--accent-primary);
 }
 
-/* Social Links - RIGHT SIDE FIX */
+/* Right Side - Social Links (EXTRA SEPARATION) */
 .social-links {
-    flex: 1;
+    flex: 0.8;
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
+    padding-left: 2rem;
+    border-left: 2px solid var(--border-color);
 }
 
 .social-link {
     background: var(--card-bg);
-    padding: 1rem 1.2rem;
-    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
     text-align: center;
     text-decoration: none;
     transition: all 0.3s;
@@ -1207,19 +1211,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    min-width: 80px;
+    gap: 0.6rem;
+    min-width: 95px;
+    border: 1px solid var(--border-color);
 }
 
 .social-link i {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 0;
 }
 
 .social-link span {
     display: block;
     color: var(--text-primary);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
 .social-link.linkedin i { color: #0077B5; }
@@ -1232,6 +1238,7 @@ body {
 .social-link:hover {
     transform: translateY(-5px);
     box-shadow: var(--hover-shadow);
+    border-color: var(--accent-primary);
 }
 
 [data-theme="dark"] .social-link.github i { color: #fff; }
@@ -1240,10 +1247,16 @@ body {
 @media (max-width: 768px) {
     .contact-container {
         flex-direction: column;
+        gap: 2rem;
     }
     
     .social-links {
         justify-content: center;
+        padding-left: 0;
+        border-left: none;
+        border-top: 2px solid var(--border-color);
+        padding-top: 2rem;
+        margin-top: 1rem;
     }
 }
 
