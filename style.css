@@ -1212,8 +1212,7 @@ body {
 
 /* ========== CONTACT SECTION ========== */
 .contact-section {
-    padding: 80px 5%;
-    background: var(--bg-primary);
+    padding: 100px 5%;
 }
 
 .contact-container {
@@ -1222,6 +1221,7 @@ body {
     display: flex;
     gap: 4rem;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .contact-info {
@@ -1246,51 +1246,60 @@ body {
 .contact-item h4 {
     margin-bottom: 0.3rem;
     color: var(--text-primary);
-    font-size: 1.1rem;
 }
 
 .contact-item a,
 .contact-item p {
     color: var(--text-secondary);
     text-decoration: none;
+    display: block;
 }
 
 .contact-item a:hover {
     color: var(--accent-primary);
 }
 
-/* ========== SOCIAL LINKS - SIMPLE & CLEAN ========== */
+/* ========== SOCIAL LINKS - RIGHT SIDE, LARGE, NAMES BELOW ========== */
 .social-links {
     flex: 1;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .social-link {
-    background: var(--bg-tertiary);
-    padding: 0.7rem 1.2rem;
-    border-radius: 8px;
+    background: var(--card-bg);
+    padding: 1.2rem;
+    border-radius: 16px;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: var(--card-shadow);
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-width: 85px;
+    text-align: center;
 }
 
 .social-link i {
-    font-size: 1.1rem;
+    font-size: 2rem;
 }
 
 .social-link span {
-    font-size: 0.85rem;
-    font-weight: 500;
+    display: block;
     color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.2rem;
 }
 
-/* Brand Colors */
+/* Brand Colors for Icons */
 .social-link.linkedin i { color: #0077B5; }
 .social-link.github i { color: #24292e; }
 .social-link.twitter i { color: #1DA1F2; }
@@ -1300,7 +1309,8 @@ body {
 
 /* Hover Effect */
 .social-link:hover {
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
     border-color: var(--accent-primary);
     background: var(--accent-primary);
 }
@@ -1321,6 +1331,26 @@ body {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .social-links {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+    
+    .social-link {
+        min-width: 75px;
+        padding: 1rem;
+    }
+    
+    .social-link i {
+        font-size: 1.6rem;
+    }
+    
+    .social-link span {
+        font-size: 0.7rem;
+    }
+}
+
 @media (max-width: 768px) {
     .contact-container {
         flex-direction: column;
@@ -1329,29 +1359,39 @@ body {
     
     .social-links {
         justify-content: center;
+        gap: 1.2rem;
     }
     
     .social-link {
-        padding: 0.6rem 1rem;
+        min-width: 70px;
+        padding: 0.8rem;
+    }
+    
+    .social-link i {
+        font-size: 1.4rem;
     }
     
     .social-link span {
-        font-size: 0.8rem;
+        font-size: 0.65rem;
     }
 }
 
 @media (max-width: 480px) {
     .social-links {
-        justify-content: center;
+        gap: 1rem;
     }
     
     .social-link {
-        padding: 0.5rem 0.9rem;
+        min-width: 65px;
+        padding: 0.7rem;
+    }
+    
+    .social-link i {
+        font-size: 1.3rem;
     }
     
     .social-link span {
-        display: inline-block;
-        font-size: 0.75rem;
+        font-size: 0.6rem;
     }
 }
 
