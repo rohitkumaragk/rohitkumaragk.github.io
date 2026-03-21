@@ -1178,24 +1178,18 @@ body {
 }
 
 /* SOCIAL CARD */
-.social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-radius: 12px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  transition: all 0.3s ease;
+
+.social-links {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: repeat(2, auto);   /* 🔥 force 2 rows */
+    gap: 1rem;
 }
 
-.social-link:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+/* important */
+.social-link {
+    width: 100%;   /* 🔥 full cell fill kare */
 }
 
 /* ICON COLORS */
