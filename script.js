@@ -251,3 +251,15 @@ document.querySelectorAll('.section, .card, .research-card, .project-card, .cert
     el.style.transition = 'opacity 0.6s, transform 0.6s';
     observer.observe(el);
 });
+
+/* ========== BLOG POST LINKS ========== */
+.blog-post-link {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.blog-post-link:hover {
+    color: var(--accent-primary);
+}
