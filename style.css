@@ -161,7 +161,8 @@ body {
 }
 
 .theme-toggle,
-.mobile-menu-btn {
+.mobile-menu-btn,
+.lang-toggle {
     background: none;
     border: none;
     color: var(--text-secondary);
@@ -177,8 +178,16 @@ body {
     justify-content: center;
 }
 
+.lang-toggle {
+    width: auto;
+    border-radius: 50px;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
 .theme-toggle:hover,
-.mobile-menu-btn:hover {
+.mobile-menu-btn:hover,
+.lang-toggle:hover {
     background-color: var(--bg-tertiary);
     color: var(--accent-primary);
 }
@@ -672,7 +681,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* ========== RESEARCH CARDS ========== */
+/* ========== RESEARCH CARDS WITH BACKGROUND ========== */
 .research-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -687,9 +696,28 @@ body {
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600');
+    background-size: cover;
+    background-position: center;
 }
 
 .research-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 0;
+}
+
+.research-card * {
+    position: relative;
+    z-index: 1;
+}
+
+.research-card::after {
     content: '';
     position: absolute;
     top: 0;
@@ -699,15 +727,16 @@ body {
     background: var(--gradient-primary);
     transform: translateX(-100%);
     transition: transform 0.3s;
+    z-index: 2;
+}
+
+.research-card:hover::after {
+    transform: translateX(0);
 }
 
 .research-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--hover-shadow);
-}
-
-.research-card:hover::before {
-    transform: translateX(0);
 }
 
 .research-icon {
@@ -718,29 +747,25 @@ body {
 
 .research-card h3 {
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: white;
 }
 
 .research-card p {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1.5rem;
 }
 
-.research-tools {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
 .research-tools span {
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
-    padding: 0.2rem 0.8rem;
-    border-radius: 50px;
-    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(5px);
 }
 
-/* ========== PROJECT CARDS ========== */
+[data-theme="dark"] .research-card::before {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* ========== PROJECT CARDS WITH BACKGROUND ========== */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -754,6 +779,26 @@ body {
     box-shadow: var(--card-shadow);
     transition: all 0.3s;
     position: relative;
+    background-image: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=600');
+    background-size: cover;
+    background-position: center;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 15px;
+    z-index: 0;
+}
+
+.project-card * {
+    position: relative;
+    z-index: 1;
 }
 
 .project-card.featured {
@@ -769,6 +814,7 @@ body {
     padding: 0.3rem 1rem;
     border-radius: 50px;
     font-size: 0.8rem;
+    z-index: 2;
 }
 
 .featured-badge i {
@@ -788,13 +834,13 @@ body {
 }
 
 .project-year {
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
     font-family: var(--font-mono);
 }
 
 .project-card h3 {
     margin-bottom: 0.5rem;
-    color: var(--text-primary);
+    color: white;
 }
 
 .project-venue {
@@ -804,20 +850,13 @@ body {
 }
 
 .project-description {
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1.5rem;
 }
 
 .project-tags span {
-    background: var(--bg-tertiary);
-    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     padding: 0.2rem 0.8rem;
     border-radius: 50px;
     font-size: 0.8rem;
@@ -839,6 +878,10 @@ body {
 
 .project-link:hover {
     text-decoration: underline;
+}
+
+[data-theme="dark"] .project-card::before {
+    background: rgba(0, 0, 0, 0.85);
 }
 
 /* ========== CERTIFICATIONS SECTION ========== */
@@ -1142,74 +1185,122 @@ body {
     font-size: 1.1rem;
 }
 
-/* ===== CSS: CONTACT SECTION ===== */
-
-/* CONTAINER */
-.contact-container {
-  display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
+/* Blog Post Link */
+.blog-post-link {
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+    display: inline-block;
 }
 
-/* LEFT SIDE */
+.blog-post-link:hover {
+    color: var(--accent-primary);
+}
+
+/* ========== CONTACT SECTION ========== */
+.contact-container {
+    display: flex;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
 .contact-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .contact-item {
-  display: flex;
-  gap: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
 }
 
 .contact-item i {
-  font-size: 1.5rem;
-  color: #6366f1;
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+    min-width: 2rem;
 }
 
-/* RIGHT SIDE GRID */
-.social-links {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+.contact-item h4 {
+    margin-bottom: 0.3rem;
+    color: var(--text-primary);
 }
 
-/* SOCIAL CARD */
+.contact-item a,
+.contact-item p {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: block;
+}
 
+.contact-item a:hover {
+    color: var(--accent-primary);
+}
+
+/* Social Links - Horizontal Row */
 .social-links {
     flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    grid-template-rows: repeat(2, auto);   /* 🔥 force 2 rows */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
-/* important */
 .social-link {
-    width: 100%;   /* 🔥 full cell fill kare */
+    background: var(--card-bg);
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--border-color);
 }
 
-/* ICON COLORS */
-.linkedin i { color: #0077B5; }
-.github i { color: #333; }
-.twitter i { color: #1DA1F2; }
-.blog i { color: #FF5722; }
-.orcid i { color: #A6CE39; }
-.ads i { color: #0066cc; }
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .contact-container {
-    flex-direction: column;
-  }
-
-  .social-links {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.social-link i {
+    font-size: 1.2rem;
+    margin-bottom: 0;
 }
+
+.social-link span {
+    display: inline-block;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* New Google Blogger Icon Style */
+.social-link.blog i {
+    color: #FF5722;
+}
+
+/* Alternative: Agar tum Google Blogger ka official logo color chaho to */
+.social-link.blog i {
+    color: #FF5722;
+}
+
+/* Social Media Colors */
+.social-link.linkedin i { color: #0077B5; }
+.social-link.github i { color: #333; }
+.social-link.twitter i { color: #1DA1F2; }
+.social-link.orcid i { color: #A6CE39; }
+.social-link.ads i { color: #0066cc; }
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+    border-color: var(--accent-primary);
+}
+
+[data-theme="dark"] .social-link.github i { color: #fff; }
 
 /* ========== FOOTER ========== */
 footer {
@@ -1228,6 +1319,13 @@ footer {
     color: var(--text-muted);
     font-style: italic;
     margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.quote-reference {
+    font-size: 0.85rem;
+    color: var(--accent-primary);
+    font-style: normal;
 }
 
 .footer-location {
@@ -1341,10 +1439,6 @@ footer {
     .about-content {
         grid-template-columns: 1fr;
     }
-    
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 768px) {
@@ -1384,8 +1478,13 @@ footer {
         padding-top: 2rem;
     }
     
+    .contact-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
     .social-links {
-        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
     }
 }
 
@@ -1409,7 +1508,8 @@ footer {
     }
     
     .social-links {
-        grid-template-columns: repeat(2, 1fr);
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .cert-grid {
