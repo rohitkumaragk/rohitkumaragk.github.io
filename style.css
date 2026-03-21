@@ -1212,7 +1212,8 @@ body {
 
 /* ========== CONTACT SECTION ========== */
 .contact-section {
-    padding: 100px 5%;
+    padding: 80px 5%;
+    background: var(--bg-primary);
 }
 
 .contact-container {
@@ -1245,61 +1246,113 @@ body {
 .contact-item h4 {
     margin-bottom: 0.3rem;
     color: var(--text-primary);
+    font-size: 1.1rem;
 }
 
 .contact-item a,
 .contact-item p {
     color: var(--text-secondary);
     text-decoration: none;
-    display: block;
 }
 
 .contact-item a:hover {
     color: var(--accent-primary);
 }
 
-/* Alternative: Horizontal Icon-Only Layout */
+/* ========== SOCIAL LINKS - SIMPLE & CLEAN ========== */
 .social-links {
     flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
+    align-items: center;
 }
 
 .social-link {
-    background: var(--card-bg);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--bg-tertiary);
+    padding: 0.7rem 1.2rem;
+    border-radius: 8px;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: var(--card-shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.2s ease;
     border: 1px solid var(--border-color);
 }
 
 .social-link i {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
+    font-size: 1.1rem;
 }
 
 .social-link span {
-    display: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
+/* Brand Colors */
+.social-link.linkedin i { color: #0077B5; }
+.social-link.github i { color: #24292e; }
+.social-link.twitter i { color: #1DA1F2; }
+.social-link.blog i { color: #FF5722; }
+.social-link.orcid i { color: #A6CE39; }
+.social-link.ads i { color: #0066cc; }
+
+/* Hover Effect */
 .social-link:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow);
+    transform: translateY(-2px);
     border-color: var(--accent-primary);
+    background: var(--accent-primary);
 }
 
-.social-link:hover i {
-    transform: scale(1.1);
+.social-link:hover i,
+.social-link:hover span {
+    color: white !important;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .social-link.github i { 
+    color: #fff; 
+}
+
+[data-theme="dark"] .social-link:hover.github i,
+[data-theme="dark"] .social-link:hover.github span {
+    color: white !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .social-link {
+        padding: 0.6rem 1rem;
+    }
+    
+    .social-link span {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-links {
+        justify-content: center;
+    }
+    
+    .social-link {
+        padding: 0.5rem 0.9rem;
+    }
+    
+    .social-link span {
+        display: inline-block;
+        font-size: 0.75rem;
+    }
 }
 
 /* ========== FOOTER ========== */
