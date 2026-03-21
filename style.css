@@ -1136,6 +1136,7 @@ body {
     font-size: 1.1rem;
 }
 
+
 /* ========== CONTACT SECTION ========== */
 .contact-container {
     display: grid;
@@ -1422,4 +1423,4 @@ footer {
     .cert-grid {
         grid-template-columns: 1fr;
     }
-} 
+}
