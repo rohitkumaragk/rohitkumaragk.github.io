@@ -1147,6 +1147,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+    align-items: start;
 }
 
 .contact-info {
@@ -1183,10 +1184,12 @@ body {
     color: var(--accent-primary);
 }
 
+/* Social Links - RIGHT SIDE */
 .social-links {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    justify-items: end;  /* 🔥 YE ADD KIYA - RIGHT ALIGN */
 }
 
 .social-link {
@@ -1197,6 +1200,8 @@ body {
     text-decoration: none;
     transition: all 0.3s;
     box-shadow: var(--card-shadow);
+    width: 100%;  /* 🔥 YE ADD KIYA - Full width */
+    max-width: 120px;  /* 🔥 YE ADD KIYA - Card size limit */
 }
 
 .social-link i {
@@ -1224,7 +1229,17 @@ body {
 
 [data-theme="dark"] .social-link.github i { color: #fff; }
 
-/* ========== FOOTER ========== */
+/* Mobile View */
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .social-links {
+        justify-items: center;  /* Mobile mein center */
+    }
+}/* ========== FOOTER ========== */
 footer {
     background: var(--bg-tertiary);
     padding: 3rem 5%;
