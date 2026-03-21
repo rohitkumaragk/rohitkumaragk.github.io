@@ -1144,13 +1144,16 @@ body {
 
 /* ========== CONTACT SECTION ========== */
 .contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 3rem;
-    align-items: start;
+    flex-wrap: wrap;
 }
 
 .contact-info {
+    flex: 1;
+    min-width: 280px;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -1184,35 +1187,39 @@ body {
     color: var(--accent-primary);
 }
 
-/* Social Links - RIGHT SIDE */
+/* Social Links - RIGHT SIDE FIX */
 .social-links {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
     gap: 1rem;
-    justify-items: end;  /* 🔥 YE ADD KIYA - RIGHT ALIGN */
 }
 
 .social-link {
     background: var(--card-bg);
-    padding: 1.5rem;
+    padding: 1rem 1.2rem;
     border-radius: 10px;
     text-align: center;
     text-decoration: none;
     transition: all 0.3s;
     box-shadow: var(--card-shadow);
-    width: 100%;  /* 🔥 YE ADD KIYA - Full width */
-    max-width: 120px;  /* 🔥 YE ADD KIYA - Card size limit */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 80px;
 }
 
 .social-link i {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 0;
 }
 
 .social-link span {
     display: block;
     color: var(--text-primary);
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 }
 
 .social-link.linkedin i { color: #0077B5; }
@@ -1232,14 +1239,14 @@ body {
 /* Mobile View */
 @media (max-width: 768px) {
     .contact-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        flex-direction: column;
     }
     
     .social-links {
-        justify-items: center;  /* Mobile mein center */
+        justify-content: center;
     }
 }
+
 /* ========== FOOTER ========== */
 footer {
     background: var(--bg-tertiary);
