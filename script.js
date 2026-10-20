@@ -1,184 +1,427 @@
-// ========== THEME TOGGLE ==========
-// Initial theme is applied by a tiny inline script in <head> (saved choice, else system preference).
+/* =====================================================
+   Rohit Kumar, academic site
+   Theme, navigation, reveal, BibTeX, and the interactive
+   eccentric-binary explainer.
+   ===================================================== */
+
 const root = document.documentElement;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Theme ---------- */
 const themeToggle = document.getElementById('themeToggle');
-const themeIcon = themeToggle.querySelector('i');
-
-function updateThemeIcon(theme) {
-    themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+function syncThemeButton() {
+    const dark = root.getAttribute('data-theme') === 'dark';
+    themeToggle.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
+    themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
 }
-updateThemeIcon(root.getAttribute('data-theme') || 'dark');
-
+syncThemeButton();
 themeToggle.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked: ignore */ }
-    updateThemeIcon(next);
+    try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked */ }
+    syncThemeButton();
 });
 
-// ========== MOBILE MENU ==========
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-
+/* ---------- Mobile menu ---------- */
+const menuBtn = document.getElementById('mobileMenuBtn');
+const menu = document.getElementById('mobileMenu');
 function setMenu(open) {
-    mobileMenu.classList.toggle('active', open);
-    mobileMenuBtn.setAttribute('aria-expanded', String(open));
-    mobileMenuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    mobileMenuBtn.querySelector('i').className = open ? 'fas fa-times' : 'fas fa-bars';
+    menu.classList.toggle('active', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBtn.querySelector('i').className = open ? 'fas fa-xmark' : 'fas fa-bars';
 }
-mobileMenuBtn.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('active')));
-mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+menuBtn.addEventListener('click', () => setMenu(!menu.classList.contains('active')));
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-// ========== SCROLL: NAVBAR, PROGRESS BAR, BACK-TO-TOP, ACTIVE LINK ==========
-const navbar = document.querySelector('.navbar');
-const backToTop = document.getElementById('backToTop');
-const progressBar = document.getElementById('progressBar');
-const sections = Array.from(document.querySelectorAll('main section[id]'));
+/* ---------- Scroll: progress, back-to-top, active nav link ---------- */
+const progress = document.getElementById('progressBar');
+const toTop = document.getElementById('backToTop');
 const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+const sections = Array.from(document.querySelectorAll('main section[id]'));
+// Sections that live under a menu item they don't have their own link for
+const navAlias = { about: 'research', skills: 'education', certifications: 'education', teaching: 'education', blog: 'contact' };
 
 let ticking = false;
 function onScroll() {
     const y = window.scrollY;
-    navbar.classList.toggle('scrolled', y > 80);
-    backToTop.classList.toggle('visible', y > 500);
-
     const max = document.documentElement.scrollHeight - window.innerHeight;
-    progressBar.style.width = (max > 0 ? Math.min(100, (y / max) * 100) : 0) + '%';
+    progress.style.width = (max > 0 ? Math.min(100, y / max * 100) : 0) + '%';
+    toTop.classList.toggle('visible', y > 600);
 
     let current = '';
-    sections.forEach(s => { if (y >= s.offsetTop - 140) current = s.id; });
-    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+    for (const s of sections) if (y >= s.offsetTop - 140) current = s.id;
+    const target = navAlias[current] || current;
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + target));
     ticking = false;
 }
-window.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-}, { passive: true });
+window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
 window.addEventListener('resize', onScroll);
 onScroll();
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 
-backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-// ========== TYPED TEXT ==========
-const typedTextSpan = document.querySelector('.typed-text');
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const textArray = [
-    'Astrophysics Researcher',
-    'AGN & Black Hole Physicist',
-    'M.Sc. @ Ariel University',
-    'NIT Hamirpur Alumnus',
-    'Science Communicator',
-    'From Bihar to the Cosmos'
-];
-let textIndex = 0, charIndex = 0;
-
-function type() {
-    const text = textArray[textIndex];
-    if (charIndex < text.length) {
-        typedTextSpan.textContent = text.slice(0, ++charIndex);
-        setTimeout(type, 90);
-    } else {
-        setTimeout(erase, 2000);
-    }
-}
-function erase() {
-    const text = textArray[textIndex];
-    if (charIndex > 0) {
-        typedTextSpan.textContent = text.slice(0, --charIndex);
-        setTimeout(erase, 45);
-    } else {
-        textIndex = (textIndex + 1) % textArray.length;
-        setTimeout(type, 500);
-    }
-}
-if (typedTextSpan) {
-    if (reduceMotion) typedTextSpan.textContent = textArray[0];
-    else setTimeout(type, 600);
-}
-
-// ========== REVEAL ON SCROLL ==========
-const revealEls = document.querySelectorAll(
-    '.section-title, .about-text, .about-stats, .timeline-item, .abstract-figure, .research-card, .project-card, ' +
-    '.talk-card, .pub-list, .cert-card, .skill-category, .teaching-card, .blog-preview, .contact-container'
-);
+/* ---------- Reveal on scroll (content stays visible if JS or IO is missing) ---------- */
+const revealEls = document.querySelectorAll('.sec-body > *, .glance');
 revealEls.forEach(el => el.classList.add('reveal'));
-
 if ('IntersectionObserver' in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in');
-                io.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
     revealEls.forEach(el => io.observe(el));
 } else {
     revealEls.forEach(el => el.classList.add('in'));
 }
 
-// ========== POSTER LINK: show only if the PDF exists in the repo ==========
+/* ---------- Poster link: show only when the PDF exists ---------- */
 const posterLink = document.getElementById('posterLink');
 if (posterLink) {
     fetch(posterLink.getAttribute('href'), { method: 'HEAD' })
         .then(r => { if (r.ok) posterLink.hidden = false; })
-        .catch(() => { /* file not uploaded yet: keep hidden */ });
+        .catch(() => {});
 }
 
-// ========== FOOTER YEAR ==========
+/* ---------- BibTeX ---------- */
+const citeBtn = document.getElementById('citeBtn');
+const citeBox = document.getElementById('citeBox');
+if (citeBtn && citeBox) {
+    citeBtn.addEventListener('click', () => {
+        const open = citeBox.hidden;
+        citeBox.hidden = !open;
+        citeBtn.setAttribute('aria-expanded', String(open));
+    });
+    const copyBtn = document.getElementById('copyCite');
+    copyBtn.addEventListener('click', async () => {
+        const text = document.getElementById('citeText').textContent;
+        try { await navigator.clipboard.writeText(text); copyBtn.textContent = 'Copied'; }
+        catch (e) { copyBtn.textContent = 'Select and copy manually'; }
+        setTimeout(() => { copyBtn.textContent = 'Copy BibTeX'; }, 1800);
+    });
+}
+
 document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-// ========== STARFIELD BACKGROUND (lightweight canvas, replaces particles.js) ==========
-(function starfield() {
-    const canvas = document.getElementById('starfield');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let w = 0, h = 0, stars = [], raf = null;
+/* =====================================================
+   Interactive explainer: eccentric binary + Roche lobe
+   -----------------------------------------------------
+   Units: semi-major axis a = 1.
+   Orbit: Kepler's equation  M = E - e sin E.
+   Separation: r = 1 - e cos E.
+   Roche lobe (Eggleton 1983), at instantaneous separation r:
+       R_L / r = 0.49 q^(2/3) / (0.6 q^(2/3) + ln(1 + q^(1/3)))
+   with q = M_donor / M_accretor.
+   ===================================================== */
+(function () {
+    const stage = document.getElementById('simCanvas');
+    const chart = document.getElementById('chartCanvas');
+    if (!stage || !chart) return;
+    const sctx = stage.getContext('2d');
+    const cctx = chart.getContext('2d');
 
-    function resize() {
+    const $ = id => document.getElementById(id);
+    const inE = $('inE'), inQ = $('inQ'), inR = $('inR'), inP = $('inP'), inS = $('inS');
+    const outE = $('outE'), outQ = $('outQ'), outR = $('outR'), outP = $('outP'), outS = $('outS');
+    const playBtn = $('simPlay'), resetBtn = $('simReset');
+    const badge = $('simBadge'), status = $('simStatus');
+    const roSep = $('roSep'), roRL = $('roRL'), roFrac = $('roFrac'), roRho = $('roRho');
+
+    const TAU = Math.PI * 2;
+    const PERIOD_SECONDS = 9;            // one orbit at 1x speed
+    const DEFAULTS = { e: 0.5, q: 1, R: 0.25, s: 1, phase: 0 };
+
+    let e = DEFAULTS.e, q = DEFAULTS.q, Rd = DEFAULTS.R, speed = DEFAULTS.s;
+    let phase = 0;                       // orbital phase 0..1 (0 = periastron)
+    let playing = false, visible = true, lastT = 0, raf = 0, lastState = null;
+    let trail1 = [], trail2 = [];
+
+    /* ----- physics ----- */
+    function solveKepler(M, ecc) {
+        let E = ecc < 0.8 ? M : Math.PI;
+        for (let i = 0; i < 25; i++) {
+            const d = (E - ecc * Math.sin(E) - M) / (1 - ecc * Math.cos(E));
+            E -= d;
+            if (Math.abs(d) < 1e-10) break;
+        }
+        return E;
+    }
+    function rocheOverR(qd) {                  // Eggleton: R_L / separation
+        const q23 = Math.pow(qd, 2 / 3);
+        return 0.49 * q23 / (0.6 * q23 + Math.log(1 + Math.pow(qd, 1 / 3)));
+    }
+    function separation(ph) {                  // r/a at orbital phase ph
+        const E = solveKepler(ph * TAU, e);
+        return 1 - e * Math.cos(E);
+    }
+    function rlofFraction() {
+        const k = rocheOverR(q), N = 720;
+        let n = 0;
+        for (let i = 0; i < N; i++) if (Rd >= k * separation((i + 0.5) / N)) n++;
+        return n / N;
+    }
+
+    /* ----- canvas sizing ----- */
+    function fit(cv, ctx) {
+        const r = cv.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        w = window.innerWidth; h = window.innerHeight;
-        canvas.width = w * dpr; canvas.height = h * dpr;
+        cv.width = Math.max(1, Math.round(r.width * dpr));
+        cv.height = Math.max(1, Math.round(r.height * dpr));
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.round(Math.min(160, (w * h) / 9000));
-        stars = Array.from({ length: count }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 1.3 + 0.3,
-            phase: Math.random() * Math.PI * 2,
-            speed: Math.random() * 0.015 + 0.004,
-            drift: Math.random() * 0.06 + 0.01
-        }));
+        return { w: r.width, h: r.height };
+    }
+    let S = { w: 0, h: 0 }, C = { w: 0, h: 0 };
+    function resize() { S = fit(stage, sctx); C = fit(chart, cctx); trail1 = []; trail2 = []; draw(); }
+
+    /* ----- background stars (fixed, drawn once per frame, cheap) ----- */
+    const stars = Array.from({ length: 70 }, (_, i) => {
+        const a = Math.sin(i * 12.9898) * 43758.5453, b = Math.sin(i * 78.233) * 12345.6789;
+        return { x: a - Math.floor(a), y: b - Math.floor(b), r: 0.4 + ((i * 37) % 10) / 10, o: 0.25 + ((i * 53) % 10) / 16 };
+    });
+
+    /* ----- drawing: orbit view ----- */
+    function drawStage(t) {
+        const { w, h } = S;
+        sctx.clearRect(0, 0, w, h);
+
+        for (const s of stars) {
+            sctx.fillStyle = 'rgba(255,255,255,' + s.o.toFixed(2) + ')';
+            sctx.beginPath(); sctx.arc(s.x * w, s.y * h, s.r, 0, TAU); sctx.fill();
+        }
+
+        const b = Math.sqrt(1 - e * e);
+        const pad = 0.12;
+        const scale = Math.min(w * (1 - pad * 2) / 2.0, h * (1 - pad * 2 - 0.08) / (2 * b));
+        const cx = w / 2 - e * scale;          // centre of mass sits at one focus
+        const cy = h / 2 - 0.02 * h;
+
+        const f1 = 1 / (1 + q);                // donor distance from CoM = f1 * separation
+        const f2 = q / (1 + q);                // accretor distance from CoM = f2 * separation
+
+        const E = solveKepler(phase * TAU, e);
+        const rx = Math.cos(E) - e, ry = b * Math.sin(E);   // relative vector, accretor minus donor
+        const r = 1 - e * Math.cos(E);
+
+        const P = (kx, ky) => [cx + kx * scale, cy - ky * scale];
+        const donor = P(-f1 * rx, -f1 * ry);
+        const acc = P(f2 * rx, f2 * ry);
+
+        // orbit paths of both stars about the centre of mass
+        function orbitPath(sign, f) {
+            sctx.beginPath();
+            for (let i = 0; i <= 160; i++) {
+                const ee = i / 160 * TAU;
+                const p = P(sign * f * (Math.cos(ee) - e), sign * f * b * Math.sin(ee));
+                if (i === 0) sctx.moveTo(p[0], p[1]); else sctx.lineTo(p[0], p[1]);
+            }
+            sctx.stroke();
+        }
+        sctx.lineWidth = 1;
+        sctx.strokeStyle = 'rgba(255,154,77,0.28)'; orbitPath(-1, f1);
+        sctx.strokeStyle = 'rgba(158,196,255,0.28)'; orbitPath(1, f2);
+
+        // centre of mass marker
+        const com = P(0, 0);
+        sctx.strokeStyle = 'rgba(255,255,255,0.35)';
+        sctx.beginPath(); sctx.moveTo(com[0] - 4, com[1]); sctx.lineTo(com[0] + 4, com[1]);
+        sctx.moveTo(com[0], com[1] - 4); sctx.lineTo(com[0], com[1] + 4); sctx.stroke();
+
+        // line joining the stars
+        sctx.strokeStyle = 'rgba(255,255,255,0.18)';
+        sctx.setLineDash([2, 4]);
+        sctx.beginPath(); sctx.moveTo(donor[0], donor[1]); sctx.lineTo(acc[0], acc[1]); sctx.stroke();
+        sctx.setLineDash([]);
+
+        // Roche lobe (dashed) and donor surface
+        const RL = rocheOverR(q) * r;
+        const active = Rd >= RL;
+        const rlPx = RL * scale;
+        const rdPx = Math.max(4, Rd * scale);
+
+        sctx.strokeStyle = active ? '#f2b84b' : '#5fd4ee';
+        sctx.lineWidth = 1.6;
+        sctx.setLineDash([5, 5]);
+        sctx.beginPath(); sctx.arc(donor[0], donor[1], rlPx, 0, TAU); sctx.stroke();
+        sctx.setLineDash([]);
+
+        const g = sctx.createRadialGradient(donor[0] - rdPx * 0.3, donor[1] - rdPx * 0.3, rdPx * 0.1, donor[0], donor[1], rdPx);
+        g.addColorStop(0, '#ffd9a8'); g.addColorStop(1, active ? '#ff7a2f' : '#e8782f');
+        sctx.fillStyle = g;
+        sctx.beginPath(); sctx.arc(donor[0], donor[1], rdPx, 0, TAU); sctx.fill();
+
+        // overflow stream toward the accretor while the donor fills its lobe
+        if (active) {
+            const dx = acc[0] - donor[0], dy = acc[1] - donor[1], len = Math.hypot(dx, dy) || 1;
+            const ux = dx / len, uy = dy / len;
+            const sx = donor[0] + ux * rdPx, sy = donor[1] + uy * rdPx;
+            const ex = acc[0] - ux * 9, ey = acc[1] - uy * 9;
+            sctx.strokeStyle = 'rgba(242,184,75,0.9)';
+            sctx.lineWidth = 2;
+            sctx.setLineDash([6, 5]);
+            sctx.lineDashOffset = reduceMotion ? 0 : -(t / 40) % 11;
+            sctx.beginPath(); sctx.moveTo(sx, sy); sctx.lineTo(ex, ey); sctx.stroke();
+            sctx.setLineDash([]); sctx.lineDashOffset = 0;
+        }
+
+        // accretor
+        const ag = sctx.createRadialGradient(acc[0] - 2, acc[1] - 2, 1, acc[0], acc[1], 7);
+        ag.addColorStop(0, '#ffffff'); ag.addColorStop(1, '#7fb0ff');
+        sctx.fillStyle = ag;
+        sctx.beginPath(); sctx.arc(acc[0], acc[1], 6, 0, TAU); sctx.fill();
+
+        // periastron tick
+        const peri = P(f2 * (1 - e), 0);
+        sctx.fillStyle = 'rgba(255,255,255,0.5)';
+        sctx.font = '11px "JetBrains Mono", monospace';
+        sctx.fillText('periastron', peri[0] + 8, peri[1] + 4);
+
+        return { r, RL, active };
+    }
+
+    /* ----- drawing: separation vs. phase chart ----- */
+    function drawChart(state) {
+        const { w, h } = C;
+        cctx.clearRect(0, 0, w, h);
+        const L = 42, R = 12, T = 12, B = 24;
+        const pw = w - L - R, ph = h - T - B;
+
+        const k = rocheOverR(q);
+        const rMax = 1 + e;                         // separation at apastron
+        const yMax = Math.max(Rd, k * rMax) * 1.12;
+        const X = p => L + p * pw;
+        const Y = v => T + ph - v / yMax * ph;
+
+        // shaded orbital phases where the donor overflows
+        const N = 360;
+        cctx.fillStyle = 'rgba(242,184,75,0.16)';
+        let start = -1;
+        for (let i = 0; i <= N; i++) {
+            const p = i / N;
+            const on = Rd >= k * separation(p);
+            if (on && start < 0) start = p;
+            if ((!on || i === N) && start >= 0) {
+                cctx.fillRect(X(start), T, X(on ? p : p - 1 / N) - X(start), ph);
+                start = -1;
+            }
+        }
+
+        // axes
+        cctx.strokeStyle = '#26304a'; cctx.lineWidth = 1;
+        cctx.beginPath(); cctx.moveTo(L, T); cctx.lineTo(L, T + ph); cctx.lineTo(L + pw, T + ph); cctx.stroke();
+        cctx.fillStyle = '#8d97b2';
+        cctx.font = '10.5px "JetBrains Mono", monospace';
+        cctx.textAlign = 'center';
+        [0, 0.25, 0.5, 0.75, 1].forEach(p => cctx.fillText(p.toFixed(2).replace(/0+$/, '').replace(/\.$/, '') || '0', X(p), h - 8));
+        cctx.textAlign = 'right';
+        cctx.fillText('R / a', L - 6, T + 10);
+        cctx.fillText('0', L - 6, T + ph + 3);
+
+        // donor radius (constant)
+        cctx.strokeStyle = '#ff9a4d'; cctx.lineWidth = 1.8;
+        cctx.beginPath(); cctx.moveTo(L, Y(Rd)); cctx.lineTo(L + pw, Y(Rd)); cctx.stroke();
+        cctx.fillStyle = '#ff9a4d'; cctx.textAlign = 'left';
+        cctx.fillText('R donor', L + 6, Y(Rd) - 5);
+
+        // Roche lobe radius along the orbit
+        cctx.strokeStyle = '#5fd4ee'; cctx.lineWidth = 1.8;
+        cctx.beginPath();
+        for (let i = 0; i <= 240; i++) {
+            const p = i / 240, v = k * separation(p);
+            if (i === 0) cctx.moveTo(X(p), Y(v)); else cctx.lineTo(X(p), Y(v));
+        }
+        cctx.stroke();
+        cctx.fillStyle = '#5fd4ee'; cctx.textAlign = 'right';
+        cctx.fillText('Roche lobe', L + pw - 4, T + 12);
+
+        // current phase marker
+        cctx.strokeStyle = 'rgba(255,255,255,0.7)'; cctx.lineWidth = 1;
+        cctx.beginPath(); cctx.moveTo(X(phase), T); cctx.lineTo(X(phase), T + ph); cctx.stroke();
+        cctx.fillStyle = '#fff';
+        cctx.beginPath(); cctx.arc(X(phase), Y(state.RL), 3.5, 0, TAU); cctx.fill();
+    }
+
+    /* ----- readouts and status ----- */
+    function updateReadouts(state) {
+        outE.textContent = e.toFixed(2);
+        outQ.textContent = q.toFixed(2);
+        outR.textContent = Rd.toFixed(2);
+        outP.textContent = phase.toFixed(2);
+        outS.textContent = speed.toFixed(2).replace(/0$/, '').replace(/\.$/, '.0') + '×';
+        inP.value = phase;
+
+        roSep.textContent = state.r.toFixed(2) + ' a';
+        roRL.textContent = state.RL.toFixed(3) + ' a';
+        roFrac.textContent = Math.round(rlofFraction() * 100) + '% of orbit';
+        const ratio = Math.pow((1 + e) / (1 - e), 2);
+        roRho.textContent = '×' + (ratio >= 100 ? ratio.toFixed(0) : ratio.toFixed(1));
+
+        badge.textContent = state.active ? 'Roche-lobe overflow' : 'Detached';
+        badge.classList.toggle('on', state.active);
+        if (lastState === null || lastState !== state.active) {
+            status.textContent = state.active ? 'Donor is filling its Roche lobe: mass transfer on.' : 'Donor is inside its Roche lobe: detached.';
+            lastState = state.active;
+        }
     }
 
     function draw(t) {
-        ctx.clearRect(0, 0, w, h);
-        const dark = root.getAttribute('data-theme') !== 'light';
-        const base = dark ? '255,255,255' : '29,95,209';
-        const peak = dark ? 0.85 : 0.35;
-        for (const s of stars) {
-            const a = (0.35 + 0.65 * (0.5 + 0.5 * Math.sin(s.phase + t * s.speed * 0.06))) * peak;
-            ctx.beginPath();
-            ctx.fillStyle = 'rgba(' + base + ',' + a.toFixed(3) + ')';
-            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-            ctx.fill();
-            if (!reduceMotion) {
-                s.y -= s.drift;
-                if (s.y < -2) { s.y = h + 2; s.x = Math.random() * w; }
-            }
-        }
-        if (!reduceMotion) raf = requestAnimationFrame(draw);
+        if (!S.w) return;
+        const state = drawStage(t || 0);
+        drawChart(state);
+        updateReadouts(state);
     }
 
-    resize();
-    draw(0);
-    window.addEventListener('resize', () => { resize(); if (reduceMotion) draw(0); });
-    document.addEventListener('visibilitychange', () => {
-        if (reduceMotion) return;
-        if (document.hidden) cancelAnimationFrame(raf);
-        else raf = requestAnimationFrame(draw);
+    /* ----- animation loop ----- */
+    function frame(t) {
+        if (!playing || !visible) { raf = 0; return; }
+        if (!lastT) lastT = t;
+        const dt = Math.min(0.05, (t - lastT) / 1000);
+        lastT = t;
+        // Constant mean-anomaly rate: a body on a Kepler orbit speeds up near periastron automatically
+        phase = (phase + dt * speed / PERIOD_SECONDS) % 1;
+        draw(t);
+        raf = requestAnimationFrame(frame);
+    }
+    function setPlaying(on) {
+        playing = on;
+        playBtn.setAttribute('aria-pressed', String(on));
+        playBtn.querySelector('i').className = on ? 'fas fa-pause' : 'fas fa-play';
+        playBtn.querySelector('span').textContent = on ? 'Pause' : 'Play';
+        lastT = 0;
+        if (on && !raf) raf = requestAnimationFrame(frame);
+    }
+
+    /* ----- controls ----- */
+    function bind(input, fn) {
+        input.addEventListener('input', () => { fn(parseFloat(input.value)); draw(performance.now()); });
+    }
+    bind(inE, v => { e = v; });
+    bind(inQ, v => { q = v; });
+    bind(inR, v => { Rd = v; });
+    bind(inS, v => { speed = v; });
+    inP.addEventListener('input', () => { phase = parseFloat(inP.value) % 1; if (playing) setPlaying(false); draw(performance.now()); });
+
+    playBtn.addEventListener('click', () => setPlaying(!playing));
+    resetBtn.addEventListener('click', () => {
+        e = DEFAULTS.e; q = DEFAULTS.q; Rd = DEFAULTS.R; speed = DEFAULTS.s; phase = DEFAULTS.phase;
+        inE.value = e; inQ.value = q; inR.value = Rd; inS.value = speed; inP.value = phase;
+        lastState = null;
+        draw(performance.now());
     });
-    // Redraw static frame when theme changes in reduced-motion mode
-    themeToggle.addEventListener('click', () => { if (reduceMotion) draw(0); });
+
+    // Only animate while on screen and the tab is visible
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(en => {
+            visible = en[0].isIntersecting;
+            if (visible && playing && !raf) { lastT = 0; raf = requestAnimationFrame(frame); }
+        }, { threshold: 0.1 }).observe(stage);
+    }
+    document.addEventListener('visibilitychange', () => {
+        visible = !document.hidden;
+        if (visible && playing && !raf) { lastT = 0; raf = requestAnimationFrame(frame); }
+    });
+
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage.parentElement);
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Respect reduced-motion: start paused. Otherwise start playing once visible.
+    if (!reduceMotion) setPlaying(true);
 })();
