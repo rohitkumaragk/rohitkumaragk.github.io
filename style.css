@@ -185,7 +185,7 @@ b, strong { font-weight: 600; }
 .sim-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .sim-badge { position: absolute; top: .8rem; left: .8rem; font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; padding: .28rem .7rem; border-radius: 999px; border: 1px solid var(--s-line); color: var(--s-mute); background: rgba(7,10,18,.75); transition: color .2s, background .2s, border-color .2s; }
 .sim-badge.on { color: #1b1405; background: var(--s-amber); border-color: var(--s-amber); }
-.sim-legend { position: absolute; bottom: .7rem; left: .8rem; display: flex; gap: 1rem; font-size: .72rem; color: var(--s-mute); }
+.sim-legend { position: absolute; bottom: .7rem; left: .8rem; right: .8rem; display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .72rem; color: var(--s-mute); }
 .sim-legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: .35rem; }
 .sim-legend .donor { background: #ff9a4d; }
 .sim-legend .acc { background: #9ec4ff; }
@@ -203,6 +203,14 @@ b, strong { font-weight: 600; }
 .sim figcaption { margin-top: 1.1rem; font-size: .78rem; line-height: 1.6; color: var(--s-mute); }
 .sim-fallback { color: var(--s-mute); }
 .sim .btn-line { color: var(--s-ink); border-color: var(--s-line); }
+
+/* mode switch: wind accretion / RLOF */
+.sim-mode { display: inline-flex; gap: .3rem; padding: .25rem; margin-bottom: 1rem; border: 1px solid var(--s-line); border-radius: 12px; background: #0a0f1b; max-width: 100%; }
+.mode-btn { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem 1rem; border: 1px solid transparent; border-radius: 9px; background: transparent; color: var(--s-mute); font: 500 .85rem/1.2 var(--sans); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.mode-btn:hover { color: var(--s-ink); }
+.mode-btn.is-on { background: var(--s-amber); color: #1b1405; font-weight: 600; }
+.sim-legend .gas { background: #f2b84b; }
+.sim-legend .disk { background: #96e1ff; }
 
 /* ============ LISTS ============ */
 .rows { list-style: none; }
@@ -254,8 +262,9 @@ b, strong { font-weight: 600; }
 .contact-list li { display: flex; align-items: center; gap: .9rem; }
 .contact-list i { width: 1.3rem; text-align: center; color: var(--kick); }
 
-.site-footer { padding: 3rem 0 3.4rem; color: var(--muted); font-size: .88rem; }
-.footer-quote { margin-top: 1rem; font-style: italic; line-height: 1.9; }
+.site-footer { padding: 3.4rem 0 3.6rem; color: var(--muted); font-size: .88rem; text-align: center; }
+.footer-quote { margin: 1.1rem auto 0; max-width: 34rem; font-style: italic; line-height: 1.9; }
+.footer-cite { display: block; margin-top: .3rem; font-size: .8rem; letter-spacing: .04em; }
 
 .back-to-top { position: fixed; right: 1.3rem; bottom: 1.3rem; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; z-index: 800; display: grid; place-items: center; opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s, transform .25s; box-shadow: 0 8px 24px -10px rgba(0,0,0,.35); }
 .back-to-top.visible { opacity: 1; visibility: visible; }
