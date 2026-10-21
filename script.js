@@ -7,20 +7,22 @@
 const root = document.documentElement;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- Theme ---------- */
-const themeToggle = document.getElementById('themeToggle');
-function syncThemeButton() {
+/* ---------- Theme (two buttons: side panel and mobile bar) ---------- */
+const themeButtons = Array.from(document.querySelectorAll('.theme-btn'));
+function syncThemeButtons() {
     const dark = root.getAttribute('data-theme') === 'dark';
-    themeToggle.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
-    themeToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    themeButtons.forEach(btn => {
+        btn.querySelector('i').className = dark ? 'fas fa-sun' : 'fas fa-moon';
+        btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    });
 }
-syncThemeButton();
-themeToggle.addEventListener('click', () => {
+syncThemeButtons();
+themeButtons.forEach(btn => btn.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) { /* storage blocked */ }
-    syncThemeButton();
-});
+    syncThemeButtons();
+}));
 
 /* ---------- Mobile menu ---------- */
 const menuBtn = document.getElementById('mobileMenuBtn');
@@ -35,13 +37,13 @@ menuBtn.addEventListener('click', () => setMenu(!menu.classList.contains('active
 menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
-/* ---------- Scroll: progress, back-to-top, active nav link ---------- */
+/* ---------- Scroll: progress bar, back-to-top, active side-nav item ---------- */
 const progress = document.getElementById('progressBar');
 const toTop = document.getElementById('backToTop');
-const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+const snavs = Array.from(document.querySelectorAll('.snav'));
 const sections = Array.from(document.querySelectorAll('main section[id]'));
-// Sections that live under a menu item they don't have their own link for
-const navAlias = { about: 'research', skills: 'education', certifications: 'education', teaching: 'education', blog: 'contact' };
+// Sub-sections that live under the "Background" item of the side nav
+const navAlias = { certifications: 'education', skills: 'education', teaching: 'education', blog: 'education' };
 
 let ticking = false;
 function onScroll() {
@@ -50,10 +52,14 @@ function onScroll() {
     progress.style.width = (max > 0 ? Math.min(100, y / max * 100) : 0) + '%';
     toTop.classList.toggle('visible', y > 600);
 
-    let current = '';
-    for (const s of sections) if (y >= s.offsetTop - 140) current = s.id;
+    let current = 'home';
+    for (const s of sections) if (y >= s.offsetTop - 160) current = s.id;
     const target = navAlias[current] || current;
-    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + target));
+    snavs.forEach(l => {
+        const on = l.dataset.id === target;
+        l.classList.toggle('active', on);
+        if (on) l.setAttribute('aria-current', 'location'); else l.removeAttribute('aria-current');
+    });
     ticking = false;
 }
 window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
@@ -62,12 +68,12 @@ onScroll();
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
 
 /* ---------- Reveal on scroll (content stays visible if JS or IO is missing) ---------- */
-const revealEls = document.querySelectorAll('.sec-body > *, .glance');
+const revealEls = document.querySelectorAll('.sec .col > *');
 revealEls.forEach(el => el.classList.add('reveal'));
 if ('IntersectionObserver' in window && !reduceMotion) {
     const io = new IntersectionObserver(entries => {
         entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
     revealEls.forEach(el => io.observe(el));
 } else {
     revealEls.forEach(el => el.classList.add('in'));
@@ -132,7 +138,6 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
     let e = DEFAULTS.e, q = DEFAULTS.q, Rd = DEFAULTS.R, speed = DEFAULTS.s;
     let phase = 0;                       // orbital phase 0..1 (0 = periastron)
     let playing = false, visible = true, lastT = 0, raf = 0, lastState = null;
-    let trail1 = [], trail2 = [];
 
     /* ----- physics ----- */
     function solveKepler(M, ecc) {
@@ -169,9 +174,9 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         return { w: r.width, h: r.height };
     }
     let S = { w: 0, h: 0 }, C = { w: 0, h: 0 };
-    function resize() { S = fit(stage, sctx); C = fit(chart, cctx); trail1 = []; trail2 = []; draw(); }
+    function resize() { S = fit(stage, sctx); C = fit(chart, cctx); draw(performance.now()); }
 
-    /* ----- background stars (fixed, drawn once per frame, cheap) ----- */
+    /* ----- background stars (fixed positions) ----- */
     const stars = Array.from({ length: 70 }, (_, i) => {
         const a = Math.sin(i * 12.9898) * 43758.5453, b = Math.sin(i * 78.233) * 12345.6789;
         return { x: a - Math.floor(a), y: b - Math.floor(b), r: 0.4 + ((i * 37) % 10) / 10, o: 0.25 + ((i * 53) % 10) / 16 };
@@ -204,7 +209,6 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         const donor = P(-f1 * rx, -f1 * ry);
         const acc = P(f2 * rx, f2 * ry);
 
-        // orbit paths of both stars about the centre of mass
         function orbitPath(sign, f) {
             sctx.beginPath();
             for (let i = 0; i <= 160; i++) {
@@ -218,19 +222,16 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         sctx.strokeStyle = 'rgba(255,154,77,0.28)'; orbitPath(-1, f1);
         sctx.strokeStyle = 'rgba(158,196,255,0.28)'; orbitPath(1, f2);
 
-        // centre of mass marker
         const com = P(0, 0);
         sctx.strokeStyle = 'rgba(255,255,255,0.35)';
         sctx.beginPath(); sctx.moveTo(com[0] - 4, com[1]); sctx.lineTo(com[0] + 4, com[1]);
         sctx.moveTo(com[0], com[1] - 4); sctx.lineTo(com[0], com[1] + 4); sctx.stroke();
 
-        // line joining the stars
         sctx.strokeStyle = 'rgba(255,255,255,0.18)';
         sctx.setLineDash([2, 4]);
         sctx.beginPath(); sctx.moveTo(donor[0], donor[1]); sctx.lineTo(acc[0], acc[1]); sctx.stroke();
         sctx.setLineDash([]);
 
-        // Roche lobe (dashed) and donor surface
         const RL = rocheOverR(q) * r;
         const active = Rd >= RL;
         const rlPx = RL * scale;
@@ -247,7 +248,6 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         sctx.fillStyle = g;
         sctx.beginPath(); sctx.arc(donor[0], donor[1], rdPx, 0, TAU); sctx.fill();
 
-        // overflow stream toward the accretor while the donor fills its lobe
         if (active) {
             const dx = acc[0] - donor[0], dy = acc[1] - donor[1], len = Math.hypot(dx, dy) || 1;
             const ux = dx / len, uy = dy / len;
@@ -261,22 +261,20 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
             sctx.setLineDash([]); sctx.lineDashOffset = 0;
         }
 
-        // accretor
         const ag = sctx.createRadialGradient(acc[0] - 2, acc[1] - 2, 1, acc[0], acc[1], 7);
         ag.addColorStop(0, '#ffffff'); ag.addColorStop(1, '#7fb0ff');
         sctx.fillStyle = ag;
         sctx.beginPath(); sctx.arc(acc[0], acc[1], 6, 0, TAU); sctx.fill();
 
-        // periastron tick
         const peri = P(f2 * (1 - e), 0);
         sctx.fillStyle = 'rgba(255,255,255,0.5)';
-        sctx.font = '11px "JetBrains Mono", monospace';
+        sctx.font = '11px "IBM Plex Mono", monospace';
         sctx.fillText('periastron', peri[0] + 8, peri[1] + 4);
 
         return { r, RL, active };
     }
 
-    /* ----- drawing: separation vs. phase chart ----- */
+    /* ----- drawing: Roche lobe vs. donor radius over one orbit ----- */
     function drawChart(state) {
         const { w, h } = C;
         cctx.clearRect(0, 0, w, h);
@@ -284,12 +282,11 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         const pw = w - L - R, ph = h - T - B;
 
         const k = rocheOverR(q);
-        const rMax = 1 + e;                         // separation at apastron
+        const rMax = 1 + e;
         const yMax = Math.max(Rd, k * rMax) * 1.12;
         const X = p => L + p * pw;
         const Y = v => T + ph - v / yMax * ph;
 
-        // shaded orbital phases where the donor overflows
         const N = 360;
         cctx.fillStyle = 'rgba(242,184,75,0.16)';
         let start = -1;
@@ -303,24 +300,21 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
             }
         }
 
-        // axes
         cctx.strokeStyle = '#26304a'; cctx.lineWidth = 1;
         cctx.beginPath(); cctx.moveTo(L, T); cctx.lineTo(L, T + ph); cctx.lineTo(L + pw, T + ph); cctx.stroke();
-        cctx.fillStyle = '#8d97b2';
-        cctx.font = '10.5px "JetBrains Mono", monospace';
+        cctx.fillStyle = '#94a0bd';
+        cctx.font = '10.5px "IBM Plex Mono", monospace';
         cctx.textAlign = 'center';
         [0, 0.25, 0.5, 0.75, 1].forEach(p => cctx.fillText(p.toFixed(2).replace(/0+$/, '').replace(/\.$/, '') || '0', X(p), h - 8));
         cctx.textAlign = 'right';
         cctx.fillText('R / a', L - 6, T + 10);
         cctx.fillText('0', L - 6, T + ph + 3);
 
-        // donor radius (constant)
         cctx.strokeStyle = '#ff9a4d'; cctx.lineWidth = 1.8;
         cctx.beginPath(); cctx.moveTo(L, Y(Rd)); cctx.lineTo(L + pw, Y(Rd)); cctx.stroke();
-        cctx.fillStyle = '#ff9a4d'; cctx.textAlign = 'left';
+        cctx.fillStyle = '#ffb676'; cctx.textAlign = 'left';
         cctx.fillText('R donor', L + 6, Y(Rd) - 5);
 
-        // Roche lobe radius along the orbit
         cctx.strokeStyle = '#5fd4ee'; cctx.lineWidth = 1.8;
         cctx.beginPath();
         for (let i = 0; i <= 240; i++) {
@@ -328,10 +322,9 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
             if (i === 0) cctx.moveTo(X(p), Y(v)); else cctx.lineTo(X(p), Y(v));
         }
         cctx.stroke();
-        cctx.fillStyle = '#5fd4ee'; cctx.textAlign = 'right';
+        cctx.fillStyle = '#7fe0f2'; cctx.textAlign = 'right';
         cctx.fillText('Roche lobe', L + pw - 4, T + 12);
 
-        // current phase marker
         cctx.strokeStyle = 'rgba(255,255,255,0.7)'; cctx.lineWidth = 1;
         cctx.beginPath(); cctx.moveTo(X(phase), T); cctx.lineTo(X(phase), T + ph); cctx.stroke();
         cctx.fillStyle = '#fff';
@@ -374,7 +367,6 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
         if (!lastT) lastT = t;
         const dt = Math.min(0.05, (t - lastT) / 1000);
         lastT = t;
-        // Constant mean-anomaly rate: a body on a Kepler orbit speeds up near periastron automatically
         phase = (phase + dt * speed / PERIOD_SECONDS) % 1;
         draw(t);
         raf = requestAnimationFrame(frame);
@@ -422,6 +414,6 @@ document.getElementById('currentYear').textContent = new Date().getFullYear();
     window.addEventListener('resize', resize);
     resize();
 
-    // Respect reduced-motion: start paused. Otherwise start playing once visible.
+    // Respect reduced-motion: start paused. Otherwise start playing.
     if (!reduceMotion) setPlaying(true);
 })();
