@@ -184,35 +184,65 @@
                 <h2 class="h2">When does an eccentric binary grow an accretion disk?</h2>
                 <div class="prose">
                     <p>
-                        In a binary on an eccentric orbit, the separation between the stars changes continuously, so the way
-                        one star feeds the other changes too. A donor can lose mass as a wind that is denser near periastron,
-                        or fill its Roche lobe and overflow (RLOF) for only part of the orbit.
-                        My M.Sc. project compares wind-fed accretion with RLOF to ask a concrete question:
-                        <em>when does a transient accretion disk form around the accretor?</em> I model this in Python.
+                        In massive binary systems, the primary star drives a strong stellar wind, and part of it is
+                        gravitationally captured by the secondary. If the captured gas carries enough angular momentum, it
+                        does not fall straight onto the secondary's surface. Instead it settles into a
+                        <em>transient</em> (temporary) accretion disk around it. On an eccentric orbit this is even more
+                        interesting, because the separation between the stars changes continuously, so the way one star
+                        feeds the other changes along the orbit. A donor can lose mass as a wind that is densest near
+                        periastron, or fill its Roche lobe and overflow (RLOF) for only part of the orbit.
+                    </p>
+                    <p>
+                        My M.Sc. project asks a concrete question: <em>under what conditions does a transient accretion disk
+                        form around the accretor, and how long does it survive?</em> I first calculate the mass accretion
+                        rate with Bondi&ndash;Hoyle&ndash;Lyttleton (BHL) theory. I then determine the angular momentum of the
+                        captured gas, to see whether the material accretes directly onto the star or forms a disk. Wind-fed
+                        accretion is compared with RLOF throughout.
+                    </p>
+                    <p>
+                        For the next stage I am setting up the simulation analysis with
+                        <a href="https://yt-project.org/" target="_blank" rel="noopener">yt</a>, an open-source Python package for
+                        volumetric data. The plan is to identify the disk or disk-like structure in each snapshot and compute the
+                        angular momentum at every timestep only within that structure, not over the entire grid. This will let me
+                        separate how much of the captured material is accreted directly from how much is stored in the disk.
+                    </p>
+                    <p>
+                        The aim is to map the parameter space that favours disk formation, follow how disks form and
+                        dissipate across orbital phases, and track the evolution of the disk mass. From this I estimate the
+                        disk lifetime and compare it with the orbital period, to find out whether a disk lasts only one
+                        orbit or survives for several. These results should help in understanding and detecting transient
+                        accretion disks in massive eccentric binaries. I model all of this in Python.
                     </p>
                 </div>
 
                 <!-- ===== Interactive explainer ===== -->
                 <figure class="sim" id="sim" aria-labelledby="simTitle">
                     <div class="sim-head">
-                        <h3 id="simTitle">Explore: when does a donor overflow its Roche lobe?</h3>
-                        <p>An illustrative toy model, not my simulation results. Change the orbit and watch the separation.</p>
+                        <h3 id="simTitle">Explore: wind accretion vs. Roche-lobe overflow</h3>
+                        <p>An illustrative toy model, not my simulation results. Pick a mass-transfer mode, change the orbit and watch where the gas goes.</p>
+                    </div>
+
+                    <div class="sim-mode" role="group" aria-label="Mass-transfer mode">
+                        <button type="button" class="mode-btn" id="modeWind" aria-pressed="true"><i class="fas fa-wind" aria-hidden="true"></i> Wind accretion</button>
+                        <button type="button" class="mode-btn" id="modeRlof" aria-pressed="false"><i class="fas fa-droplet" aria-hidden="true"></i> Roche-lobe overflow</button>
                     </div>
 
                     <noscript><p class="sim-fallback">This interactive explainer needs JavaScript.</p></noscript>
 
                     <div class="sim-stage">
-                        <canvas id="simCanvas" role="img" aria-label="Animated two-body orbit of a donor star and an accretor on an eccentric orbit. A dashed circle shows the donor's Roche lobe."></canvas>
-                        <div class="sim-badge" id="simBadge">Detached</div>
+                        <canvas id="simCanvas" role="img" aria-label="Animated eccentric binary. Gas particles flow from the donor star to the accretor, either as a wind or through the inner Lagrange point during Roche-lobe overflow. A dashed circle shows the donor's Roche lobe."></canvas>
+                        <div class="sim-badge" id="simBadge">Wind accretion</div>
                         <div class="sim-legend" aria-hidden="true">
                             <span><i class="dot donor"></i> donor</span>
                             <span><i class="dot acc"></i> accretor</span>
                             <span><i class="dash"></i> Roche lobe</span>
+                            <span><i class="dot gas"></i> gas</span>
+                            <span><i class="dot disk"></i> bound to accretor</span>
                         </div>
                     </div>
 
                     <div class="sim-chart-wrap">
-                        <canvas id="chartCanvas" role="img" aria-label="Chart of donor radius and Roche lobe radius against orbital phase"></canvas>
+                        <canvas id="chartCanvas" role="img" aria-label="Chart of the wind density at the accretor against orbital phase"></canvas>
                     </div>
 
                     <div class="sim-controls">
@@ -224,6 +254,9 @@
                         </label>
                         <label>Donor radius <i>R</i><sub>d</sub>/<i>a</i> <output id="outR">0.25</output>
                             <input type="range" id="inR" min="0.05" max="0.5" step="0.01" value="0.25">
+                        </label>
+                        <label id="lblW">Wind speed <i>v</i><sub>w</sub> <output id="outW">2.5</output>
+                            <input type="range" id="inW" min="1" max="5" step="0.1" value="2.5">
                         </label>
                         <label>Orbital phase <output id="outP">0.00</output>
                             <input type="range" id="inP" min="0" max="1" step="0.005" value="0">
@@ -237,23 +270,30 @@
                         </div>
                     </div>
 
-                    <dl class="sim-readout">
+                    <dl class="sim-readout" id="simReadout">
                         <div><dt>Separation now</dt><dd id="roSep">&ndash;</dd></div>
-                        <div><dt>Roche lobe radius now</dt><dd id="roRL">&ndash;</dd></div>
-                        <div><dt>RLOF active for</dt><dd id="roFrac">&ndash;</dd></div>
-                        <div><dt>Wind density, periastron / apastron</dt><dd id="roRho">&ndash;</dd></div>
+                        <div data-only="wind"><dt>Bondi&ndash;Hoyle radius now</dt><dd id="roBHL">&ndash;</dd></div>
+                        <div data-only="wind"><dt>Wind density, periastron / apastron</dt><dd id="roRho">&ndash;</dd></div>
+                        <div data-only="rlof"><dt>Roche lobe radius now</dt><dd id="roRL">&ndash;</dd></div>
+                        <div data-only="rlof"><dt>RLOF active for</dt><dd id="roFrac">&ndash;</dd></div>
+                        <div><dt>Gas bound near accretor</dt><dd id="roBound">&ndash;</dd></div>
+                        <div><dt>Gas accreted (particles)</dt><dd id="roAcc">&ndash;</dd></div>
                     </dl>
                     <p class="sr-only" id="simStatus" aria-live="polite"></p>
 
                     <figcaption>
-                        Orbit solved with Kepler's equation. Roche-lobe radius from Eggleton (1983), evaluated at the instantaneous separation
-                        <i>r</i>: <i>R</i><sub>L</sub>/<i>r</i> = 0.49<i>q</i><sup>2/3</sup> / (0.6<i>q</i><sup>2/3</sup> + ln(1 + <i>q</i><sup>1/3</sup>)).
-                        Wind density is taken as &rho; &prop; <i>r</i><sup>&minus;2</sup> for a constant-speed wind.
-                        Lengths are in units of the semi-major axis <i>a</i>.
+                        Gas is a cloud of test particles moving in the gravity of both stars, not a hydrodynamic simulation.
+                        In wind mode they leave the donor in all directions at speed <i>v</i><sub>w</sub>; in RLOF mode they leave through the
+                        inner Lagrange point, and only while the donor fills its Roche lobe. A weak drag close to the accretor stands in for
+                        viscosity, so bound gas can pile up into a short-lived, disk-like swirl. Orbit solved with Kepler's equation;
+                        Roche-lobe radius from Eggleton (1983) at the instantaneous separation <i>r</i>:
+                        <i>R</i><sub>L</sub>/<i>r</i> = 0.49<i>q</i><sup>2/3</sup> / (0.6<i>q</i><sup>2/3</sup> + ln(1 + <i>q</i><sup>1/3</sup>)).
+                        Bondi&ndash;Hoyle radius <i>R</i><sub>BHL</sub> = 2<i>GM</i><sub>acc</sub>/<i>v</i><sub>rel</sub><sup>2</sup>, with the wind speed taken relative to the moving accretor.
+                        Wind density is taken as &rho; &prop; <i>r</i><sup>&minus;2</sup> for a constant-speed wind. Lengths are in units of the semi-major axis <i>a</i>.
                     </figcaption>
                 </figure>
 
-                <div class="tag-row" aria-label="Methods"><span>Python</span><span>Wind accretion</span><span>RLOF</span><span>Binary stars</span><span>Orbital dynamics</span></div>
+                <div class="tag-row" aria-label="Methods"><span>Python</span><span>yt</span><span>Wind accretion</span><span>RLOF</span><span>Binary stars</span><span>Orbital dynamics</span></div>
 
                 <h3 class="h3">Broader interests</h3>
                 <dl class="defs">
@@ -278,7 +318,7 @@
                             <h3>Accretion disk formation in eccentric binary systems</h3>
                             <p class="row-where">Ariel University, Israel &middot; supervisor: <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a></p>
                             <p class="row-role"><b>My role:</b> Python modelling of wind-fed accretion and Roche-lobe overflow along eccentric orbits; poster presented at the 2nd IAU&ndash;ORAS Pro-Am Workshop.</p>
-                            <div class="tag-row"><span>Python</span><span>RLOF</span><span>Wind accretion</span><span>Binary stars</span></div>
+                            <div class="tag-row"><span>Python</span><span>yt</span><span>RLOF</span><span>Wind accretion</span><span>Binary stars</span></div>
                         </div>
                     </li>
                     <li class="row">
@@ -520,11 +560,11 @@
 
         <footer class="site-footer">
             <div class="col">
-                <p>&copy; <span id="currentYear"></span> Rohit Kumar &middot; Last updated October 2026</p>
+                <p class="footer-copy">&copy; <span id="currentYear"></span> Rohit Kumar &middot; Last updated October 2026</p>
                 <p class="footer-quote" lang="sa">
                     समानी व आकूतिः समाना हृदयानि वः ।<br>
                     समानमस्तु वो मनो यथा वः सुसहासति ॥
-                    <br><span lang="en">&mdash; Rigveda 10.191.4</span>
+                    <span class="footer-cite" lang="en">&mdash; Rigveda 10.191.4</span>
                 </p>
             </div>
         </footer>
