@@ -42,7 +42,7 @@ const progress = document.getElementById('progressBar');
 const toTop = document.getElementById('backToTop');
 const snavs = Array.from(document.querySelectorAll('.snav'));
 const sections = Array.from(document.querySelectorAll('main section[id]'));
-const navAlias = { My place: 'about', certifications: 'education', skills: 'education', teaching: 'education', blog: 'education' };
+const navAlias = { bihar: 'about', certifications: 'education', skills: 'education', teaching: 'education', blog: 'education' };
 
 let ticking = false;
 function onScroll() {
