@@ -42,8 +42,7 @@ const progress = document.getElementById('progressBar');
 const toTop = document.getElementById('backToTop');
 const snavs = Array.from(document.querySelectorAll('.snav'));
 const sections = Array.from(document.querySelectorAll('main section[id]'));
-// Sub-sections that live under the "Background" item of the side nav
-const navAlias = { certifications: 'education', skills: 'education', teaching: 'education', blog: 'education' };
+const navAlias = { My place: 'about', certifications: 'education', skills: 'education', teaching: 'education', blog: 'education' };
 
 let ticking = false;
 function onScroll() {
