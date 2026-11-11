@@ -1,62 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7GRPR821P1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-7GRPR821P1');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohit Kumar | Astrophysicist | Ariel University &amp; NIT Hamirpur</title>
+    <title>Rohit Kumar | Astrophysicist | Ariel University & NIT Hamirpur</title>
     <meta name="description" content="Rohit Kumar, M.Sc. Physics student at Ariel University, Israel. Research on accretion in eccentric binary systems, AGN and black hole physics.">
-    <meta name="keywords" content="Astrophysics, accretion disks, eccentric binaries, AGN, blazars, black holes, Ariel University, NIT Hamirpur, PhD applicant">
-    <meta name="author" content="Rohit Kumar">
-    <meta name="theme-color" content="#f7f8fc">
-    <link rel="canonical" href="https://rohitkumaragk.github.io/">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f1f'/%3E%3Ccircle cx='28' cy='32' r='8' fill='%23f2b84b'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='13' fill='none' stroke='%238ea2ff' stroke-width='3'/%3E%3C/svg%3E">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Rohit Kumar | Astrophysicist">
-    <meta property="og:description" content="Accretion in eccentric binaries, AGN and black hole physics. M.Sc. Physics, Ariel University.">
-    <meta property="og:image" content="https://rohitkumaragk.github.io/photo.jpeg">
-    <meta property="og:url" content="https://rohitkumaragk.github.io/">
-    <meta name="twitter:card" content="summary">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Rohit Kumar",
-      "url": "https://rohitkumaragk.github.io/",
-      "image": "https://rohitkumaragk.github.io/photo.jpeg",
-      "jobTitle": "M.Sc. Physics student (Astrophysics)",
-      "affiliation": { "@type": "CollegeOrUniversity", "name": "Ariel University" },
-      "alumniOf": { "@type": "CollegeOrUniversity", "name": "National Institute of Technology Hamirpur" },
-      "knowsAbout": ["Astrophysics", "Accretion disks", "Eccentric binary stars", "Active Galactic Nuclei", "Blazars", "X-ray astronomy"],
-      "sameAs": [
-        "https://www.linkedin.com/in/rohit-kumar-56643a20b",
-        "https://github.com/rohitkumaragk",
-        "https://questioneverythingagk.blogspot.com"
-      ]
-    }
-    </script>
-
-    <!-- Apply saved / system theme before first paint -->
-    <script>
-      (function () {
-        var t = 'light';
-        try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
-        if (t !== 'light' && t !== 'dark') t = 'light';
-        document.documentElement.setAttribute('data-theme', t);
-        document.documentElement.classList.add('js');
-      })();
-    </script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -65,7 +13,7 @@
     <link rel="stylesheet" href="galaxy.css">
 </head>
 <body>
-    <canvas id="galaxy" aria-label="Interactive galaxy. Each labelled star opens a section of this site; the same sections are listed under All stars."></canvas>
+    <canvas id="galaxy" aria-label="Interactive galaxy"></canvas>
 
     <header class="g-head">
         <div class="g-id">
@@ -74,118 +22,66 @@
         </div>
         <div class="g-tools">
             <a class="btn btn-small btn-amber" href="Rohit_CV.pdf" download>CV</a>
-            <a class="g-icon" href="https://github.com/rohitkumaragk" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a class="g-icon" href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-            <a class="g-icon" href="https://questioneverythingagk.blogspot.com" target="_blank" rel="noopener" aria-label="Blog"><i class="fas fa-blog" aria-hidden="true"></i></a>
-            <button type="button" class="theme-btn g-icon" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
+            <a class="g-icon" href="https://github.com/rohitkumaragk" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a class="g-icon" href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a class="g-icon" href="https://questioneverythingagk.blogspot.com" target="_blank" rel="noopener" aria-label="Blog"><i class="fas fa-blog"></i></a>
+            <button type="button" class="theme-btn g-icon" aria-label="Switch theme"><i class="fas fa-moon"></i></button>
         </div>
     </header>
 
     <p class="g-hint" id="gHint">Click a star to explore</p>
 
     <nav class="star-index" id="starIndexWrap" aria-label="All sections">
-        <button type="button" class="si-btn" id="starIndexBtn" aria-expanded="false" aria-controls="starIndex"><i class="fas fa-star" aria-hidden="true"></i> All stars</button>
+        <button type="button" class="si-btn" id="starIndexBtn" aria-expanded="false" aria-controls="starIndex"><i class="fas fa-star"></i> All stars</button>
         <ul class="si-list" id="starIndex" hidden></ul>
     </nav>
 
     <div class="scrim" id="scrim"></div>
-    <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Section" aria-hidden="true" tabindex="-1">
-        <div class="panel-bar">
-            <span class="panel-crumb" id="panelCrumb"></span>
-            <button type="button" class="panel-close" id="panelClose" aria-label="Close and return to the galaxy"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    <main class="fullpage" id="fullpage" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+        <div class="fullpage-bar">
+            <span class="fullpage-crumb" id="panelCrumb"></span>
+            <button type="button" class="fullpage-close" id="panelClose" aria-label="Close"><i class="fas fa-xmark"></i></button>
         </div>
-        <div class="panel-body">
+        <div class="fullpage-body">
             <article class="pane" data-id="home" hidden>
-
-<p class="kicker">Home</p>
-<h2 class="hero-title">I study how accretion disks form in <em>eccentric binary stars.</em></h2>
-<p class="hero-lede">
-    M.Sc. Physics at Ariel University, Israel, working with
-    <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a>.
-</p>
-<div class="actions">
-    <a href="Rohit_CV.pdf" class="btn btn-ink" download>Download CV</a>
-    <a href="mailto:rohitkumaragk@gmail.com?subject=Prospective%20PhD%20student" class="btn btn-outline">Email me</a>
-</div>
-<dl class="glance">
-    <div><dt>Now</dt><dd>M.Sc. Physics, Ariel University (since Oct 2025)</dd></div>
-    <div><dt>Focus</dt><dd>Wind-fed accretion in eccentric binary orbits</dd></div>
-    <div><dt>Supervisor</dt><dd>Prof. Amit Kashi</dd></div>
-    <div><dt>Also</dt><dd>AGN and blazar X-ray / gamma-ray analysis at BHU</dd></div>
-</dl>
-<footer class="site-footer">
-    <p class="footer-copy">&copy; <span id="currentYear"></span> Rohit Kumar &middot; Last updated November 2026</p>
-    <p class="footer-quote" lang="sa">
-        समानी व आकूतिः समाना हृदयानि वः ।<br>
-        समानमस्तु वो मनो यथा वः सुसहासति ॥
-        <span class="footer-cite" lang="en">&mdash; Rigveda 10.191.4</span>
-    </p>
-</footer>
-
+                <p class="kicker">Home</p>
+                <h2 class="hero-title">I study how accretion disks form in <em>eccentric binary stars.</em></h2>
+                <p class="hero-lede">M.Sc. Physics at Ariel University, Israel, working with <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a>.</p>
+                <div class="actions">
+                    <a href="Rohit_CV.pdf" class="btn btn-ink" download>Download CV</a>
+                    <a href="mailto:rohitkumaragk@gmail.com" class="btn btn-outline">Email me</a>
+                </div>
+                <dl class="glance">
+                    <div><dt>Now</dt><dd>M.Sc. Physics, Ariel University (since Oct 2025)</dd></div>
+                    <div><dt>Focus</dt><dd>Wind-fed accretion in eccentric binary orbits</dd></div>
+                    <div><dt>Supervisor</dt><dd>Prof. Amit Kashi</dd></div>
+                    <div><dt>Also</dt><dd>AGN and blazar X-ray / gamma-ray analysis at BHU</dd></div>
+                </dl>
+                <footer class="site-footer">
+                    <p class="footer-copy">&copy; <span id="currentYear"></span> Rohit Kumar</p>
+                    <p class="footer-quote" lang="sa">समानी व आकूतिः समाना हृदयानि वः ।<br>समानमस्तु वो मनो यथा वः सुसहासति ॥<span class="footer-cite">— Rigveda 10.191.4</span></p>
+                </footer>
             </article>
+
             <article class="pane" data-id="about" hidden>
-<p class="kicker">§01 · About</p>
+                <p class="kicker">§01 · About</p>
                 <h2 class="h2">From a village in Bihar to an astrophysics lab in Israel</h2>
                 <div class="prose">
-                    <p class="lead">
-                        I'm a physicist from a village in Siwan, Bihar, India. I'm currently an M.Sc. student at
-                        <strong>Ariel University</strong>, working on mass transfer in eccentric binaries.
-                    </p>
-                    <p>
-                        Before this I completed an M.Sc. in Physics at <strong>NIT Hamirpur</strong>, where I built a 150&nbsp;mm Newtonian telescope,
-                        and worked with the High Energy Astrophysics Group at <strong>BHU</strong> on Swift, Fermi-LAT and NuSTAR data of AGN and blazars.
-                        I taught school students for four years (2015&ndash;2019), which shaped how I explain physics from first principles.
-                    </p>
-                    <p>I believe that understanding the universe is a sacred act, for nothing is as pure as knowledge.</p>
+                    <p class="lead">I'm a physicist from a village in Siwan, Bihar, India. I'm currently an M.Sc. student at <strong>Ariel University</strong>, working on mass transfer in eccentric binaries.</p>
+                    <p>Before this I completed an M.Sc. in Physics at <strong>NIT Hamirpur</strong>, where I built a 150 mm Newtonian telescope, and worked with the High Energy Astrophysics Group at <strong>BHU</strong> on Swift, Fermi-LAT and NuSTAR data of AGN and blazars.</p>
+                    <p>I taught school students for four years (2015–2019), which shaped how I explain physics from first principles.</p>
                     <p class="aside-note">From the land of Litti Chokha to the international stage: curiosity knows no boundaries.</p>
                 </div>
-<div class="pane-divider"></div>
-<p class="kicker">§01.1 · Where I come from</p>
+                <div class="pane-divider"></div>
+                <p class="kicker">§01.1 · Where I come from</p>
                 <h2 class="h2">Bihar: where religion, knowledge and culture flourished together</h2>
                 <div class="prose">
-                    <p>
-                        Bihar is one of those regions of Indian civilization where religion, knowledge, and culture flourished together.
-                        It served as both the birthplace and the field of action for Buddhism and Jainism: Siddhartha Gautama attained
-                        enlightenment in Bodh Gaya and became the Buddha; Buddhist councils were held in Rajgir, Vaishali, and Pataliputra;
-                        and Lord Mahavira, born in Kundagrama near Vaishali, preached the message of non-violence (ahimsa) and attained
-                        Nirvana in Pavapuri.
-                    </p>
-                    <p>
-                        The land of Magadha was home to great rulers such as Chandragupta Maurya, his mentor Chanakya (Kautilya), and
-                        Emperor Ashoka. Following the Kalinga War, Ashoka embraced the path of 'Dhamma' and propagated Buddhism to Sri Lanka
-                        and beyond. The mathematician and astronomer Aryabhata, associated with Kusumpura (Patna), presented concepts in his
-                        work 'Aryabhatiya' that included the place-value numeral system, a precise value for pi (π), discover the zero, and the rotation of the
-                        Earth on its axis.
-                    </p>
-                    <p>
-                        The Mithila region in North Bihar corresponds to the ancient kingdom of Videha, which was home to figures such as
-                        King Janak, the sage Yajnavalkya, and the learned women Gargi and Maitreyi; later, the poet Vidyapati immortalized
-                        the Maithili language. According to the Ramayana, Sita was a daughter of Mithila, and Sitamarhi is believed to be her
-                        birthplace. Buxar is associated with the hermitage of Vishvamitra and the slaying of the demoness Tadaka, while
-                        Valmiki Nagar in West Champaran is believed to be the site of the hermitage of the sage Valmiki.
-                    </p>
-                    <p>
-                        Many travelers from abroad have also described Bihar: <strong>Megasthenes</strong> (from Greece, an ambassador of
-                        Seleucus) visited the Mauryan court at Pataliputra; <strong>Faxian</strong> (from China) arrived during the Gupta
-                        period; <strong>Xuanzang</strong> and <strong>Yijing</strong> (from China) studied at Nalanda in the seventh century;
-                        and <strong>Dharmasvamin</strong> (from Tibet) also traveled here in the 13th century.
-                    </p>
-                    <p>
-                        The region boasts a rich and diverse linguistic tradition: alongside the official languages, Hindi and Urdu,
-                        languages such as Maithili, Bhojpuri, Magahi, Angika, and Vajjika are spoken by the common people.
-                    </p>
-                    <p>
-                        Among cultural observances, <strong>Chhath Puja</strong> holds a special place; it is a four-day festival, comprising
-                        rituals known as Nahay-Khay, Kharna, Sandhya Arghya, and Usha Arghya, dedicated to the worship of the Sun God and
-                        Chhathi Maiya.
-                    </p>
-                    <p>
-                        In the realm of handicrafts, Bihar is renowned for its distinct artistry, including Madhubani (Mithila) painting,
-                        the Sujani embroidery of Muzaffarpur, the Tikuli art of Patna, artifacts made from Sikki grass, the Manjusha art of
-                        Bhagalpur, and Bhagalpuri silk.
-                    </p>
+                    <p>Bihar is one of those regions of Indian civilization where religion, knowledge, and culture flourished together. It served as both the birthplace and the field of action for Buddhism and Jainism.</p>
+                    <p>The land of Magadha was home to great rulers such as Chandragupta Maurya, his mentor Chanakya (Kautilya), and Emperor Ashoka. The mathematician and astronomer Aryabhata, associated with Kusumpura (Patna), presented concepts including the place-value numeral system and a precise value for pi.</p>
+                    <p>Among cultural observances, <strong>Chhath Puja</strong> holds a special place. Bihar is renowned for Madhubani painting, Sujani embroidery, and Bhagalpuri silk.</p>
                 </div>
             </article>
+
             <article class="pane" data-id="research" hidden>
                 <p class="kicker">§02 · Research</p>
                 <h2 class="h2">Transient accretion disks in eccentric massive binaries</h2>
@@ -193,45 +89,111 @@
 
                 <section class="research-block">
                     <div class="research-number">01</div>
-                    <div><h3>Scientific background</h3>
-                    <p>In a massive binary, the donor star can lose material through a stellar wind. The companion (accretor) gravitationally captures a fraction of this gas. If the captured material carries sufficient specific angular momentum, it can circularise around the accretor and form a temporary accretion disk rather than falling directly onto the stellar surface.</p>
-                    <p>Eccentricity makes the process time-dependent: the stellar separation and orbital velocity change throughout the orbit. The mass-transfer rate and angular momentum of the captured gas can therefore vary strongly, especially around periastron.</p></div>
+                    <div>
+                        <h3>Scientific Background</h3>
+                        <div class="research-subsection">
+                            <h4>Binary Star Systems</h4>
+                            <p>More than 70% of massive main-sequence stars exist in binary systems. These systems evolve through stellar winds, mass transfer, and angular momentum exchange.</p>
+                        </div>
+                        <div class="research-subsection">
+                            <h4>Mass Transfer Mechanisms</h4>
+                            <p>Two primary mechanisms drive mass transfer:</p>
+                            <ul class="check-list">
+                                <li><strong>Bondi-Hoyle-Lyttleton (BHL) Accretion:</strong> The donor star releases a wind, and the accretor's gravity captures a portion of it.</li>
+                                <li><strong>Roche-Lobe Overflow (RLOF):</strong> When the donor fills its Roche lobe, material flows through the L1 point directly toward the accretor.</li>
+                            </ul>
+                        </div>
+                        <div class="research-subsection">
+                            <h4>Disk Formation Criterion</h4>
+                            <p>The captured gas forms a disk if its specific angular momentum exceeds the Keplerian value at the accretor's surface:</p>
+                            <p class="formula">j<sub>A</sub> = ΩR<sub>acc</sub>², j<sub>2</sub> = √(GM<sub>a</sub>R<sub>a</sub>)</p>
+                            <div class="criteria-grid">
+                                <div class="criteria-item"><strong>Disk</strong><span>j<sub>A</sub>/j<sub>2</sub> ≥ 1</span></div>
+                                <div class="criteria-item"><strong>Belt</strong><span>0.8 ≤ j<sub>A</sub>/j<sub>2</sub> < 1</span></div>
+                                <div class="criteria-item"><strong>No Disk</strong><span>j<sub>A</sub>/j<sub>2</sub> < 0.8</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
+
                 <section class="research-block">
                     <div class="research-number">02</div>
-                    <div><h3>Research question</h3>
-                    <p class="research-question">Under what orbital and stellar conditions does a transient accretion disk form around the secondary, and what determines its duration and evolution?</p>
-                    <ul class="check-list"><li>When is the captured gas able to circularise?</li><li>How does wind-fed Bondi–Hoyle–Lyttleton (BHL) accretion compare with Roche-lobe overflow (RLOF)?</li><li>For what part of the orbit are disk-forming conditions satisfied?</li><li>How does the disk draining time compare with the orbital period?</li></ul></div>
+                    <div>
+                        <h3>Research Question</h3>
+                        <p class="research-question">Under what orbital and stellar conditions does a transient accretion disk form around the secondary, and what determines its duration and evolution?</p>
+                        <ul class="check-list">
+                            <li>When is the captured gas able to circularise?</li>
+                            <li>How does BHL accretion compare with RLOF?</li>
+                            <li>For what part of the orbit are disk-forming conditions satisfied?</li>
+                            <li>How does the disk draining time compare with the orbital period?</li>
+                        </ul>
+                    </div>
                 </section>
+
                 <section class="research-block">
                     <div class="research-number">03</div>
-                    <div><h3>Physical mechanisms</h3>
-                    <div class="mini-grid">
-                        <article class="mini-card"><span class="mini-icon">↗</span><h4>Wind accretion</h4><p>The companion captures part of the donor's stellar wind. The BHL accretion radius provides a characteristic scale for gravitational focusing.</p></article>
-                        <article class="mini-card"><span class="mini-icon">⇢</span><h4>Roche-lobe overflow</h4><p>When the donor fills its Roche lobe, gas can pass through the inner Lagrange point and transfer to the companion.</p></article>
-                        <article class="mini-card"><span class="mini-icon">⟳</span><h4>Angular momentum</h4><p>The specific angular momentum of the captured material is compared with the value needed to orbit at the accretor's surface.</p></article>
-                    </div></div>
+                    <div>
+                        <h3>Key Results (η Carinae-like system)</h3>
+                        <div class="results-table">
+                            <table>
+                                <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Disk window</td><td>32°–114°</td></tr>
+                                    <tr><td>Thick Disk/Belt</td><td>16°–31° & 115°–118°</td></tr>
+                                    <tr><td>Duration</td><td>~34 days</td></tr>
+                                    <tr><td>Peak lag</td><td>~11 days after periastron</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Adopted parameters: M<sub>d</sub> = 170 M☉, M<sub>a</sub> = 80 M☉, a = 19.74 AU, e = 0.9, P = 5.54 yr</p>
+                    </div>
                 </section>
+
                 <section class="research-block">
                     <div class="research-number">04</div>
-                    <div><h3>Methods and workflow</h3>
-                    <ol class="method-flow"><li><b>Binary parameters</b><span>Adopt stellar masses, radii, orbital period, eccentricity and wind properties.</span></li><li><b>Orbital evolution</b><span>Calculate the changing separation, orbital velocity and wind conditions along the orbit.</span></li><li><b>Accretion estimates</b><span>Evaluate BHL capture and RLOF conditions, then estimate the angular momentum of the captured gas.</span></li><li><b>Disk criterion</b><span>Compare captured specific angular momentum with the Keplerian value at the accretor's surface.</span></li><li><b>Timescales</b><span>Compare the disk's estimated viscous draining time with the orbital timescale.</span></li></ol></div>
+                    <div>
+                        <h3>Methods and Workflow</h3>
+                        <ol class="method-flow">
+                            <li><b>Step 1: Define Binary Parameters</b><span>Adopt stellar masses, radii, orbital period, eccentricity and wind properties.</span></li>
+                            <li><b>Step 2: Calculate Orbital Evolution</b><span>Compute changing separation, orbital velocity and wind conditions along the orbit.</span></li>
+                            <li><b>Step 3: Evaluate Accretion</b><span>Apply BHL capture formula and RLOF conditions. Estimate angular momentum of captured gas.</span></li>
+                            <li><b>Step 4: Apply Disk Criterion</b><span>Compare captured specific angular momentum with Keplerian value at accretor's surface.</span></li>
+                            <li><b>Step 5: Compare Timescales</b><span>Compare disk viscous draining time with orbital timescale to determine disk survival.</span></li>
+                        </ol>
+                    </div>
                 </section>
+
                 <section class="research-block">
                     <div class="research-number">05</div>
-                    <div><h3>Numerical simulation analysis — next stage</h3>
-                    <p>I am learning to use <a href="https://yt-project.org/" target="_blank" rel="noopener">yt</a> to inspect FLASH simulation outputs. The planned analysis is to identify disk-like structures in the simulation and calculate the gas angular momentum at successive timesteps. This is a developing workflow; no simulation-derived result is claimed here yet.</p>
-                    <div class="tag-row"><span>FLASH</span><span>yt</span><span>Python</span><span>Angular momentum</span><span>Time evolution</span></div></div>
+                    <div>
+                        <h3>Numerical Simulation Analysis — Next Stage</h3>
+                        <p>I am learning to use <a href="https://yt-project.org/" target="_blank" rel="noopener">yt</a> to inspect FLASH simulation outputs. The planned analysis is to identify disk-like structures and calculate gas angular momentum at successive timesteps.</p>
+                        <div class="tag-row"><span>FLASH</span><span>yt</span><span>Python</span><span>Angular momentum</span></div>
+                    </div>
                 </section>
+
                 <figure class="sim" id="sim" aria-labelledby="simTitle">
-                    <div class="sim-head"><div><p class="eyebrow">Interactive explainer</p><h3 id="simTitle">Wind accretion vs. Roche-lobe overflow</h3></div><p>This is an illustrative test-particle toy model—not a hydrodynamic simulation and not a presentation of research results.</p></div>
+                    <div class="sim-head">
+                        <div>
+                            <p class="eyebrow">Interactive Explainer</p>
+                            <h3 id="simTitle">Wind Accretion vs. Roche-Lobe Overflow</h3>
+                        </div>
+                        <p>Illustrative test-particle toy model — not a hydrodynamic simulation.</p>
+                    </div>
                     <div class="sim-mode" role="group" aria-label="Mass-transfer mode">
                         <button type="button" class="mode-btn is-on" id="modeWind" aria-pressed="true">✦ Wind accretion</button>
                         <button type="button" class="mode-btn" id="modeRlof" aria-pressed="false">⇢ Roche-lobe overflow</button>
                     </div>
-                    <noscript><p class="sim-fallback">Enable JavaScript to run this interactive explainer.</p></noscript>
-                    <div class="sim-stage"><canvas id="simCanvas" role="img" aria-label="Animated eccentric binary with gas test particles"></canvas><div class="sim-badge" id="simBadge">Wind accretion</div>
-                        <div class="sim-legend"><span><i class="dot donor"></i> Donor</span><span><i class="dot acc"></i> Accretor</span><span><i class="dash"></i> Roche lobe</span><span><i class="dot gas"></i> Gas</span><span><i class="dot disk"></i> Bound gas</span></div>
+                    <div class="sim-stage">
+                        <canvas id="simCanvas" role="img" aria-label="Animated eccentric binary with gas test particles"></canvas>
+                        <div class="sim-badge" id="simBadge">Wind accretion</div>
+                        <div class="sim-legend">
+                            <span><i class="dot donor"></i> Donor</span>
+                            <span><i class="dot acc"></i> Accretor</span>
+                            <span><i class="dash"></i> Roche lobe</span>
+                            <span><i class="dot gas"></i> Gas</span>
+                            <span><i class="dot disk"></i> Bound gas</span>
+                        </div>
                     </div>
                     <div class="sim-chart-wrap"><canvas id="chartCanvas" role="img" aria-label="Orbital phase chart"></canvas></div>
                     <div class="sim-controls">
@@ -241,56 +203,155 @@
                         <label id="lblW">Wind speed <i>v</i><sub>w</sub><output id="outW">2.5</output><input type="range" id="inW" min="1" max="5" step="0.1" value="2.5"></label>
                         <label>Orbital phase<output id="outP">0.00</output><input type="range" id="inP" min="0" max="1" step="0.005" value="0"></label>
                         <label>Animation speed<output id="outS">1.0×</output><input type="range" id="inS" min="0.25" max="3" step="0.25" value="1"></label>
-                        <div class="sim-buttons"><button type="button" class="btn btn-small btn-amber" id="simPlay" aria-pressed="false"><i class="fas fa-play"></i> <span>Play</span></button><button type="button" class="btn btn-small btn-line" id="simReset">Reset</button></div>
+                        <div class="sim-buttons">
+                            <button type="button" class="btn btn-small btn-amber" id="simPlay" aria-pressed="false"><i class="fas fa-play"></i> <span>Play</span></button>
+                            <button type="button" class="btn btn-small btn-line" id="simReset">Reset</button>
+                        </div>
                     </div>
-                    <dl class="sim-readout" id="simReadout"><div><dt>Separation</dt><dd id="roSep">–</dd></div><div data-only="wind"><dt>BHL radius</dt><dd id="roBHL">–</dd></div><div data-only="wind"><dt>Density contrast</dt><dd id="roRho">–</dd></div><div data-only="rlof"><dt>Roche-lobe radius</dt><dd id="roRL">–</dd></div><div data-only="rlof"><dt>RLOF active</dt><dd id="roFrac">–</dd></div><div><dt>Bound gas particles</dt><dd id="roBound">–</dd></div><div><dt>Accreted particles</dt><dd id="roAcc">–</dd></div></dl>
+                    <dl class="sim-readout" id="simReadout">
+                        <div><dt>Separation</dt><dd id="roSep">–</dd></div>
+                        <div data-only="wind"><dt>BHL radius</dt><dd id="roBHL">–</dd></div>
+                        <div data-only="wind"><dt>Density contrast</dt><dd id="roRho">–</dd></div>
+                        <div data-only="rlof"><dt>Roche-lobe radius</dt><dd id="roRL">–</dd></div>
+                        <div data-only="rlof"><dt>RLOF active</dt><dd id="roFrac">–</dd></div>
+                        <div><dt>Bound gas</dt><dd id="roBound">–</dd></div>
+                        <div><dt>Accreted</dt><dd id="roAcc">–</dd></div>
+                    </dl>
                     <p class="sr-only" id="simStatus" aria-live="polite"></p>
-                    <figcaption>Particles are integrated as test particles in the gravitational field of both stars. A simple drag term near the accretor represents unresolved dissipation; it is not a physical viscosity prescription. The Roche-lobe estimate follows Eggleton (1983), and the wind density scaling assumes a constant-speed wind. All lengths are in units of the semi-major axis.</figcaption>
+                    <figcaption>Particles are integrated as test particles in the gravitational field of both stars. A simple drag term near the accretor represents unresolved dissipation. Roche-lobe estimate follows Eggleton (1983).</figcaption>
                 </figure>
-                <div class="research-note"><b>Scientific context:</b> the project uses η Carinae as a motivating massive eccentric binary system. Quantitative values and conclusions are discussed in the research poster and project material; the interactive model above is deliberately illustrative.</div>
-                <h3 class="h3">Related research interests</h3>
-                <div class="interest-grid"><article><h4>AGN and blazars</h4><p>Multiwavelength emission, X-ray and gamma-ray spectra, and variability.</p></article><article><h4>Black-hole accretion</h4><p>Accretion flows, disk physics and feedback around compact objects.</p></article><article><h4>Stellar and galactic evolution</h4><p>Mass transfer, star formation, galaxy evolution and their physical connections.</p></article><article><h4>Cosmology</h4><p>Large-scale structure and data-driven approaches to the universe.</p></article></div>
+
+                <div class="research-note"><b>Scientific context:</b> The project uses η Carinae as a motivating massive eccentric binary system. The interactive model above is illustrative.</div>
             </article>
+
             <article class="pane" data-id="projects" hidden>
-                <p class="kicker">§03 · Projects</p><h2 class="h2">Research, analysis and scientific builds</h2>
-                <p class="section-intro">A selection of research and hands-on projects, arranged by the question addressed and the work carried out.</p>
+                <p class="kicker">§03 · Projects</p>
+                <h2 class="h2">Research, Analysis and Scientific Builds</h2>
+                <p class="section-intro">A selection of research and hands-on projects, organized by the question addressed and the work carried out.</p>
                 <div class="project-grid">
-                    <article class="project-card project-featured"><div class="project-top"><span class="project-index">PROJECT 01</span><span class="status status-current">Current research</span></div><p class="project-date">Nov 2025 – present</p><h3>Transient accretion disks in eccentric massive binaries</h3><p class="project-place">Ariel University, Israel · Supervisor: <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a></p><p>Analytical investigation of wind-fed BHL accretion and Roche-lobe overflow, with attention to the angular momentum of captured material and the orbital window for disk formation.</p><div class="project-contribution"><b>My contribution</b><p>Python-based calculations and visualisation; comparing disk-formation criteria and characteristic timescales. Learning the yt workflow for future FLASH simulation analysis.</p></div><div class="tag-row"><span>Python</span><span>BHL accretion</span><span>RLOF</span><span>Orbital dynamics</span><span>yt / FLASH (learning)</span></div></article>
-                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 02</span><span class="status">Research experience</span></div><p class="project-date">Jul – Oct 2025</p><h3>AGN and blazar multiwavelength analysis</h3><p class="project-place"><a href="https://sites.google.com/view/hea-bhu" target="_blank" rel="noopener">High Energy Astrophysics Group, BHU</a> · Supervisor: <a href="https://scholar.google.com/citations?user=bbqblCkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dr. Raj Prince</a></p><p>Worked with high-energy observations of active galactic nuclei and blazars, combining X-ray and gamma-ray data.</p><div class="project-contribution"><b>Data and methods</b><p>Swift BAT, XRT and UVOT; Fermi-LAT; NuSTAR; spectral analysis and variability.</p></div><div class="tag-row"><span>AGN</span><span>Blazars</span><span>Swift</span><span>Fermi-LAT</span><span>NuSTAR</span></div></article>
-                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 03</span><span class="status">M.Sc. thesis</span></div><p class="project-date">2023</p><h3>Demonstrating the Sun–Earth model</h3><p class="project-place">NIT Hamirpur · Supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p><p>Designed and built a working model to demonstrate Earth–Sun geometry and explain rotation, revolution, seasons and day/night.</p><div class="project-contribution"><b>Project focus</b><p>Hands-on scientific demonstration and communicating astronomical concepts through a physical model.</p></div><div class="tag-row"><span>Solar system</span><span>Scientific model</span><span>Physics education</span></div></article>
-                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 04</span><span class="status">Instrumentation</span></div><p class="project-date">2022–2023</p><h3>150 mm Newtonian reflecting telescope</h3><p class="project-place">NIT Hamirpur · Supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p><p>Designed and constructed a 150 mm aperture Newtonian telescope, gaining practical experience with optical components and telescope assembly.</p><div class="tag-row"><span>Optics</span><span>Mirror fabrication</span><span>Instrumentation</span></div></article>
-                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 05</span><span class="status">Citizen science</span></div><p class="project-date">2023 – present</p><h3>Zooniverse astronomy projects</h3><p class="project-place">Independent participation</p><p>Contributed to citizen-science classification and data activities, including galaxy morphology and supernova searches.</p><div class="tag-row"><span>Galaxy morphology</span><span>Supernova searches</span><span>Citizen science</span></div></article>
+                    <article class="project-card project-featured">
+                        <div class="project-top"><span class="project-index">PROJECT 01</span><span class="status status-current">Current Research</span></div>
+                        <p class="project-date">Nov 2025 – present</p>
+                        <h3>Transient accretion disks in eccentric massive binaries</h3>
+                        <p class="project-place">Ariel University, Israel · Supervisor: <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a></p>
+                        <p>Analytical investigation of wind-fed BHL accretion and Roche-lobe overflow, with attention to angular momentum of captured material and the orbital window for disk formation.</p>
+                        <div class="project-contribution">
+                            <b>My Contribution</b>
+                            <p>Python-based calculations and visualisation; comparing disk-formation criteria and characteristic timescales. Learning yt workflow for future FLASH simulation analysis.</p>
+                        </div>
+                        <div class="tag-row"><span>Python</span><span>BHL accretion</span><span>RLOF</span><span>Orbital dynamics</span></div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-top"><span class="project-index">PROJECT 02</span><span class="status">Research Experience</span></div>
+                        <p class="project-date">Jul – Oct 2025</p>
+                        <h3>AGN and blazar multiwavelength analysis</h3>
+                        <p class="project-place"><a href="https://sites.google.com/view/hea-bhu" target="_blank" rel="noopener">High Energy Astrophysics Group, BHU</a> · Supervisor: <a href="https://scholar.google.com/citations?user=bbqblCkAAAAJ" target="_blank" rel="noopener">Dr. Raj Prince</a></p>
+                        <p>Worked with high-energy observations of active galactic nuclei and blazars, combining X-ray and gamma-ray data.</p>
+                        <div class="project-contribution">
+                            <b>Data and Methods</b>
+                            <p>Swift BAT, XRT and UVOT; Fermi-LAT; NuSTAR; spectral analysis and variability studies.</p>
+                        </div>
+                        <div class="tag-row"><span>AGN</span><span>Blazars</span><span>Swift</span><span>Fermi-LAT</span><span>NuSTAR</span></div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-top"><span class="project-index">PROJECT 03</span><span class="status">M.Sc. Thesis</span></div>
+                        <p class="project-date">2023</p>
+                        <h3>Demonstrating the Sun–Earth model</h3>
+                        <p class="project-place">NIT Hamirpur · Supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p>
+                        <p>Designed and built a working model to demonstrate Earth–Sun geometry and explain rotation, revolution, seasons and day/night.</p>
+                        <div class="project-contribution">
+                            <b>Project Focus</b>
+                            <p>Hands-on scientific demonstration and communicating astronomical concepts through a physical model.</p>
+                        </div>
+                        <div class="tag-row"><span>Solar system</span><span>Scientific model</span><span>Physics education</span></div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-top"><span class="project-index">PROJECT 04</span><span class="status">Instrumentation</span></div>
+                        <p class="project-date">2022–2023</p>
+                        <h3>150 mm Newtonian reflecting telescope</h3>
+                        <p class="project-place">NIT Hamirpur · Supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p>
+                        <p>Designed and constructed a 150 mm aperture Newtonian telescope, gaining practical experience with optical components and telescope assembly.</p>
+                        <div class="tag-row"><span>Optics</span><span>Mirror fabrication</span><span>Instrumentation</span></div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-top"><span class="project-index">PROJECT 05</span><span class="status">Citizen Science</span></div>
+                        <p class="project-date">2023 – present</p>
+                        <h3>Zooniverse astronomy projects</h3>
+                        <p class="project-place">Independent participation</p>
+                        <p>Contributed to citizen-science classification and data activities, including galaxy morphology and supernova searches.</p>
+                        <div class="tag-row"><span>Galaxy morphology</span><span>Supernova searches</span><span>Citizen science</span></div>
+                    </article>
                 </div>
             </article>
+
             <article class="pane" data-id="conferences" hidden>
-<p class="kicker">§04 · Publications &amp; talks</p>
-                <h2 class="h2" id="presentations">Conference presentations</h2>
+                <p class="kicker">§04 · Publications & Talks</p>
+                <h2 class="h2">Conference Presentations</h2>
                 <article class="paper">
-    <p class="paper-kind">Poster, virtual &middot; 7 October 2026</p>
-    <h3>When does a transient accretion disk form? Comparison of wind-fed and RLOF accretion in eccentric binaries</h3>
-    <p class="paper-authors"><b>Rohit Kumar</b> and Amit Kashi</p>
-    <p class="paper-venue">2nd IAU&ndash;ORAS International Pro-Am Workshop, Oil Region Astronomy Learning Center, Pennsylvania, USA</p>
-    <div class="paper-actions">
-        <!-- Appears automatically once IAU-ORAS-2026-poster.pdf is in the repository -->
-        <a id="posterLink" class="btn btn-small btn-ink" href="IAU-ORAS-2026-poster.pdf" target="_blank" rel="noopener" hidden><i class="fas fa-file-pdf" aria-hidden="true"></i> Poster (PDF)</a>
-    </div>
-</article>
+                    <p class="paper-kind">Poster, virtual · 7 October 2026</p>
+                    <h3>When does a transient accretion disk form? Comparison of wind-fed and RLOF accretion in eccentric binaries</h3>
+                    <p class="paper-authors"><b>Rohit Kumar</b> and Amit Kashi</p>
+                    <p class="paper-venue">2nd IAU–ORAS International Pro-Am Workshop, Oil Region Astronomy Learning Center, Pennsylvania, USA</p>
+                    <div class="paper-actions">
+                        <a id="posterLink" class="btn btn-small btn-ink" href="IAU-ORAS-2026-poster.pdf" target="_blank" rel="noopener" hidden><i class="fas fa-file-pdf"></i> Poster (PDF)</a>
+                    </div>
+                </article>
             </article>
+
             <article class="pane" data-id="training" hidden>
-                <p class="kicker">§05.2 · Training</p><h2 class="h2">Schools, workshops and professional development</h2>
+                <p class="kicker">§05.2 · Training</p>
+                <h2 class="h2">Schools, Workshops and Professional Development</h2>
                 <p class="section-intro">A chronological record of astronomy, astrophysics, cosmology, data-analysis and language-learning programmes.</p>
-                <div class="training-summary"><div><strong>2022–2025</strong><span>Training period represented</span></div><div><strong>11</strong><span>Programmes listed</span></div><div><strong>Astro + data</strong><span>Main learning themes</span></div></div>
-                <div class="training-year"><h3>2025</h3><ol class="training-list"><li><time>February 2025</time><div><b>Color the Universe with Vera C. Rubin Observatory</b><span>Vera C. Rubin Observatory &amp; AMTA</span></div></li></ol></div>
-                <div class="training-year"><h3>2024</h3><ol class="training-list"><li><time>October 2024</time><div><b>Data Analysis in Cosmology using Python</b><span>Sardar Patel University</span></div></li><li><time>July 2024</time><div><b>Explore Exploding Stars with Vera C. Rubin Observatory</b><span>Vera C. Rubin Observatory &amp; AAS</span></div></li><li><time>July 2024</time><div><b>Workshop on Relativistic Cosmology: Theoretical &amp; Data Analysis Techniques</b><span>IUCAA &amp; GHRCE Nagpur</span></div></li><li><time>June 2024</time><div><b>Summer School in Theoretical (Astro)Physics</b><span>IUCAA &amp; St. Xavier’s College</span></div></li><li><time>2023–2024</time><div><b>English Course</b><span>Oxford School of English, Delhi</span></div></li></ol></div>
-                <div class="training-year"><h3>2023</h3><ol class="training-list"><li><time>July 2023</time><div><b>Beginning Astronomy v2: Start a Data-Driven Journey</b><span>IUCAA &amp; Central University of Himachal Pradesh</span></div></li><li><time>June 2023</time><div><b>Summer School Internship</b><span>Indian Institute of Astrophysics (IIA) · also attended July 2022</span></div></li></ol></div>
-                <div class="training-year"><h3>2022</h3><ol class="training-list"><li><time>November 2022</time><div><b>Role of Small Telescopes in Exciting Areas of Observational Astronomy</b><span>Indian Centre for Space Physics (ICSP)</span></div></li><li><time>November 2022</time><div><b>Workshop on Recent Progress in Astrophysics</b><span>Amity University</span></div></li><li><time>July 2022</time><div><b>Summer Internship</b><span>IIIT Kota</span></div></li></ol></div>
+                <div class="training-summary">
+                    <div><strong>2022–2025</strong><span>Training period</span></div>
+                    <div><strong>11</strong><span>Programmes listed</span></div>
+                    <div><strong>Astro + data</strong><span>Main themes</span></div>
+                </div>
+                <div class="training-timeline">
+                    <div class="training-year">
+                        <h3>2025</h3>
+                        <ol class="training-list">
+                            <li><time>February 2025</time><div><b>Color the Universe with Vera C. Rubin Observatory</b><span>Vera C. Rubin Observatory & AMTA</span></div></li>
+                        </ol>
+                    </div>
+                    <div class="training-year">
+                        <h3>2024</h3>
+                        <ol class="training-list">
+                            <li><time>October 2024</time><div><b>Data Analysis in Cosmology using Python</b><span>Sardar Patel University</span></div></li>
+                            <li><time>July 2024</time><div><b>Explore Exploding Stars with Vera C. Rubin Observatory</b><span>Vera C. Rubin Observatory & AAS</span></div></li>
+                            <li><time>July 2024</time><div><b>Workshop on Relativistic Cosmology</b><span>IUCAA & GHRCE Nagpur</span></div></li>
+                            <li><time>June 2024</time><div><b>Summer School in Theoretical (Astro)Physics</b><span>IUCAA & St. Xavier's College</span></div></li>
+                            <li><time>2023–2024</time><div><b>English Course</b><span>Oxford School of English, Delhi</span></div></li>
+                        </ol>
+                    </div>
+                    <div class="training-year">
+                        <h3>2023</h3>
+                        <ol class="training-list">
+                            <li><time>July 2023</time><div><b>Beginning Astronomy v2</b><span>IUCAA & Central University of Himachal Pradesh</span></div></li>
+                            <li><time>June 2023</time><div><b>Summer School Internship</b><span>Indian Institute of Astrophysics (IIA)</span></div></li>
+                        </ol>
+                    </div>
+                    <div class="training-year">
+                        <h3>2022</h3>
+                        <ol class="training-list">
+                            <li><time>November 2022</time><div><b>Role of Small Telescopes in Observational Astronomy</b><span>Indian Centre for Space Physics (ICSP)</span></div></li>
+                            <li><time>November 2022</time><div><b>Workshop on Recent Progress in Astrophysics</b><span>Amity University</span></div></li>
+                            <li><time>July 2022</time><div><b>Summer Internship</b><span>IIIT Kota</span></div></li>
+                        </ol>
+                    </div>
+                </div>
             </article>
+
             <article class="pane" data-id="education" hidden>
-<p class="kicker">§05.1 · Education</p>
+                <p class="kicker">§05.1 · Education</p>
                 <h2 class="h2">Degrees</h2>
                 <ol class="rows">
                     <li class="row">
-                        <div class="row-when">Oct 2025 &ndash; now</div>
+                        <div class="row-when">Oct 2025 – now</div>
                         <div class="row-main">
                             <h3>M.Sc. Physics</h3>
                             <p class="row-where">Ariel University, Israel</p>
@@ -298,12 +359,151 @@
                         </div>
                     </li>
                     <li class="row">
-                        <div class="row-when">2021 &ndash; 2023</div>
+                        <div class="row-when">2021 – 2023</div>
                         <div class="row-main">
                             <h3>M.Sc. Physics</h3>
-                            <p class="row-where">National Institute of Technology (NIT) Hamirpur, India &middot; CGPA 7.52 / 10</p>
-                            <p>Thesis: demonstrating the Sun&ndash;Earth model.</p>
+                            <p class="row-where">National Institute of Technology (NIT) Hamirpur, India · CGPA 7.52/10</p>
+                            <p>Thesis: demonstrating the Sun–Earth model.</p>
                         </div>
                     </li>
                     <li class="row">
-                        <div class="row-when">2016 &ndash; 2020</
+                        <div class="row-when">2016 – 2020</div>
+                        <div class="row-main">
+                            <h3>B.Sc. Physics</h3>
+                            <p class="row-where">Indira Gandhi National Open University (IGNOU), Delhi · 62%</p>
+                        </div>
+                    </li>
+                    <li class="row">
+                        <div class="row-when">2017 – 2019</div>
+                        <div class="row-main">
+                            <h3>Diploma in Elementary Education (D.El.Ed.)</h3>
+                            <p class="row-where">G.J.P.H.S., Siwan, Bihar</p>
+                        </div>
+                    </li>
+                </ol>
+                <details class="more">
+                    <summary>School education</summary>
+                    <ul class="plain-list">
+                        <li>Intermediate (Class XII), S.B.S. Inter College, Siwan, Bihar, 2016, 68.4%</li>
+                        <li>Matriculation (Class X), G.J.P. High School, Siwan, Bihar, 2013, 74.4%</li>
+                    </ul>
+                </details>
+            </article>
+
+            <article class="pane" data-id="skills" hidden>
+                <p class="kicker">§05.3 · Skills</p>
+                <h2 class="h2">Tools and Methods</h2>
+                <p class="section-intro">A structured overview of the software, analysis techniques and research practices used across my projects.</p>
+                <div class="skill-grid">
+                    <section class="skill-card">
+                        <span class="skill-icon">⌘</span>
+                        <h3>Scientific Programming</h3>
+                        <p>Python · MATLAB · Linux / Bash</p>
+                        <div class="skill-detail">Numerical calculations, scripting, data handling and reproducible computational workflows.</div>
+                    </section>
+                    <section class="skill-card">
+                        <span class="skill-icon">∿</span>
+                        <h3>Data Analysis</h3>
+                        <p>Astrophysical datasets · Spectral analysis · Variability</p>
+                        <div class="skill-detail">Working with high-energy data from Swift (BAT/XRT/UVOT), Fermi-LAT and NuSTAR.</div>
+                    </section>
+                    <section class="skill-card">
+                        <span class="skill-icon">✧</span>
+                        <h3>Modelling & Astrophysics</h3>
+                        <p>Binary orbital dynamics · BHL accretion · RLOF</p>
+                        <div class="skill-detail">Analytical estimates, angular-momentum criteria, characteristic timescales.</div>
+                    </section>
+                    <section class="skill-card">
+                        <span class="skill-icon">▥</span>
+                        <h3>Visualisation & Presentation</h3>
+                        <p>Matplotlib · Origin · PowerPoint</p>
+                        <div class="skill-detail">Scientific plots, model diagrams, conference posters and presentation materials.</div>
+                    </section>
+                    <section class="skill-card">
+                        <span class="skill-icon">⌨</span>
+                        <h3>Research Tools</h3>
+                        <p>LaTeX · MS Office · Literature review</p>
+                        <div class="skill-detail">Scientific writing, technical documentation, reading papers and communicating results.</div>
+                    </section>
+                    <section class="skill-card skill-learning">
+                        <span class="skill-icon">◌</span>
+                        <h3>Simulation Analysis — Learning</h3>
+                        <p>yt · FLASH data workflow</p>
+                        <div class="skill-detail">Learning to load and inspect FLASH outputs, identify disk-like structures and calculate angular momentum over time.</div>
+                    </section>
+                </div>
+                <div class="language-strip"><b>Languages</b><span>Hindi · Bhojpuri · English</span></div>
+            </article>
+
+            <article class="pane" data-id="teaching" hidden>
+                <p class="kicker">§05.4 · Teaching</p>
+                <h2 class="h2">Four Years in the Classroom</h2>
+                <ol class="rows compact">
+                    <li class="row"><div class="row-when">Apr 2015 – Mar 2019</div><div class="row-main"><h3>Teacher</h3><p class="row-where">Adarsh Gyan Kendra, Barari, Siwan</p></div></li>
+                    <li class="row"><div class="row-when">Apr 2015 – Mar 2019</div><div class="row-main"><h3>Teacher</h3><p class="row-where">S.S.C. Coaching Centre, Sani Basantpur, Siwan</p></div></li>
+                    <li class="row"><div class="row-when">2019</div><div class="row-main"><h3>Tutor</h3><p class="row-where">Coaching and home tuition, Delhi</p></div></li>
+                </ol>
+            </article>
+
+            <article class="pane" data-id="writing" hidden>
+                <p class="kicker">§05.5 · Blog & Science Communication</p>
+                <h2 class="h2">Question Everything</h2>
+                <p class="section-intro">A place for exploring physics, astronomy, cosmology and the ideas that connect scientific concepts with the wider universe.</p>
+
+                <a class="blog-banner" href="https://questioneverythingagk.blogspot.com/" target="_blank" rel="noopener">
+                    <span class="blog-mark">Q?</span>
+                    <span><b>Question Everything</b><small>Read the complete blog and explore all published posts</small></span>
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+
+                <h3 class="h3">Explore by Topic</h3>
+                <div class="blog-topic-grid">
+                    <a href="https://questioneverythingagk.blogspot.com/search?q=astronomy" target="_blank" rel="noopener"><b>01 · Astronomy</b><span>Celestial objects, sky and observing</span></a>
+                    <a href="https://questioneverythingagk.blogspot.com/search?q=astrophysics" target="_blank" rel="noopener"><b>02 · Astrophysics</b><span>Stars, black holes and high-energy phenomena</span></a>
+                    <a href="https://questioneverythingagk.blogspot.com/search?q=physics" target="_blank" rel="noopener"><b>03 · Physics</b><span>Fundamental ideas and physical principles</span></a>
+                    <a href="https://questioneverythingagk.blogspot.com/search?q=cosmology" target="_blank" rel="noopener"><b>04 · Cosmology</b><span>Spacetime and the large-scale universe</span></a>
+                    <a href="https://questioneverythingagk.blogspot.com/search?q=space" target="_blank" rel="noopener"><b>05 · Space Science</b><span>Space, exploration and the universe</span></a>
+                    <a href="https://questioneverythingagk.blogspot.com/search?q=education" target="_blank" rel="noopener"><b>06 · Learning Resources</b><span>Explanations and educational writing</span></a>
+                </div>
+
+                <div class="blog-feed-head">
+                    <div><p class="eyebrow">From the Blog</p><h3 class="h3">Recent Posts</h3></div>
+                    <a href="https://questioneverythingagk.blogspot.com/" target="_blank" rel="noopener">All posts ↗</a>
+                </div>
+                <div class="blog-post-grid" id="blogPosts">
+                    <article class="blog-post">
+                        <span class="blog-post-type">Spacetime · Gravitation</span>
+                        <h4><a href="https://questioneverythingagk.blogspot.com/2026/05/gravitational-waves-in-spacetime.html" target="_blank" rel="noopener">Gravitational Waves in Spacetime: Connection of Einstein and Black Holes</a></h4>
+                        <p>A discussion of gravitational waves, spacetime and their connection with compact astrophysical objects.</p>
+                        <a class="read-link" href="https://questioneverythingagk.blogspot.com/2026/05/gravitational-waves-in-spacetime.html" target="_blank" rel="noopener">Read article ↗</a>
+                    </article>
+                    <article class="blog-post">
+                        <span class="blog-post-type">Astronomy · Sky Coordinates</span>
+                        <h4><a href="https://questioneverythingagk.blogspot.com/2023/01/how-to-find-position-of-celestial.html" target="_blank" rel="noopener">Exploring the Wonders of the Celestial Sphere: A Journey Through the Stars</a></h4>
+                        <p>An introduction to the celestial sphere and the language used to describe positions in the sky.</p>
+                        <a class="read-link" href="https://questioneverythingagk.blogspot.com/2023/01/how-to-find-position-of-celestial.html" target="_blank" rel="noopener">Read article ↗</a>
+                    </article>
+                </div>
+                <p class="blog-feed-note" id="blogFeedNote">More articles are available through the topic links and the complete blog archive.</p>
+            </article>
+
+            <article class="pane" data-id="contact" hidden>
+                <p class="kicker">§06 · Contact</p>
+                <h2 class="h2">Get in Touch</h2>
+                <ul class="contact-list">
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:rohitkumaragk@gmail.com">rohitkumaragk@gmail.com</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:21mph011@nith.ac.in">21mph011@nith.ac.in</a></li>
+                    <li><i class="fas fa-location-dot"></i> Ariel University, Israel</li>
+                    <li><i class="fab fa-linkedin-in"></i> <a href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><i class="fab fa-github"></i> <a href="https://github.com/rohitkumaragk" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><i class="fas fa-blog"></i> <a href="https://questioneverythingagk.blogspot.com" target="_blank" rel="noopener">Blog</a></li>
+                </ul>
+            </article>
+        </div>
+    </main>
+
+    <script src="blog.js"></script>
+    <script src="galaxy.js"></script>
+    <script src="sim.js"></script>
+</body>
+</html>
