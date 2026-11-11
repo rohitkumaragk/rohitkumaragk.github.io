@@ -1,0 +1,114 @@
+/* =====================================================
+   Galaxy layout: full-screen spinning galaxy, labelled stars
+   open a side panel. Loaded after style.css, which still
+   provides the content styles (rows, defs, paper, sim ...).
+   ===================================================== */
+
+html, body { height: 100%; }
+body { overflow: hidden; background: #03050d; color: var(--ink); }
+
+#galaxy {
+    position: fixed; inset: 0; width: 100%; height: 100%; display: block;
+    background: radial-gradient(80% 80% at 50% 50%, #0a1024 0%, #04060f 70%, #02030a 100%);
+    touch-action: manipulation;
+    animation: g-fade 1.4s ease both;
+}
+@keyframes g-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- header, hint, index ---------- */
+.g-head {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+    padding: 1.1rem 1.5rem; pointer-events: none; color: #e6e9f4;
+}
+.g-head > * { pointer-events: auto; }
+.g-name { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4vw, 2.9rem); line-height: 1; letter-spacing: -.01em; color: #fff; }
+.g-sub { font-size: .85rem; color: #aab3cf; margin-top: .35rem; max-width: 26rem; line-height: 1.4; }
+.g-tools { display: flex; align-items: center; gap: .3rem; flex: none; }
+.g-icon {
+    width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: none; background: none;
+    color: #c8cfe4; font-size: 1.05rem; cursor: pointer; text-decoration: none; transition: background .2s, color .2s;
+}
+.g-icon:hover { background: rgba(255,255,255,.1); color: #fff; }
+.g-head .btn-amber { margin-right: .4rem; }
+
+.g-hint {
+    position: fixed; left: 50%; bottom: 1.4rem; transform: translateX(-50%); z-index: 20;
+    font-family: var(--mono); font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+    color: #8d97b6; pointer-events: none; white-space: nowrap;
+}
+
+.star-index { position: fixed; left: 1.2rem; bottom: 1.1rem; z-index: 30; }
+.si-btn {
+    display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .95rem; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.22); background: rgba(7,10,18,.7); color: #d4daee;
+    font: 500 .82rem/1 var(--sans); cursor: pointer; backdrop-filter: blur(6px);
+}
+.si-btn:hover { border-color: #fff; color: #fff; }
+.si-btn i { color: var(--amber); font-size: .75rem; }
+.si-list {
+    position: absolute; left: 0; bottom: calc(100% + .5rem); list-style: none; min-width: 15rem; max-height: 70vh; overflow-y: auto;
+    background: rgba(7,10,18,.92); border: 1px solid #1a2238; border-radius: 12px; padding: .4rem; backdrop-filter: blur(8px);
+}
+.si-list button {
+    display: flex; flex-direction: column; align-items: flex-start; width: 100%; text-align: left; gap: .05rem;
+    padding: .5rem .7rem; border: none; background: none; border-radius: 8px; cursor: pointer; color: #e6e9f4; font: 500 .9rem/1.2 var(--sans);
+}
+.si-list button small { font-weight: 400; font-size: .74rem; color: #8d97b6; }
+.si-list button:hover, .si-list button:focus-visible { background: rgba(255,255,255,.08); }
+
+/* ---------- side panel ---------- */
+.scrim {
+    position: fixed; inset: 0; z-index: 50; background: rgba(3, 5, 13, .6);
+    opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s;
+}
+.scrim.open { opacity: 1; visibility: visible; }
+
+.panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 60;
+    width: min(54rem, 100vw);
+    background: var(--bg); color: var(--ink); border-left: 1px solid var(--rule);
+    overflow-y: auto; overscroll-behavior: contain;
+    transform: translateX(100%); visibility: hidden;
+    transition: transform .45s cubic-bezier(.2, .8, .2, 1), visibility .45s;
+    box-shadow: -30px 0 80px -30px rgba(0, 0, 0, .6);
+}
+.panel.open { transform: none; visibility: visible; }
+.panel:focus { outline: none; }
+
+.panel-bar {
+    position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+    padding: .7rem 1rem .7rem clamp(1.25rem, 4vw, 3rem);
+    background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule);
+}
+.panel-crumb { font-family: var(--mono); font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--kick); }
+.panel-close {
+    width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%;
+    border: 1px solid var(--rule); background: var(--card); color: var(--ink); font-size: 1.05rem; cursor: pointer;
+    transition: transform .2s, border-color .2s;
+}
+.panel-close:hover { border-color: var(--ink-2); transform: rotate(90deg); }
+
+.panel-body { padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem; }
+.pane .kicker:first-child { margin-top: 0; }
+.pane-divider { height: 1px; background: var(--rule); margin: 3rem 0 2.6rem; }
+.pane .site-footer { padding: 3rem 0 0; text-align: left; }
+.pane .footer-quote { margin-left: 0; }
+
+/* the old per-section scroll offsets are no longer needed */
+html { scroll-behavior: auto; }
+
+@media (max-width: 640px) {
+    .g-head { padding: .8rem .9rem; }
+    .g-sub { display: none; }
+    .g-icon { width: 36px; height: 36px; }
+    .g-hint { bottom: 4.2rem; }
+    .star-index { left: 50%; transform: translateX(-50%); bottom: 1rem; }
+    .si-list { left: 50%; transform: translateX(-50%); }
+}
+@media print {
+    body { overflow: visible; }
+    #galaxy, .g-head, .g-hint, .star-index, .scrim { display: none !important; }
+    .panel { position: static; transform: none; visibility: visible; width: auto; box-shadow: none; border: none; }
+    .pane[hidden] { display: block !important; }
+}

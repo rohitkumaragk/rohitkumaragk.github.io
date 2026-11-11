@@ -64,101 +64,69 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="galaxy.css">
 </head>
-
 <body>
-    <a class="skip-link" href="#about">Skip to content</a>
-    <div class="progress-bar" id="progressBar"></div>
+    <canvas id="galaxy" aria-label="Interactive galaxy. Each labelled star opens a section of this site; the same sections are listed under All stars."></canvas>
 
-    <!-- ================= DESKTOP SIDE PANEL ================= -->
-    <aside class="side" aria-label="Profile and navigation">
-        <div class="side-stars" aria-hidden="true"></div>
-        <div class="side-inner">
-            <a href="#home" class="side-photo-link" aria-label="Back to top">
-                <img src="photo.jpeg" alt="Portrait of Rohit Kumar" class="side-photo" width="112" height="112">
-            </a>
-            <p class="side-name">Rohit Kumar</p>
-            <p class="side-role">Astrophysics. M.Sc. Physics, Ariel University, Israel.</p>
-
-            <nav class="side-nav" aria-label="Sections">
-                <a href="#home" class="snav" data-id="home"><span>§00</span>Home</a>
-                <a href="#about" class="snav" data-id="about"><span>§01</span>About</a>
-                <a href="#research" class="snav" data-id="research"><span>§02</span>Research</a>
-                <a href="#projects" class="snav" data-id="projects"><span>§03</span>Projects</a>
-                <a href="#publications" class="snav" data-id="publications"><span>§04</span>Publications</a>
-                <a href="#education" class="snav" data-id="education"><span>§05</span>Background</a>
-                <a href="#contact" class="snav" data-id="contact"><span>§06</span>Contact</a>
-            </nav>
-
-            <div class="side-actions">
-                <a href="Rohit_CV.pdf" class="btn btn-amber" download>Download CV</a>
-                <a href="mailto:rohitkumaragk@gmail.com?subject=Prospective%20PhD%20student" class="btn btn-line">Email me</a>
-                <div class="side-icons">
-                    <a href="https://github.com/rohitkumaragk" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-                    <a href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                    <a href="https://questioneverythingagk.blogspot.com" target="_blank" rel="noopener" aria-label="Blog"><i class="fas fa-blog" aria-hidden="true"></i></a>
-                    <button type="button" class="theme-btn" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
-                </div>
-            </div>
+    <header class="g-head">
+        <div class="g-id">
+            <h1 class="g-name">Rohit Kumar</h1>
+            <p class="g-sub">Astrophysics &middot; M.Sc. Physics, Ariel University, Israel</p>
         </div>
-    </aside>
-
-    <!-- ================= MOBILE TOP BAR ================= -->
-    <header class="topbar">
-        <a href="#home" class="topbar-name">Rohit Kumar</a>
-        <div class="topbar-right">
-            <button type="button" class="theme-btn" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
-            <button type="button" class="menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><i class="fas fa-bars" aria-hidden="true"></i></button>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#bihar">My Place</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publications">Publications &amp; talks</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#certifications">Training</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#teaching">Teaching</a></li>
-                <li><a href="#blog">Writing</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="Rohit_CV.pdf" download>Download CV</a></li>
-            </ul>
+        <div class="g-tools">
+            <a class="btn btn-small btn-amber" href="Rohit_CV.pdf" download>CV</a>
+            <a class="g-icon" href="https://github.com/rohitkumaragk" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a class="g-icon" href="https://www.linkedin.com/in/rohit-kumar-56643a20b" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+            <a class="g-icon" href="https://questioneverythingagk.blogspot.com" target="_blank" rel="noopener" aria-label="Blog"><i class="fas fa-blog" aria-hidden="true"></i></a>
+            <button type="button" class="theme-btn g-icon" aria-label="Switch to dark mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
         </div>
     </header>
 
-    <main class="main">
-        <!-- ================= HOME ================= -->
-        <section id="home" class="sec hero">
-            <div class="col">
-                <img src="photo.jpeg" alt="" class="hero-photo-m" width="96" height="96" aria-hidden="true">
-                <p class="kicker">§00 · Astrophysics</p>
-                <h2 class="hero-title">I study how accretion disks form in <em>eccentric binary stars.</em></h2>
-                <p class="hero-lede">
-                    M.Sc. Physics at Ariel University, Israel, working with
-                    <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a>.
-                
-                </p>
-                <div class="actions">
-                    <a href="#research" class="btn btn-ink">See my research <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
-                    <a href="Rohit_CV.pdf" class="btn btn-outline" download>Download CV</a>
-                </div>
+    <p class="g-hint" id="gHint">Click a star to explore</p>
 
-                <dl class="glance">
-                    <div><dt>Now</dt><dd>M.Sc. Physics, Ariel University (since Oct 2025)</dd></div>
-                    <div><dt>Focus</dt><dd>Wind-fed accretion in eccentric binary orbits</dd></div>
-                    <div><dt>Supervisor</dt><dd>Prof. Amit Kashi</dd></div>
-                    <div><dt>Also</dt><dd>AGN and blazar X-ray / gamma-ray analysis at BHU</dd></div>
-                </dl>
-            </div>
-        </section>
+    <nav class="star-index" id="starIndexWrap" aria-label="All sections">
+        <button type="button" class="si-btn" id="starIndexBtn" aria-expanded="false" aria-controls="starIndex"><i class="fas fa-star" aria-hidden="true"></i> All stars</button>
+        <ul class="si-list" id="starIndex" hidden></ul>
+    </nav>
 
-        <!-- ================= ABOUT ================= -->
-        <section id="about" class="sec">
-            <div class="col">
-                <p class="kicker">§01 · About</p>
+    <div class="scrim" id="scrim"></div>
+    <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Section" aria-hidden="true" tabindex="-1">
+        <div class="panel-bar">
+            <span class="panel-crumb" id="panelCrumb"></span>
+            <button type="button" class="panel-close" id="panelClose" aria-label="Close and return to the galaxy"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="panel-body">
+            <article class="pane" data-id="home" hidden>
+
+<p class="kicker">Home</p>
+<h2 class="hero-title">I study how accretion disks form in <em>eccentric binary stars.</em></h2>
+<p class="hero-lede">
+    M.Sc. Physics at Ariel University, Israel, working with
+    <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a>.
+</p>
+<div class="actions">
+    <a href="Rohit_CV.pdf" class="btn btn-ink" download>Download CV</a>
+    <a href="mailto:rohitkumaragk@gmail.com?subject=Prospective%20PhD%20student" class="btn btn-outline">Email me</a>
+</div>
+<dl class="glance">
+    <div><dt>Now</dt><dd>M.Sc. Physics, Ariel University (since Oct 2025)</dd></div>
+    <div><dt>Focus</dt><dd>Wind-fed accretion in eccentric binary orbits</dd></div>
+    <div><dt>Supervisor</dt><dd>Prof. Amit Kashi</dd></div>
+    <div><dt>Also</dt><dd>AGN and blazar X-ray / gamma-ray analysis at BHU</dd></div>
+</dl>
+<footer class="site-footer">
+    <p class="footer-copy">&copy; <span id="currentYear"></span> Rohit Kumar &middot; Last updated November 2026</p>
+    <p class="footer-quote" lang="sa">
+        समानी व आकूतिः समाना हृदयानि वः ।<br>
+        समानमस्तु वो मनो यथा वः सुसहासति ॥
+        <span class="footer-cite" lang="en">&mdash; Rigveda 10.191.4</span>
+    </p>
+</footer>
+
+            </article>
+            <article class="pane" data-id="about" hidden>
+<p class="kicker">§01 · About</p>
                 <h2 class="h2">From a village in Bihar to an astrophysics lab in Israel</h2>
                 <div class="prose">
                     <p class="lead">
@@ -173,13 +141,8 @@
                     <p>I believe that understanding the universe is a sacred act, for nothing is as pure as knowledge.</p>
                     <p class="aside-note">From the land of Litti Chokha to the international stage: curiosity knows no boundaries.</p>
                 </div>
-            </div>
-        </section>
-
-                <!-- ================= BIHAR ================= -->
-        <section id="bihar" class="sec">
-            <div class="col">
-                <p class="kicker">§01.1 · Where I come from</p>
+<div class="pane-divider"></div>
+<p class="kicker">§01.1 · Where I come from</p>
                 <h2 class="h2">Bihar: where religion, knowledge and culture flourished together</h2>
                 <div class="prose">
                     <p>
@@ -224,13 +187,9 @@
                         Bhagalpur, and Bhagalpuri silk.
                     </p>
                 </div>
-            </div>
-        </section>
-
-        <!-- ================= RESEARCH ================= -->
-        <section id="research" class="sec">
-            <div class="col">
-                <p class="kicker">§02 · Research</p>
+            </article>
+            <article class="pane" data-id="research" hidden>
+<p class="kicker">§02 · Research</p>
                 <h2 class="h2">When does an accretion disk form in eccentric binary?</h2>
                 <div class="prose">
                     <p>
@@ -338,13 +297,9 @@
                     <div><dt>Star formation</dt><dd>Collapse of giant molecular clouds in the ISM and the feedback that regulates it.</dd></div>
                     <div><dt>Cosmology</dt><dd>Cosmic inflation, structure formation and data analysis with Python.</dd></div>
                 </dl>
-            </div>
-        </section>
-
-        <!-- ================= PROJECTS ================= -->
-        <section id="projects" class="sec">
-            <div class="col">
-                <p class="kicker">§03 · Projects</p>
+            </article>
+            <article class="pane" data-id="projects" hidden>
+<p class="kicker">§03 · Projects</p>
                 <h2 class="h2">What I have built and analysed</h2>
                 <ol class="rows">
                     <li class="row">
@@ -393,13 +348,9 @@
                         </div>
                     </li>
                 </ol>
-            </div>
-        </section>
-
-        <!-- ================= PUBLICATIONS & TALKS ================= -->
-        <section id="publications" class="sec">
-            <div class="col">
-                <p class="kicker">§04 · Publications &amp; talks</p>
+            </article>
+            <article class="pane" data-id="conferences" hidden>
+<p class="kicker">§04 · Publications &amp; talks</p>
                 <h2 class="h2" id="presentations">Conference presentations</h2>
                 <article class="paper">
     <p class="paper-kind">Poster, virtual &middot; 7 October 2026</p>
@@ -411,12 +362,30 @@
         <a id="posterLink" class="btn btn-small btn-ink" href="assets/IAU-ORAS-2026-poster.pdf" target="_blank" rel="noopener" hidden><i class="fas fa-file-pdf" aria-hidden="true"></i> Poster (PDF)</a>
     </div>
 </article>
-                            </div>
-        </section>
-        <!-- ================= EDUCATION ================= -->
-        <section id="education" class="sec">
-            <div class="col">
-                <p class="kicker">§05.1 · Education</p>
+            </article>
+            <article class="pane" data-id="training" hidden>
+<p class="kicker">§05.2 · Training</p>
+                <h2 class="h2">Schools, workshops and internships</h2>
+                <table class="train">
+                    <caption class="sr-only">Schools, workshops and internships, newest first</caption>
+                    <thead><tr><th scope="col">When</th><th scope="col">Programme</th><th scope="col">Organisation</th></tr></thead>
+                    <tbody>
+                        <tr><td>Feb 2025</td><td>Color the Universe with Vera C. Rubin Observatory</td><td>Vera C. Rubin Observatory &amp; AMTA</td></tr>
+                        <tr><td>Oct 2024</td><td>Data Analysis in Cosmology using Python</td><td> Sardar Patel University</td></tr>
+                        <tr><td>Jul 2024</td><td>Explore Exploding Stars with Vera C. Rubin Observatory</td><td>Vera C. Rubin Observatory &amp; AAS</td></tr>
+                        <tr><td>Jul 2024</td><td>Workshop on Relativistic Cosmology: Theoretical &amp; Data Analysis Techniques</td><td>IUCAA &amp; GHRCE Nagpur</td></tr>
+                        <tr><td>Jun 2024</td><td>Summer School in Theoretical (Astro)Physics</td><td>IUCAA &amp; St. Xavier's College</td></tr>
+                        <tr><td>Jul 2023</td><td>Beginning Astronomy v2: Start a Data-Driven Journey</td><td>IUCAA &amp; Central University of Himachal Pradesh</td></tr>
+                        <tr><td>Jun 2023</td><td>Summer School Internship (also Jul 2022)</td><td>Indian Institute of Astrophysics (IIA)</td></tr>
+                        <tr><td>Nov 2022</td><td>Role of Small Telescopes in Exciting Areas of Observational Astronomy</td><td>Indian Centre for Space Physics (ICSP)</td></tr>
+                        <tr><td>Nov 2022</td><td>Workshop on Recent Progress in Astrophysics</td><td>Amity University</td></tr>
+                        <tr><td>Jul 2022</td><td>Summer Internship</td><td>IIIT Kota</td></tr>
+                        <tr><td>2023&ndash;24</td><td>English Course</td><td>Oxford School of English, Delhi</td></tr>
+                    </tbody>
+                </table>
+            </article>
+            <article class="pane" data-id="education" hidden>
+<p class="kicker">§05.1 · Education</p>
                 <h2 class="h2">Degrees</h2>
                 <ol class="rows">
                     <li class="row">
@@ -457,38 +426,9 @@
                         <li>Matriculation (Class X), G.J.P. High School, Siwan, Bihar, 2013, 74.4%</li>
                     </ul>
                 </details>
-            </div>
-        </section>
-
-        <!-- ================= TRAINING ================= -->
-        <section id="certifications" class="sec">
-            <div class="col">
-                <p class="kicker">§05.2 · Training</p>
-                <h2 class="h2">Schools, workshops and internships</h2>
-                <table class="train">
-                    <caption class="sr-only">Schools, workshops and internships, newest first</caption>
-                    <thead><tr><th scope="col">When</th><th scope="col">Programme</th><th scope="col">Organisation</th></tr></thead>
-                    <tbody>
-                        <tr><td>Feb 2025</td><td>Color the Universe with Vera C. Rubin Observatory</td><td>Vera C. Rubin Observatory &amp; AMTA</td></tr>
-                        <tr><td>Oct 2024</td><td>Data Analysis in Cosmology using Python</td><td> Sardar Patel University</td></tr>
-                        <tr><td>Jul 2024</td><td>Explore Exploding Stars with Vera C. Rubin Observatory</td><td>Vera C. Rubin Observatory &amp; AAS</td></tr>
-                        <tr><td>Jul 2024</td><td>Workshop on Relativistic Cosmology: Theoretical &amp; Data Analysis Techniques</td><td>IUCAA &amp; GHRCE Nagpur</td></tr>
-                        <tr><td>Jun 2024</td><td>Summer School in Theoretical (Astro)Physics</td><td>IUCAA &amp; St. Xavier's College</td></tr>
-                        <tr><td>Jul 2023</td><td>Beginning Astronomy v2: Start a Data-Driven Journey</td><td>IUCAA &amp; Central University of Himachal Pradesh</td></tr>
-                        <tr><td>Jun 2023</td><td>Summer School Internship (also Jul 2022)</td><td>Indian Institute of Astrophysics (IIA)</td></tr>
-                        <tr><td>Nov 2022</td><td>Role of Small Telescopes in Exciting Areas of Observational Astronomy</td><td>Indian Centre for Space Physics (ICSP)</td></tr>
-                        <tr><td>Nov 2022</td><td>Workshop on Recent Progress in Astrophysics</td><td>Amity University</td></tr>
-                        <tr><td>Jul 2022</td><td>Summer Internship</td><td>IIIT Kota</td></tr>
-                        <tr><td>2023&ndash;24</td><td>English Course</td><td>Oxford School of English, Delhi</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- ================= SKILLS ================= -->
-        <section id="skills" class="sec">
-            <div class="col">
-                <p class="kicker">§05.3 · Skills</p>
+            </article>
+            <article class="pane" data-id="skills" hidden>
+<p class="kicker">§05.3 · Skills</p>
                 <h2 class="h2">Tools and methods</h2>
                 <dl class="defs">
                     <div><dt>Programming &amp; tools</dt><dd>Python, MATLAB, Origin, Linux, LaTeX, yt, MS Office</dd></div>
@@ -497,26 +437,18 @@
                     <div><dt>Other</dt><dd>Teaching, mentoring, communication, collaboration</dd></div>
                     <div><dt>Languages</dt><dd>Hindi (native), Bhojpuri (native), English (fluent)</dd></div>
                 </dl>
-            </div>
-        </section>
-
-        <!-- ================= TEACHING ================= -->
-        <section id="teaching" class="sec">
-            <div class="col">
-                <p class="kicker">§05.4 · Teaching</p>
+            </article>
+            <article class="pane" data-id="teaching" hidden>
+<p class="kicker">§05.4 · Teaching</p>
                 <h2 class="h2">Four years in the classroom</h2>
                 <ol class="rows compact">
                     <li class="row"><div class="row-when">Apr 2015 &ndash; Mar 2019</div><div class="row-main"><h3>Teacher</h3><p class="row-where">Adarsh Gyan Kendra, Barari, Siwan</p></div></li>
                     <li class="row"><div class="row-when">Apr 2015 &ndash; Mar 2019</div><div class="row-main"><h3>Teacher</h3><p class="row-where">S.S.C. Coaching Centre, Sani Basantpur, Siwan</p></div></li>
                     <li class="row"><div class="row-when">2019</div><div class="row-main"><h3>Tutor</h3><p class="row-where">Coaching and home tuition, Delhi</p></div></li>
                 </ol>
-            </div>
-        </section>
-
-        <!-- ================= WRITING ================= -->
-        <section id="blog" class="sec">
-            <div class="col">
-                <p class="kicker">§05.5 · Writing</p>
+            </article>
+            <article class="pane" data-id="writing" hidden>
+<p class="kicker">§05.5 · Writing</p>
                 <h2 class="h2">Question Everything</h2>
                 <div class="prose">
                     <p>
@@ -528,13 +460,9 @@
                     <li><a href="https://questioneverythingagk.blogspot.com/2026/05/gravitational-waves-in-spacetime.html" target="_blank" rel="noopener">Gravitational Waves in Spacetime: Connection of Einstein and Black Holes</a> <span class="pill">latest</span></li>
                     <li><a href="https://questioneverythingagk.blogspot.com/2023/01/how-to-find-position-of-celestial.html" target="_blank" rel="noopener">Exploring the Wonders of the Celestial Sphere: A Journey Through the Stars</a> <span class="pill">popular</span></li>
                 </ul>
-            </div>
-        </section>
-
-        <!-- ================= CONTACT ================= -->
-        <section id="contact" class="sec">
-            <div class="col">
-                <p class="kicker">§06 · Contact</p>
+            </article>
+            <article class="pane" data-id="contact" hidden>
+<p class="kicker">§06 · Contact</p>
                 <h2 class="h2">Get in touch</h2>
                 <ul class="contact-list">
                     <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:rohitkumaragk@gmail.com">rohitkumaragk@gmail.com</a></li>
@@ -546,23 +474,11 @@
                     <!-- Add ORCID / NASA ADS / Google Scholar here once you have the profile links:
                     <li><i class="fab fa-orcid"></i> <a href="https://orcid.org/XXXX-XXXX-XXXX-XXXX">ORCID</a></li> -->
                 </ul>
-            </div>
-        </section>
+            </article>
+        </div>
+    </aside>
 
-        <footer class="site-footer">
-            <div class="col">
-                <p class="footer-copy">&copy; <span id="currentYear"></span> Rohit Kumar &middot; Last updated October 2026</p>
-                <p class="footer-quote" lang="sa">
-                    समानी व आकूतिः समाना हृदयानि वः ।<br>
-                    समानमस्तु वो मनो यथा वः सुसहासति ॥
-                    <span class="footer-cite" lang="en">&mdash; Rigveda 10.191.4</span>
-                </p>
-            </div>
-        </footer>
-    </main>
-
-    <button id="backToTop" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
-
-    <script src="script.js"></script>
+    <script src="galaxy.js"></script>
+    <script src="sim.js"></script>
 </body>
 </html>
