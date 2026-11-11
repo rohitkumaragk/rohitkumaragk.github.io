@@ -1,22 +1,4 @@
-/* =====================================================
-   Interactive explainer: wind accretion vs. Roche-lobe overflow
-   -----------------------------------------------------
-   Units: semi-major axis a = 1, total mass = 1, G = 1,
-   so the mean motion n = 1 and one orbit lasts 2*pi.
-   Orbit: Kepler's equation  M = E - e sin E.
-   Separation: r = 1 - e cos E.
-   Roche lobe (Eggleton 1983), at instantaneous separation r:
-       R_L / r = 0.49 q^(2/3) / (0.6 q^(2/3) + ln(1 + q^(1/3)))
-   with q = M_donor / M_accretor.
-
-   Gas is a cloud of test particles moving in the gravity of
-   both stars (a toy model, not hydrodynamics).
-     Wind mode: particles leave the donor isotropically at speed v_w.
-     RLOF mode: particles leave through L1 only while the donor
-                fills its Roche lobe.
-   A weak drag close to the accretor stands in for viscosity,
-   so bound gas can settle into a short-lived, disk-like swirl.
-   ===================================================== */
+/* Interactive explainer: wind accretion vs. Roche-lobe overflow */
 (function () {
     const stage = document.getElementById('simCanvas');
     const chart = document.getElementById('chartCanvas');
@@ -36,32 +18,30 @@
     const roBHL = $('roBHL'), roBound = $('roBound'), roAcc = $('roAcc');
 
     const TAU = Math.PI * 2;
-    const PERIOD_SECONDS = 9;            // one orbit at 1x speed
+    const PERIOD_SECONDS = 9;
     const DEFAULTS = { e: 0.5, q: 1, R: 0.25, s: 1, w: 2.5, phase: 0 };
 
     let e = DEFAULTS.e, q = DEFAULTS.q, Rd = DEFAULTS.R, speed = DEFAULTS.s, vw = DEFAULTS.w;
-    let mode = 'wind';                   // 'wind' | 'rlof'
-    let phase = 0;                       // orbital phase 0..1 (0 = periastron)
+    let mode = 'wind';
+    let phase = 0;
     let playing = false, visible = true, lastT = 0, raf = 0, lastKey = null;
 
-    /* ----- gas particle settings ----- */
-    const MAXP = 1600;                   // particle cap
-    const SUBSTEP = 0.004;               // max integration step (orbit units)
-    const EPS2 = 2.5e-5;                 // gravitational softening squared
-    const ABSORB2 = 0.022 * 0.022;       // accretor surface: gas is accreted inside this
-    const DISK_R2 = 0.15 * 0.15;         // "near accretor" radius for drag and disk count
-    const DRAG = 0.2;                    // weak drag near the accretor (stands in for viscosity)
-    const OUT2 = 2.0 * 2.0;              // gas beyond this distance from the CoM is dropped
-    const WIND_RATE = 600;               // particles per unit time (wind)
-    const RLOF_MIN = 120, RLOF_MAX = 420; // particles per unit time (RLOF, scales with overflow depth)
+    const MAXP = 1600;
+    const SUBSTEP = 0.004;
+    const EPS2 = 2.5e-5;
+    const ABSORB2 = 0.022 * 0.022;
+    const DISK_R2 = 0.15 * 0.15;
+    const DRAG = 0.2;
+    const OUT2 = 2.0 * 2.0;
+    const WIND_RATE = 600;
+    const RLOF_MIN = 120, RLOF_MAX = 420;
 
     const gx = new Float32Array(MAXP), gy = new Float32Array(MAXP);
     const gvx = new Float32Array(MAXP), gvy = new Float32Array(MAXP);
-    const gk = new Uint8Array(MAXP);     // 0 = wind, 1 = RLOF stream
-    const gc = new Uint8Array(MAXP);     // draw category: 0 wind, 1 RLOF, 2 bound to accretor
+    const gk = new Uint8Array(MAXP);
+    const gc = new Uint8Array(MAXP);
     let gn = 0, accreted = 0, emitAcc = 0, boundN = 0;
 
-    /* ----- orbit physics ----- */
     function solveKepler(M, ecc) {
         let E = ecc < 0.8 ? M : Math.PI;
         for (let i = 0; i < 25; i++) {
@@ -71,11 +51,11 @@
         }
         return E;
     }
-    function rocheOverR(qd) {                  // Eggleton: R_L / separation
+    function rocheOverR(qd) {
         const q23 = Math.pow(qd, 2 / 3);
         return 0.49 * q23 / (0.6 * q23 + Math.log(1 + Math.pow(qd, 1 / 3)));
     }
-    function separation(ph) {                  // r/a at orbital phase ph
+    function separation(ph) {
         const E = solveKepler(ph * TAU, e);
         return 1 - e * Math.cos(E);
     }
@@ -86,29 +66,26 @@
         return n / N;
     }
 
-    // Positions and velocities of both stars in the centre-of-mass frame (y up)
     function starState(ph) {
         const w = ph - Math.floor(ph);
         const E = solveKepler(w * TAU, e);
         const b = Math.sqrt(1 - e * e);
-        const rx = Math.cos(E) - e, ry = b * Math.sin(E);       // accretor minus donor
+        const rx = Math.cos(E) - e, ry = b * Math.sin(E);
         const r = 1 - e * Math.cos(E);
-        const vx = -Math.sin(E) / r, vy = b * Math.cos(E) / r;  // d(rel)/dt, since dE/dt = 1/r
-        const f1 = 1 / (1 + q), f2 = q / (1 + q);               // f1 = accretor mass, f2 = donor mass
+        const vx = -Math.sin(E) / r, vy = b * Math.cos(E) / r;
+        const f1 = 1 / (1 + q), f2 = q / (1 + q);
         return {
             r, rx, ry, vx, vy, f1, f2,
             dx: -f1 * rx, dy: -f1 * ry, ax: f2 * rx, ay: f2 * ry,
             dvx: -f1 * vx, dvy: -f1 * vy, avx: f2 * vx, avy: f2 * vy
         };
     }
-    // Bondi-Hoyle accretion radius: 2 G M_a / w^2, w = wind speed relative to the accretor
     function bhlRadius(s) {
         const ux = s.rx / s.r, uy = s.ry / s.r;
         const wx = vw * ux - s.vx, wy = vw * uy - s.vy;
         return 2 * s.f1 / Math.max(wx * wx + wy * wy, 0.05);
     }
 
-    /* ----- gas: emission and integration ----- */
     function clearGas() { gn = 0; accreted = 0; emitAcc = 0; boundN = 0; }
 
     function emitGas(s, h) {
@@ -126,15 +103,14 @@
             }
             return;
         }
-        // RLOF: gas flows through L1 only while the donor fills its Roche lobe
         const RL = rocheOverR(q) * s.r;
         if (Rd < RL) { emitAcc = 0; return; }
         const depth = Math.min(1, (Rd / RL - 1) * 4);
         emitAcc += (RLOF_MIN + (RLOF_MAX - RLOF_MIN) * depth) * h;
-        const ux = s.rx / s.r, uy = s.ry / s.r;                  // unit vector donor -> accretor
+        const ux = s.rx / s.r, uy = s.ry / s.r;
         const fl1 = Math.min(0.8, Math.max(0.2, 0.5 + 0.227 * Math.log10(q)));
         const d = Math.min(0.9 * s.r, Math.max(fl1 * s.r, Rd * 1.02));
-        const omega = (s.rx * s.vy - s.ry * s.vx) / (s.r * s.r); // instantaneous orbital angular velocity
+        const omega = (s.rx * s.vy - s.ry * s.vx) / (s.r * s.r);
         while (emitAcc >= 1) {
             emitAcc -= 1;
             if (gn >= MAXP) { emitAcc = 0; break; }
@@ -149,7 +125,6 @@
         }
     }
 
-    // Advance the gas (and its emission) while the orbit moves from ph0 by dph (in orbital phase)
     function stepGas(ph0, dph) {
         if (dph <= 0) return;
         const n = Math.max(1, Math.ceil(dph * TAU / SUBSTEP));
@@ -178,7 +153,7 @@
                 if (ax * ax + ay * ay < ABSORB2) { accreted++; dead = true; }
                 else if (ex * ex + ey * ey < rd2 || x * x + y * y > OUT2) dead = true;
 
-                if (dead) {                       // swap-remove
+                if (dead) {
                     gn--;
                     gx[i] = gx[gn]; gy[i] = gy[gn]; gvx[i] = gvx[gn]; gvy[i] = gvy[gn]; gk[i] = gk[gn];
                     i--;
@@ -188,14 +163,12 @@
             }
         }
     }
-    // Rebuild a snapshot of the gas by running the last ~0.45 orbit up to the current phase
     function warmUp() {
         clearGas();
         stepGas(phase - 0.45, 0.45);
         accreted = 0;
     }
 
-    /* ----- canvas sizing ----- */
     function fit(cv, ctx) {
         const r = cv.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -207,20 +180,18 @@
     let S = { w: 0, h: 0 }, C = { w: 0, h: 0 };
     function resize() { S = fit(stage, sctx); C = fit(chart, cctx); draw(performance.now()); }
 
-    /* ----- background stars (fixed positions) ----- */
     const stars = Array.from({ length: 70 }, (_, i) => {
         const a = Math.sin(i * 12.9898) * 43758.5453, b = Math.sin(i * 78.233) * 12345.6789;
         return { x: a - Math.floor(a), y: b - Math.floor(b), r: 0.4 + ((i * 37) % 10) / 10, o: 0.25 + ((i * 53) % 10) / 16 };
     });
 
-    /* ----- drawing: gas particles ----- */
-    const GAS_COLORS = ['rgba(255,166,96,0.8)', 'rgba(242,184,75,0.95)', 'rgba(150,225,255,0.98)'];
+    const GAS_COLORS = ['rgba(255, 166, 96, 0.85)', 'rgba(242, 184, 75, 0.95)', 'rgba(150, 225, 255, 0.98)'];
     function drawGas(s, cx, cy, scale) {
         let nb = 0;
         for (let i = 0; i < gn; i++) {
             const dx = gx[i] - s.ax, dy = gy[i] - s.ay, r2 = dx * dx + dy * dy;
             let c = gk[i];
-            if (r2 < DISK_R2) {                    // bound to the accretor and close by: disk-like gas
+            if (r2 < DISK_R2) {
                 const dvx = gvx[i] - s.avx, dvy = gvy[i] - s.avy;
                 if (0.5 * (dvx * dvx + dvy * dvy) - s.f1 / Math.sqrt(r2 + EPS2) < 0) c = 2;
             }
@@ -232,15 +203,16 @@
             sctx.fillStyle = GAS_COLORS[c];
             for (let i = 0; i < gn; i++) {
                 if (gc[i] !== c) continue;
-                sctx.fillRect(cx + gx[i] * scale - 0.9, cy - gy[i] * scale - 0.9, 1.8, 1.8);
+                sctx.fillRect(cx + gx[i] * scale - 1, cy - gy[i] * scale - 1, 2, 2);
             }
         }
     }
 
-    /* ----- drawing: orbit view ----- */
     function drawStage() {
         const { w, h } = S;
         sctx.clearRect(0, 0, w, h);
+        sctx.fillStyle = '#0a0e1a';
+        sctx.fillRect(0, 0, w, h);
 
         for (const st of stars) {
             sctx.fillStyle = 'rgba(255,255,255,' + st.o.toFixed(2) + ')';
@@ -250,14 +222,14 @@
         const b = Math.sqrt(1 - e * e);
         const pad = 0.12;
         const scale = Math.min(w * (1 - pad * 2) / 2.0, h * (1 - pad * 2 - 0.08) / (2 * b));
-        const cx = w / 2 - e * scale;          // centre of mass sits at one focus
+        const cx = w / 2 - e * scale;
         const cy = h / 2 - 0.02 * h;
 
-        const f1 = 1 / (1 + q);                // donor distance from CoM = f1 * separation
-        const f2 = q / (1 + q);                // accretor distance from CoM = f2 * separation
+        const f1 = 1 / (1 + q);
+        const f2 = q / (1 + q);
 
         const E = solveKepler(phase * TAU, e);
-        const rx = Math.cos(E) - e, ry = b * Math.sin(E);   // relative vector, accretor minus donor
+        const rx = Math.cos(E) - e, ry = b * Math.sin(E);
         const r = 1 - e * Math.cos(E);
 
         const P = (kx, ky) => [cx + kx * scale, cy - ky * scale];
@@ -298,7 +270,6 @@
         sctx.beginPath(); sctx.arc(donor[0], donor[1], rlPx, 0, TAU); sctx.stroke();
         sctx.setLineDash([]);
 
-        // gas goes under the stars
         const s = starState(phase);
         drawGas(s, cx, cy, scale);
 
@@ -313,7 +284,7 @@
         sctx.beginPath(); sctx.arc(acc[0], acc[1], 6, 0, TAU); sctx.fill();
 
         const bhl = bhlRadius(s);
-        if (mode === 'wind') {                 // Bondi-Hoyle accretion radius around the accretor
+        if (mode === 'wind') {
             const rb = Math.min(bhl, 0.45) * scale;
             sctx.strokeStyle = 'rgba(158,196,255,0.75)';
             sctx.lineWidth = 1.2;
@@ -335,10 +306,11 @@
         return { r, RL, active, bhl };
     }
 
-    /* ----- drawing: bottom chart (Roche lobe in RLOF mode, wind density in wind mode) ----- */
     function drawChart(state) {
         const { w, h } = C;
         cctx.clearRect(0, 0, w, h);
+        cctx.fillStyle = '#0a0e1a';
+        cctx.fillRect(0, 0, w, h);
         const L = 42, R = 12, T = 12, B = 24;
         const pw = w - L - R, ph = h - T - B;
         const wind = mode === 'wind';
@@ -382,7 +354,7 @@
             }
             cctx.stroke();
             cctx.fillStyle = '#ffb676'; cctx.textAlign = 'right';
-            cctx.fillText('wind density at the accretor, \u03C1 \u221D r\u207B\u00B2', L + pw - 4, T + 12);
+            cctx.fillText('wind density at the accretor', L + pw - 4, T + 12);
         } else {
             cctx.strokeStyle = '#ff9a4d'; cctx.lineWidth = 1.8;
             cctx.beginPath(); cctx.moveTo(L, Y(Rd)); cctx.lineTo(L + pw, Y(Rd)); cctx.stroke();
@@ -407,7 +379,6 @@
         cctx.beginPath(); cctx.arc(X(phase), Y(mark), 3.5, 0, TAU); cctx.fill();
     }
 
-    /* ----- readouts and status ----- */
     function updateReadouts(state) {
         outE.textContent = e.toFixed(2);
         outQ.textContent = q.toFixed(2);
@@ -447,7 +418,6 @@
         updateReadouts(state);
     }
 
-    /* ----- animation loop ----- */
     function frame(t) {
         if (!playing || !visible) { raf = 0; return; }
         if (!lastT) lastT = t;
@@ -468,7 +438,6 @@
         if (on && !raf) raf = requestAnimationFrame(frame);
     }
 
-    /* ----- mode switch (wind accretion / RLOF) ----- */
     function setMode(m) {
         mode = m;
         modeWind.classList.toggle('is-on', m === 'wind');
@@ -477,9 +446,6 @@
         modeRlof.setAttribute('aria-pressed', String(m === 'rlof'));
         lblW.hidden = m !== 'wind';
         readout.querySelectorAll('[data-only]').forEach(el => { el.hidden = el.dataset.only !== m; });
-        chart.setAttribute('aria-label', m === 'wind'
-            ? 'Chart of the wind density at the accretor against orbital phase'
-            : 'Chart of donor radius and Roche lobe radius against orbital phase');
         lastKey = null;
         warmUp();
         draw(performance.now());
@@ -487,7 +453,6 @@
     modeWind.addEventListener('click', () => setMode('wind'));
     modeRlof.addEventListener('click', () => setMode('rlof'));
 
-    /* ----- controls ----- */
     function bind(input, fn, rebuildGas) {
         input.addEventListener('input', () => {
             fn(parseFloat(input.value));
@@ -516,7 +481,6 @@
         draw(performance.now());
     });
 
-    // Only animate while on screen and the tab is visible
     if ('IntersectionObserver' in window) {
         new IntersectionObserver(en => {
             visible = en[0].isIntersecting;
@@ -531,12 +495,10 @@
     if ('ResizeObserver' in window) new ResizeObserver(() => { if (stage.getBoundingClientRect().width > 0) resize(); }).observe(stage.parentElement);
     window.addEventListener('resize', resize);
 
-    // Initial state: wind mode, with a first snapshot of gas already in place
     modeWind.classList.add('is-on');
     readout.querySelectorAll('[data-only]').forEach(el => { el.hidden = el.dataset.only !== mode; });
     warmUp();
     resize();
 
-    // Respect reduced-motion: start paused. Otherwise start playing.
     if (!reduceMotion) setPlaying(true);
 })();
