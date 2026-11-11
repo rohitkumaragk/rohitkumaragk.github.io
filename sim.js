@@ -45,7 +45,7 @@
     let playing = false, visible = true, lastT = 0, raf = 0, lastKey = null;
 
     /* ----- gas particle settings ----- */
-    const MAXP = 2200;                   // particle cap
+    const MAXP = 1600;                   // particle cap
     const SUBSTEP = 0.004;               // max integration step (orbit units)
     const EPS2 = 2.5e-5;                 // gravitational softening squared
     const ABSORB2 = 0.022 * 0.022;       // accretor surface: gas is accreted inside this
@@ -520,7 +520,7 @@
     if ('IntersectionObserver' in window) {
         new IntersectionObserver(en => {
             visible = en[0].isIntersecting;
-            if (visible && playing && !raf) { lastT = 0; raf = requestAnimationFrame(frame); }
+            if (visible) { resize(); if (playing && !raf) { lastT = 0; raf = requestAnimationFrame(frame); } }
         }, { threshold: 0.1 }).observe(stage);
     }
     document.addEventListener('visibilitychange', () => {
@@ -528,7 +528,7 @@
         if (visible && playing && !raf) { lastT = 0; raf = requestAnimationFrame(frame); }
     });
 
-    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(stage.parentElement);
+    if ('ResizeObserver' in window) new ResizeObserver(() => { if (stage.getBoundingClientRect().width > 0) resize(); }).observe(stage.parentElement);
     window.addEventListener('resize', resize);
 
     // Initial state: wind mode, with a first snapshot of gas already in place

@@ -16,7 +16,7 @@
     <meta name="description" content="Rohit Kumar, M.Sc. Physics student at Ariel University, Israel. Research on accretion in eccentric binary systems, AGN and black hole physics.">
     <meta name="keywords" content="Astrophysics, accretion disks, eccentric binaries, AGN, blazars, black holes, Ariel University, NIT Hamirpur, PhD applicant">
     <meta name="author" content="Rohit Kumar">
-    <meta name="theme-color" content="#0a0f1f">
+    <meta name="theme-color" content="#f7f8fc">
     <link rel="canonical" href="https://rohitkumaragk.github.io/">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f1f'/%3E%3Ccircle cx='28' cy='32' r='8' fill='%23f2b84b'/%3E%3Cellipse cx='32' cy='32' rx='24' ry='13' fill='none' stroke='%238ea2ff' stroke-width='3'/%3E%3C/svg%3E">
 
@@ -49,11 +49,9 @@
     <!-- Apply saved / system theme before first paint -->
     <script>
       (function () {
-        var t = null;
-        try { t = localStorage.getItem('theme'); } catch (e) {}
-        if (t !== 'light' && t !== 'dark') {
-          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-        }
+        var t = 'light';
+        try { t = localStorage.getItem('theme') || 'light'; } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = 'light';
         document.documentElement.setAttribute('data-theme', t);
         document.documentElement.classList.add('js');
       })();
@@ -189,165 +187,80 @@
                 </div>
             </article>
             <article class="pane" data-id="research" hidden>
-<p class="kicker">§02 · Research</p>
-                <h2 class="h2">When does an accretion disk form in eccentric binary?</h2>
-                <div class="prose">
-                    <p>
-                        In massive binary systems, the primary star drives a strong stellar wind, and part of it is
-                        gravitationally captured by the secondary. If the captured gas carries enough angular momentum, it
-                        does not fall straight onto the secondary's surface. Instead it settles into a
-                        <em>transient</em> (temporary) accretion disk around it. On an eccentric orbit this is even more
-                        interesting, because the separation between the stars changes continuously, so the way one star
-                        feeds the other changes along the orbit. A donor can lose mass as a wind that is densest near
-                        periastron, or fill its Roche lobe and overflow (RLOF) for only part of the orbit.
-                    </p>
-                    <p>
-                        My M.Sc. project asks a concrete question: <em>under what conditions does a transient accretion disk
-                        form around the accretor, and how long does it survive?</em>
-                        For the next stage I am setting up the simulation analysis with
-                        <a href="https://yt-project.org/" target="_blank" rel="noopener">yt</a>, an open-source Python package.
-                    </p>
-                </div>
+                <p class="kicker">§02 · Research</p>
+                <h2 class="h2">Transient accretion disks in eccentric massive binaries</h2>
+                <p class="section-intro">My current research examines how a companion star captures material from a massive donor, when the captured gas has enough angular momentum to form a disk, and how the disk evolves during an eccentric orbit.</p>
 
-                <!-- ===== Interactive explainer ===== -->
+                <section class="research-block">
+                    <div class="research-number">01</div>
+                    <div><h3>Scientific background</h3>
+                    <p>In a massive binary, the donor star can lose material through a stellar wind. The companion (accretor) gravitationally captures a fraction of this gas. If the captured material carries sufficient specific angular momentum, it can circularise around the accretor and form a temporary accretion disk rather than falling directly onto the stellar surface.</p>
+                    <p>Eccentricity makes the process time-dependent: the stellar separation and orbital velocity change throughout the orbit. The mass-transfer rate and angular momentum of the captured gas can therefore vary strongly, especially around periastron.</p></div>
+                </section>
+                <section class="research-block">
+                    <div class="research-number">02</div>
+                    <div><h3>Research question</h3>
+                    <p class="research-question">Under what orbital and stellar conditions does a transient accretion disk form around the secondary, and what determines its duration and evolution?</p>
+                    <ul class="check-list"><li>When is the captured gas able to circularise?</li><li>How does wind-fed Bondi–Hoyle–Lyttleton (BHL) accretion compare with Roche-lobe overflow (RLOF)?</li><li>For what part of the orbit are disk-forming conditions satisfied?</li><li>How does the disk draining time compare with the orbital period?</li></ul></div>
+                </section>
+                <section class="research-block">
+                    <div class="research-number">03</div>
+                    <div><h3>Physical mechanisms</h3>
+                    <div class="mini-grid">
+                        <article class="mini-card"><span class="mini-icon">↗</span><h4>Wind accretion</h4><p>The companion captures part of the donor's stellar wind. The BHL accretion radius provides a characteristic scale for gravitational focusing.</p></article>
+                        <article class="mini-card"><span class="mini-icon">⇢</span><h4>Roche-lobe overflow</h4><p>When the donor fills its Roche lobe, gas can pass through the inner Lagrange point and transfer to the companion.</p></article>
+                        <article class="mini-card"><span class="mini-icon">⟳</span><h4>Angular momentum</h4><p>The specific angular momentum of the captured material is compared with the value needed to orbit at the accretor's surface.</p></article>
+                    </div></div>
+                </section>
+                <section class="research-block">
+                    <div class="research-number">04</div>
+                    <div><h3>Methods and workflow</h3>
+                    <ol class="method-flow"><li><b>Binary parameters</b><span>Adopt stellar masses, radii, orbital period, eccentricity and wind properties.</span></li><li><b>Orbital evolution</b><span>Calculate the changing separation, orbital velocity and wind conditions along the orbit.</span></li><li><b>Accretion estimates</b><span>Evaluate BHL capture and RLOF conditions, then estimate the angular momentum of the captured gas.</span></li><li><b>Disk criterion</b><span>Compare captured specific angular momentum with the Keplerian value at the accretor's surface.</span></li><li><b>Timescales</b><span>Compare the disk's estimated viscous draining time with the orbital timescale.</span></li></ol></div>
+                </section>
+                <section class="research-block">
+                    <div class="research-number">05</div>
+                    <div><h3>Numerical simulation analysis — next stage</h3>
+                    <p>I am learning to use <a href="https://yt-project.org/" target="_blank" rel="noopener">yt</a> to inspect FLASH simulation outputs. The planned analysis is to identify disk-like structures in the simulation and calculate the gas angular momentum at successive timesteps. This is a developing workflow; no simulation-derived result is claimed here yet.</p>
+                    <div class="tag-row"><span>FLASH</span><span>yt</span><span>Python</span><span>Angular momentum</span><span>Time evolution</span></div></div>
+                </section>
                 <figure class="sim" id="sim" aria-labelledby="simTitle">
-                    <div class="sim-head">
-                        <h3 id="simTitle">Explore: wind accretion vs. Roche-lobe overflow</h3>
-                        <p>An illustrative toy model, not my simulation results. Pick a mass-transfer mode, change the orbit and watch where the gas goes.</p>
-                    </div>
-
+                    <div class="sim-head"><div><p class="eyebrow">Interactive explainer</p><h3 id="simTitle">Wind accretion vs. Roche-lobe overflow</h3></div><p>This is an illustrative test-particle toy model—not a hydrodynamic simulation and not a presentation of research results.</p></div>
                     <div class="sim-mode" role="group" aria-label="Mass-transfer mode">
-                        <button type="button" class="mode-btn" id="modeWind" aria-pressed="true"><i class="fas fa-wind" aria-hidden="true"></i> Wind accretion</button>
-                        <button type="button" class="mode-btn" id="modeRlof" aria-pressed="false"><i class="fas fa-droplet" aria-hidden="true"></i> Roche-lobe overflow</button>
+                        <button type="button" class="mode-btn is-on" id="modeWind" aria-pressed="true">✦ Wind accretion</button>
+                        <button type="button" class="mode-btn" id="modeRlof" aria-pressed="false">⇢ Roche-lobe overflow</button>
                     </div>
-
-                    <noscript><p class="sim-fallback">This interactive explainer needs JavaScript.</p></noscript>
-
-                    <div class="sim-stage">
-                        <canvas id="simCanvas" role="img" aria-label="Animated eccentric binary. Gas particles flow from the donor star to the accretor, either as a wind or through the inner Lagrange point during Roche-lobe overflow. A dashed circle shows the donor's Roche lobe."></canvas>
-                        <div class="sim-badge" id="simBadge">Wind accretion</div>
-                        <div class="sim-legend" aria-hidden="true">
-                            <span><i class="dot donor"></i> donor</span>
-                            <span><i class="dot acc"></i> accretor</span>
-                            <span><i class="dash"></i> Roche lobe</span>
-                            <span><i class="dot gas"></i> gas</span>
-                            <span><i class="dot disk"></i> bound to accretor</span>
-                        </div>
+                    <noscript><p class="sim-fallback">Enable JavaScript to run this interactive explainer.</p></noscript>
+                    <div class="sim-stage"><canvas id="simCanvas" role="img" aria-label="Animated eccentric binary with gas test particles"></canvas><div class="sim-badge" id="simBadge">Wind accretion</div>
+                        <div class="sim-legend"><span><i class="dot donor"></i> Donor</span><span><i class="dot acc"></i> Accretor</span><span><i class="dash"></i> Roche lobe</span><span><i class="dot gas"></i> Gas</span><span><i class="dot disk"></i> Bound gas</span></div>
                     </div>
-
-                    <div class="sim-chart-wrap">
-                        <canvas id="chartCanvas" role="img" aria-label="Chart of the wind density at the accretor against orbital phase"></canvas>
-                    </div>
-
+                    <div class="sim-chart-wrap"><canvas id="chartCanvas" role="img" aria-label="Orbital phase chart"></canvas></div>
                     <div class="sim-controls">
-                        <label>Eccentricity <i>e</i> <output id="outE">0.50</output>
-                            <input type="range" id="inE" min="0" max="0.9" step="0.01" value="0.5">
-                        </label>
-                        <label>Mass ratio <i>q</i> = M<sub>donor</sub>/M<sub>acc</sub> <output id="outQ">1.00</output>
-                            <input type="range" id="inQ" min="0.3" max="3" step="0.05" value="1">
-                        </label>
-                        <label>Donor radius <i>R</i><sub>d</sub>/<i>a</i> <output id="outR">0.25</output>
-                            <input type="range" id="inR" min="0.05" max="0.5" step="0.01" value="0.25">
-                        </label>
-                        <label id="lblW">Wind speed <i>v</i><sub>w</sub> <output id="outW">2.5</output>
-                            <input type="range" id="inW" min="1" max="5" step="0.1" value="2.5">
-                        </label>
-                        <label>Orbital phase <output id="outP">0.00</output>
-                            <input type="range" id="inP" min="0" max="1" step="0.005" value="0">
-                        </label>
-                        <label>Speed <output id="outS">1.0&times;</output>
-                            <input type="range" id="inS" min="0.25" max="3" step="0.25" value="1">
-                        </label>
-                        <div class="sim-buttons">
-                            <button type="button" class="btn btn-small btn-amber" id="simPlay" aria-pressed="false"><i class="fas fa-play" aria-hidden="true"></i> <span>Play</span></button>
-                            <button type="button" class="btn btn-small btn-line" id="simReset">Reset</button>
-                        </div>
+                        <label>Eccentricity <i>e</i><output id="outE">0.50</output><input type="range" id="inE" min="0" max="0.9" step="0.01" value="0.5"></label>
+                        <label>Mass ratio <i>q</i><output id="outQ">1.00</output><input type="range" id="inQ" min="0.3" max="3" step="0.05" value="1"></label>
+                        <label>Donor radius <i>R</i><sub>d</sub>/<i>a</i><output id="outR">0.25</output><input type="range" id="inR" min="0.05" max="0.5" step="0.01" value="0.25"></label>
+                        <label id="lblW">Wind speed <i>v</i><sub>w</sub><output id="outW">2.5</output><input type="range" id="inW" min="1" max="5" step="0.1" value="2.5"></label>
+                        <label>Orbital phase<output id="outP">0.00</output><input type="range" id="inP" min="0" max="1" step="0.005" value="0"></label>
+                        <label>Animation speed<output id="outS">1.0×</output><input type="range" id="inS" min="0.25" max="3" step="0.25" value="1"></label>
+                        <div class="sim-buttons"><button type="button" class="btn btn-small btn-amber" id="simPlay" aria-pressed="false"><i class="fas fa-play"></i> <span>Play</span></button><button type="button" class="btn btn-small btn-line" id="simReset">Reset</button></div>
                     </div>
-
-                    <dl class="sim-readout" id="simReadout">
-                        <div><dt>Separation now</dt><dd id="roSep">&ndash;</dd></div>
-                        <div data-only="wind"><dt>Bondi&ndash;Hoyle radius now</dt><dd id="roBHL">&ndash;</dd></div>
-                        <div data-only="wind"><dt>Wind density, periastron / apastron</dt><dd id="roRho">&ndash;</dd></div>
-                        <div data-only="rlof"><dt>Roche lobe radius now</dt><dd id="roRL">&ndash;</dd></div>
-                        <div data-only="rlof"><dt>RLOF active for</dt><dd id="roFrac">&ndash;</dd></div>
-                        <div><dt>Gas bound near accretor</dt><dd id="roBound">&ndash;</dd></div>
-                        <div><dt>Gas accreted (particles)</dt><dd id="roAcc">&ndash;</dd></div>
-                    </dl>
+                    <dl class="sim-readout" id="simReadout"><div><dt>Separation</dt><dd id="roSep">–</dd></div><div data-only="wind"><dt>BHL radius</dt><dd id="roBHL">–</dd></div><div data-only="wind"><dt>Density contrast</dt><dd id="roRho">–</dd></div><div data-only="rlof"><dt>Roche-lobe radius</dt><dd id="roRL">–</dd></div><div data-only="rlof"><dt>RLOF active</dt><dd id="roFrac">–</dd></div><div><dt>Bound gas particles</dt><dd id="roBound">–</dd></div><div><dt>Accreted particles</dt><dd id="roAcc">–</dd></div></dl>
                     <p class="sr-only" id="simStatus" aria-live="polite"></p>
-
-                    <figcaption>
-                        Gas is a cloud of test particles moving in the gravity of both stars, not a hydrodynamic simulation.
-                        In wind mode they leave the donor in all directions at speed <i>v</i><sub>w</sub>; in RLOF mode they leave through the
-                        inner Lagrange point, and only while the donor fills its Roche lobe. A weak drag close to the accretor stands in for
-                        viscosity, so bound gas can pile up into a short-lived, disk-like swirl. Orbit solved with Kepler's equation;
-                        Roche-lobe radius from Eggleton (1983) at the instantaneous separation <i>r</i>:
-                        <i>R</i><sub>L</sub>/<i>r</i> = 0.49<i>q</i><sup>2/3</sup> / (0.6<i>q</i><sup>2/3</sup> + ln(1 + <i>q</i><sup>1/3</sup>)).
-                        Bondi&ndash;Hoyle radius <i>R</i><sub>BHL</sub> = 2<i>GM</i><sub>acc</sub>/<i>v</i><sub>rel</sub><sup>2</sup>, with the wind speed taken relative to the moving accretor.
-                        Wind density is taken as &rho; &prop; <i>r</i><sup>&minus;2</sup> for a constant-speed wind. Lengths are in units of the semi-major axis <i>a</i>.
-                    </figcaption>
+                    <figcaption>Particles are integrated as test particles in the gravitational field of both stars. A simple drag term near the accretor represents unresolved dissipation; it is not a physical viscosity prescription. The Roche-lobe estimate follows Eggleton (1983), and the wind density scaling assumes a constant-speed wind. All lengths are in units of the semi-major axis.</figcaption>
                 </figure>
-
-                <div class="tag-row" aria-label="Methods"><span>Python</span><span>yt</span><span>Wind accretion</span><span>RLOF</span><span>Binary stars</span><span>Orbital dynamics</span></div>
-
-                <h3 class="h3">Broader interests</h3>
-                <dl class="defs">
-                    <div><dt>Active Galactic Nuclei</dt><dd>Supermassive black hole accretion and feedback, studied with Swift BAT/XRT/UVOT, Fermi-LAT and NuSTAR.</dd></div>
-                    <div><dt>Black hole accretion</dt><dd>Disk formation and dynamics, from binary stars to AGN environments.</dd></div>
-                    <div><dt>Galaxy formation &amp; evolution</dt><dd>How galaxies grow and interact with their central black holes across cosmic time.</dd></div>
-                    <div><dt>Star formation</dt><dd>Collapse of giant molecular clouds in the ISM and the feedback that regulates it.</dd></div>
-                    <div><dt>Cosmology</dt><dd>Cosmic inflation, structure formation and data analysis with Python.</dd></div>
-                </dl>
+                <div class="research-note"><b>Scientific context:</b> the project uses η Carinae as a motivating massive eccentric binary system. Quantitative values and conclusions are discussed in the research poster and project material; the interactive model above is deliberately illustrative.</div>
+                <h3 class="h3">Related research interests</h3>
+                <div class="interest-grid"><article><h4>AGN and blazars</h4><p>Multiwavelength emission, X-ray and gamma-ray spectra, and variability.</p></article><article><h4>Black-hole accretion</h4><p>Accretion flows, disk physics and feedback around compact objects.</p></article><article><h4>Stellar and galactic evolution</h4><p>Mass transfer, star formation, galaxy evolution and their physical connections.</p></article><article><h4>Cosmology</h4><p>Large-scale structure and data-driven approaches to the universe.</p></article></div>
             </article>
             <article class="pane" data-id="projects" hidden>
-<p class="kicker">§03 · Projects</p>
-                <h2 class="h2">What I have built and analysed</h2>
-                <ol class="rows">
-                    <li class="row">
-                        <div class="row-when">Nov 2025 &ndash; now</div>
-                        <div class="row-main">
-                            <h3>Accretion disk formation in eccentric binary systems</h3>
-                            <p class="row-where">Ariel University, Israel &middot; supervisor: <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a></p>
-                            <p class="row-role"><b>My role:</b> Python modelling of wind-fed accretion and Roche-lobe overflow along eccentric orbits; poster presented at the 2nd IAU&ndash;ORAS Pro-Am Workshop.</p>
-                            <div class="tag-row"><span>Python</span><span>yt</span><span>RLOF</span><span>Wind accretion</span><span>Binary stars</span></div>
-                        </div>
-                    </li>
-                    <li class="row">
-                        <div class="row-when">Jul &ndash; Oct 2025</div>
-                        <div class="row-main">
-                            <h3>AGN and blazar analysis with NASA telescopes</h3>
-                            <p class="row-where"><a href="https://sites.google.com/view/hea-bhu" target="_blank" rel="noopener">High Energy Astrophysics Group, BHU, Varanasi</a> &middot; supervisor: <a href="https://scholar.google.com/citations?user=bbqblCkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dr. Raj Prince</a></p>
-                            <p class="row-role"><b>My role:</b> multi-wavelength study of AGN and blazars using hard X-ray and gamma-ray data from Swift (BAT, XRT, UVOT), Fermi-LAT and NuSTAR, with a focus on spectral analysis and variability.</p>
-                            <div class="tag-row"><span>Swift</span><span>NuSTAR</span><span>Fermi-LAT</span><span>Spectral fitting</span><span>Variability</span></div>
-                        </div>
-                    </li>
-                    <li class="row">
-                        <div class="row-when">2023</div>
-                        <div class="row-main">
-                            <h3>M.Sc. thesis: demonstrating the Sun&ndash;Earth model</h3>
-                            <p class="row-where">NIT Hamirpur &middot; supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p>
-                            <p class="row-role"><b>My role:</b> designed and built a working Earth&ndash;Sun system model that explains rotation and revolution, seasons, day and night, tides, celestial positions and satellite orbits.</p>
-                            <div class="tag-row"><span>Solar system</span><span>Seasons</span><span>Hands-on</span></div>
-                        </div>
-                    </li>
-                    <li class="row">
-                        <div class="row-when">2022 &ndash; 23</div>
-                        <div class="row-main">
-                            <h3>150&nbsp;mm Newtonian reflecting telescope</h3>
-                            <p class="row-where">NIT Hamirpur &middot; supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p>
-                            <p class="row-role"><b>My role:</b> designed and constructed a 150&nbsp;mm aperture telescope; hands-on work in optics, mirror fabrication and mounting.</p>
-                            <div class="tag-row"><span>Optics</span><span>Instrumentation</span><span>Observational astronomy</span></div>
-                        </div>
-                    </li>
-                    <li class="row">
-                        <div class="row-when">2023 &ndash; now</div>
-                        <div class="row-main">
-                            <h3>Zooniverse citizen science</h3>
-                            <p class="row-where">Part-time independent researcher</p>
-                            <p class="row-role"><b>My role:</b> classification and data analysis for astronomy projects, including galaxy morphology and supernova searches.</p>
-                            <div class="tag-row"><span>Galaxy morphology</span><span>Supernova searches</span></div>
-                        </div>
-                    </li>
-                </ol>
+                <p class="kicker">§03 · Projects</p><h2 class="h2">Research, analysis and scientific builds</h2>
+                <p class="section-intro">A selection of research and hands-on projects, arranged by the question addressed and the work carried out.</p>
+                <div class="project-grid">
+                    <article class="project-card project-featured"><div class="project-top"><span class="project-index">PROJECT 01</span><span class="status status-current">Current research</span></div><p class="project-date">Nov 2025 – present</p><h3>Transient accretion disks in eccentric massive binaries</h3><p class="project-place">Ariel University, Israel · Supervisor: <a href="https://www.ariel.ac.il/wp/amitkashi/" target="_blank" rel="noopener">Prof. Amit Kashi</a></p><p>Analytical investigation of wind-fed BHL accretion and Roche-lobe overflow, with attention to the angular momentum of captured material and the orbital window for disk formation.</p><div class="project-contribution"><b>My contribution</b><p>Python-based calculations and visualisation; comparing disk-formation criteria and characteristic timescales. Learning the yt workflow for future FLASH simulation analysis.</p></div><div class="tag-row"><span>Python</span><span>BHL accretion</span><span>RLOF</span><span>Orbital dynamics</span><span>yt / FLASH (learning)</span></div></article>
+                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 02</span><span class="status">Research experience</span></div><p class="project-date">Jul – Oct 2025</p><h3>AGN and blazar multiwavelength analysis</h3><p class="project-place"><a href="https://sites.google.com/view/hea-bhu" target="_blank" rel="noopener">High Energy Astrophysics Group, BHU</a> · Supervisor: <a href="https://scholar.google.com/citations?user=bbqblCkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Dr. Raj Prince</a></p><p>Worked with high-energy observations of active galactic nuclei and blazars, combining X-ray and gamma-ray data.</p><div class="project-contribution"><b>Data and methods</b><p>Swift BAT, XRT and UVOT; Fermi-LAT; NuSTAR; spectral analysis and variability.</p></div><div class="tag-row"><span>AGN</span><span>Blazars</span><span>Swift</span><span>Fermi-LAT</span><span>NuSTAR</span></div></article>
+                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 03</span><span class="status">M.Sc. thesis</span></div><p class="project-date">2023</p><h3>Demonstrating the Sun–Earth model</h3><p class="project-place">NIT Hamirpur · Supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p><p>Designed and built a working model to demonstrate Earth–Sun geometry and explain rotation, revolution, seasons and day/night.</p><div class="project-contribution"><b>Project focus</b><p>Hands-on scientific demonstration and communicating astronomical concepts through a physical model.</p></div><div class="tag-row"><span>Solar system</span><span>Scientific model</span><span>Physics education</span></div></article>
+                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 04</span><span class="status">Instrumentation</span></div><p class="project-date">2022–2023</p><h3>150 mm Newtonian reflecting telescope</h3><p class="project-place">NIT Hamirpur · Supervisor: <a href="https://portfolios.nith.ac.in/index.php?/nith/dr-arvind-kumar-" target="_blank" rel="noopener">Dr. Arvind Kumar Gathania</a></p><p>Designed and constructed a 150 mm aperture Newtonian telescope, gaining practical experience with optical components and telescope assembly.</p><div class="tag-row"><span>Optics</span><span>Mirror fabrication</span><span>Instrumentation</span></div></article>
+                    <article class="project-card"><div class="project-top"><span class="project-index">PROJECT 05</span><span class="status">Citizen science</span></div><p class="project-date">2023 – present</p><h3>Zooniverse astronomy projects</h3><p class="project-place">Independent participation</p><p>Contributed to citizen-science classification and data activities, including galaxy morphology and supernova searches.</p><div class="tag-row"><span>Galaxy morphology</span><span>Supernova searches</span><span>Citizen science</span></div></article>
+                </div>
             </article>
             <article class="pane" data-id="conferences" hidden>
 <p class="kicker">§04 · Publications &amp; talks</p>
@@ -364,25 +277,13 @@
 </article>
             </article>
             <article class="pane" data-id="training" hidden>
-<p class="kicker">§05.2 · Training</p>
-                <h2 class="h2">Schools, workshops and internships</h2>
-                <table class="train">
-                    <caption class="sr-only">Schools, workshops and internships, newest first</caption>
-                    <thead><tr><th scope="col">When</th><th scope="col">Programme</th><th scope="col">Organisation</th></tr></thead>
-                    <tbody>
-                        <tr><td>Feb 2025</td><td>Color the Universe with Vera C. Rubin Observatory</td><td>Vera C. Rubin Observatory &amp; AMTA</td></tr>
-                        <tr><td>Oct 2024</td><td>Data Analysis in Cosmology using Python</td><td> Sardar Patel University</td></tr>
-                        <tr><td>Jul 2024</td><td>Explore Exploding Stars with Vera C. Rubin Observatory</td><td>Vera C. Rubin Observatory &amp; AAS</td></tr>
-                        <tr><td>Jul 2024</td><td>Workshop on Relativistic Cosmology: Theoretical &amp; Data Analysis Techniques</td><td>IUCAA &amp; GHRCE Nagpur</td></tr>
-                        <tr><td>Jun 2024</td><td>Summer School in Theoretical (Astro)Physics</td><td>IUCAA &amp; St. Xavier's College</td></tr>
-                        <tr><td>Jul 2023</td><td>Beginning Astronomy v2: Start a Data-Driven Journey</td><td>IUCAA &amp; Central University of Himachal Pradesh</td></tr>
-                        <tr><td>Jun 2023</td><td>Summer School Internship (also Jul 2022)</td><td>Indian Institute of Astrophysics (IIA)</td></tr>
-                        <tr><td>Nov 2022</td><td>Role of Small Telescopes in Exciting Areas of Observational Astronomy</td><td>Indian Centre for Space Physics (ICSP)</td></tr>
-                        <tr><td>Nov 2022</td><td>Workshop on Recent Progress in Astrophysics</td><td>Amity University</td></tr>
-                        <tr><td>Jul 2022</td><td>Summer Internship</td><td>IIIT Kota</td></tr>
-                        <tr><td>2023&ndash;24</td><td>English Course</td><td>Oxford School of English, Delhi</td></tr>
-                    </tbody>
-                </table>
+                <p class="kicker">§05.2 · Training</p><h2 class="h2">Schools, workshops and professional development</h2>
+                <p class="section-intro">A chronological record of astronomy, astrophysics, cosmology, data-analysis and language-learning programmes.</p>
+                <div class="training-summary"><div><strong>2022–2025</strong><span>Training period represented</span></div><div><strong>11</strong><span>Programmes listed</span></div><div><strong>Astro + data</strong><span>Main learning themes</span></div></div>
+                <div class="training-year"><h3>2025</h3><ol class="training-list"><li><time>February 2025</time><div><b>Color the Universe with Vera C. Rubin Observatory</b><span>Vera C. Rubin Observatory &amp; AMTA</span></div></li></ol></div>
+                <div class="training-year"><h3>2024</h3><ol class="training-list"><li><time>October 2024</time><div><b>Data Analysis in Cosmology using Python</b><span>Sardar Patel University</span></div></li><li><time>July 2024</time><div><b>Explore Exploding Stars with Vera C. Rubin Observatory</b><span>Vera C. Rubin Observatory &amp; AAS</span></div></li><li><time>July 2024</time><div><b>Workshop on Relativistic Cosmology: Theoretical &amp; Data Analysis Techniques</b><span>IUCAA &amp; GHRCE Nagpur</span></div></li><li><time>June 2024</time><div><b>Summer School in Theoretical (Astro)Physics</b><span>IUCAA &amp; St. Xavier’s College</span></div></li><li><time>2023–2024</time><div><b>English Course</b><span>Oxford School of English, Delhi</span></div></li></ol></div>
+                <div class="training-year"><h3>2023</h3><ol class="training-list"><li><time>July 2023</time><div><b>Beginning Astronomy v2: Start a Data-Driven Journey</b><span>IUCAA &amp; Central University of Himachal Pradesh</span></div></li><li><time>June 2023</time><div><b>Summer School Internship</b><span>Indian Institute of Astrophysics (IIA) · also attended July 2022</span></div></li></ol></div>
+                <div class="training-year"><h3>2022</h3><ol class="training-list"><li><time>November 2022</time><div><b>Role of Small Telescopes in Exciting Areas of Observational Astronomy</b><span>Indian Centre for Space Physics (ICSP)</span></div></li><li><time>November 2022</time><div><b>Workshop on Recent Progress in Astrophysics</b><span>Amity University</span></div></li><li><time>July 2022</time><div><b>Summer Internship</b><span>IIIT Kota</span></div></li></ol></div>
             </article>
             <article class="pane" data-id="education" hidden>
 <p class="kicker">§05.1 · Education</p>
@@ -428,15 +329,18 @@
                 </details>
             </article>
             <article class="pane" data-id="skills" hidden>
-<p class="kicker">§05.3 · Skills</p>
-                <h2 class="h2">Tools and methods</h2>
-                <dl class="defs">
-                    <div><dt>Programming &amp; tools</dt><dd>Python, MATLAB, Origin, Linux, LaTeX, yt, MS Office</dd></div>
-                    <div><dt>Data analysis</dt><dd>X-ray data analysis, spectral fitting, time-series analysis, statistical techniques, numerical analysis</dd></div>
-                    <div><dt>Research</dt><dd>Scientific writing, literature review, proposal writing</dd></div>
-                    <div><dt>Other</dt><dd>Teaching, mentoring, communication, collaboration</dd></div>
-                    <div><dt>Languages</dt><dd>Hindi (native), Bhojpuri (native), English (fluent)</dd></div>
-                </dl>
+                <p class="kicker">§05.3 · Skills</p><h2 class="h2">Tools and methods</h2>
+                <p class="section-intro">A structured overview of the software, analysis techniques and research practices used or currently being learned across my projects.</p>
+                <div class="skill-grid">
+                    <section class="skill-card"><span class="skill-icon">⌘</span><h3>Scientific programming</h3><p>Python · MATLAB · Linux / Bash</p><div class="skill-detail">Numerical calculations, scripting, data handling and reproducible computational workflows.</div></section>
+                    <section class="skill-card"><span class="skill-icon">∿</span><h3>Data analysis</h3><p>Astrophysical datasets · Spectral analysis · Variability</p><div class="skill-detail">Working with high-energy data from Swift (BAT/XRT/UVOT), Fermi-LAT and NuSTAR; statistical and time-series analysis.</div></section>
+                    <section class="skill-card"><span class="skill-icon">✧</span><h3>Modelling and astrophysics</h3><p>Binary orbital dynamics · BHL accretion · RLOF</p><div class="skill-detail">Analytical estimates, angular-momentum criteria, characteristic timescales and physical interpretation.</div></section>
+                    <section class="skill-card"><span class="skill-icon">▥</span><h3>Visualisation and presentation</h3><p>Matplotlib · Origin · PowerPoint</p><div class="skill-detail">Scientific plots, model diagrams, conference posters and presentation materials.</div></section>
+                    <section class="skill-card"><span class="skill-icon">⌨</span><h3>Research tools</h3><p>LaTeX · MS Office · Literature review</p><div class="skill-detail">Scientific writing, technical documentation, reading papers and communicating results.</div></section>
+                    <section class="skill-card skill-learning"><span class="skill-icon">◌</span><h3>Simulation analysis — learning</h3><p>yt · FLASH data workflow</p><div class="skill-detail">Learning to load and inspect FLASH outputs, identify disk-like structures and calculate angular momentum over time. This is a developing skill, not a completed simulation result.</div></section>
+                </div>
+                <div class="language-strip"><b>Languages</b><span>Hindi · Bhojpuri · English</span></div>
+                <div class="research-note">Software and methods are described according to the work and learning stages currently represented on this site; no proficiency rating is implied.</div>
             </article>
             <article class="pane" data-id="teaching" hidden>
 <p class="kicker">§05.4 · Teaching</p>
@@ -448,18 +352,17 @@
                 </ol>
             </article>
             <article class="pane" data-id="writing" hidden>
-<p class="kicker">§05.5 · Writing</p>
-                <h2 class="h2">Question Everything</h2>
-                <div class="prose">
-                    <p>
-                        <a href="https://questioneverythingagk.blogspot.com" target="_blank" rel="noopener"><b>My blog</b></a>
-                        on physics, astronomy and the research journey.
-                    </p>
+                <p class="kicker">§05.5 · Blog &amp; science communication</p><h2 class="h2">Question Everything</h2>
+                <p class="section-intro">A place for exploring physics, astronomy, cosmology and the ideas that connect scientific concepts with the wider universe.</p>
+                <a class="blog-banner" href="https://questioneverythingagk.blogspot.com/" target="_blank" rel="noopener"><span class="blog-mark">Q?</span><span><b>Question Everything</b><small>Read the complete blog and explore all published posts</small></span><i class="fas fa-arrow-up-right-from-square"></i></a>
+                <h3 class="h3">Explore by topic</h3>
+                <div class="blog-topic-grid"><a href="https://questioneverythingagk.blogspot.com/search?q=astronomy" target="_blank" rel="noopener"><b>01 · Astronomy</b><span>Celestial objects, sky and observing</span></a><a href="https://questioneverythingagk.blogspot.com/search?q=astrophysics" target="_blank" rel="noopener"><b>02 · Astrophysics</b><span>Stars, black holes and high-energy phenomena</span></a><a href="https://questioneverythingagk.blogspot.com/search?q=physics" target="_blank" rel="noopener"><b>03 · Physics</b><span>Fundamental ideas and physical principles</span></a><a href="https://questioneverythingagk.blogspot.com/search?q=cosmology" target="_blank" rel="noopener"><b>04 · Cosmology</b><span>Spacetime and the large-scale universe</span></a><a href="https://questioneverythingagk.blogspot.com/search?q=space" target="_blank" rel="noopener"><b>05 · Space science</b><span>Space, exploration and the universe</span></a><a href="https://questioneverythingagk.blogspot.com/search?q=education" target="_blank" rel="noopener"><b>06 · Learning resources</b><span>Explanations and educational writing</span></a></div>
+                <div class="blog-feed-head"><div><p class="eyebrow">From the blog</p><h3 class="h3">Featured writing</h3></div><a href="https://questioneverythingagk.blogspot.com/" target="_blank" rel="noopener">All posts ↗</a></div>
+                <div class="blog-post-grid" id="blogPosts">
+                    <article class="blog-post"><span class="blog-post-type">Spacetime · Gravitation</span><h4><a href="https://questioneverythingagk.blogspot.com/2026/05/gravitational-waves-in-spacetime.html" target="_blank" rel="noopener">Gravitational Waves in Spacetime: Connection of Einstein and Black Holes</a></h4><p>A discussion of gravitational waves, spacetime and their connection with compact astrophysical objects.</p><a class="read-link" href="https://questioneverythingagk.blogspot.com/2026/05/gravitational-waves-in-spacetime.html" target="_blank" rel="noopener">Read article ↗</a></article>
+                    <article class="blog-post"><span class="blog-post-type">Astronomy · Sky coordinates</span><h4><a href="https://questioneverythingagk.blogspot.com/2023/01/how-to-find-position-of-celestial.html" target="_blank" rel="noopener">Exploring the Wonders of the Celestial Sphere: A Journey Through the Stars</a></h4><p>An introduction to the celestial sphere and the language used to describe positions in the sky.</p><a class="read-link" href="https://questioneverythingagk.blogspot.com/2023/01/how-to-find-position-of-celestial.html" target="_blank" rel="noopener">Read article ↗</a></article>
                 </div>
-                <ul class="plain-list">
-                    <li><a href="https://questioneverythingagk.blogspot.com/2026/05/gravitational-waves-in-spacetime.html" target="_blank" rel="noopener">Gravitational Waves in Spacetime: Connection of Einstein and Black Holes</a> <span class="pill">latest</span></li>
-                    <li><a href="https://questioneverythingagk.blogspot.com/2023/01/how-to-find-position-of-celestial.html" target="_blank" rel="noopener">Exploring the Wonders of the Celestial Sphere: A Journey Through the Stars</a> <span class="pill">popular</span></li>
-                </ul>
+                <p class="blog-feed-note" id="blogFeedNote">More articles are available through the topic links and the complete blog archive.</p>
             </article>
             <article class="pane" data-id="contact" hidden>
 <p class="kicker">§06 · Contact</p>
@@ -478,6 +381,7 @@
         </div>
     </aside>
 
+    <script src="blog.js"></script>
     <script src="galaxy.js"></script>
     <script src="sim.js"></script>
 </body>

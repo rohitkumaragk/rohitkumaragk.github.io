@@ -155,15 +155,18 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
     function gauss() { return (rnd() + rnd() + rnd() + rnd() - 2) / 0.58; }   // about N(0, 1)
 
     /* ----- stars of the disc: bulge + two spiral arms + a faint halo ----- */
-    const N_ARM = 1500, N_BULGE = 500, N_HALO = 260, N = N_ARM + N_BULGE + N_HALO;
+    const N_ARM = 2200, N_BULGE = 620, N_HALO = 320, N = N_ARM + N_BULGE + N_HALO;
     const pr = new Float32Array(N), pa = new Float32Array(N), pw = new Float32Array(N), ps = new Float32Array(N);
     const pcol = new Array(N);
 
     function colour(r, hii) {
-        if (hii) return 'rgba(255,150,190,' + (0.55 + rnd() * 0.4).toFixed(2) + ')';
-        const t = Math.min(1, r / 0.95);
-        const R = Math.round(255 - 90 * t), G = Math.round(224 - 20 * t), B = Math.round(175 + 80 * t);
-        return 'rgba(' + R + ',' + G + ',' + B + ',' + (0.35 + rnd() * 0.6).toFixed(2) + ')';
+        if (hii) return 'rgba(255,105,145,' + (0.55 + rnd() * 0.4).toFixed(2) + ')';
+        const palette = [[255,174,112],[118,174,255],[177,145,255],[104,205,197],[245,151,191],[255,218,130]];
+        const c = palette[Math.floor(rnd() * palette.length)];
+        const t = Math.min(1, r / 1.0);
+        const mix = 0.15 + 0.25 * t;
+        const R = Math.round(c[0] * (1-mix) + 255 * mix), G = Math.round(c[1] * (1-mix) + 255 * mix), B = Math.round(c[2] * (1-mix) + 255 * mix);
+        return 'rgba(' + R + ',' + G + ',' + B + ',' + (0.48 + rnd() * 0.48).toFixed(2) + ')';
     }
     function omega(r) { return 0.03 + 0.06 / (1 + 3 * r); }   // rad/s, faster near the centre
 
@@ -171,8 +174,8 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
         let r, a, hii = false, size = 0.6 + rnd() * 1.0;
         if (i < N_ARM) {
             r = 0.03 + 0.97 * Math.pow(rnd(), 0.8);
-            const arm = i % 2;
-            a = arm * Math.PI + r * 5.4 + gauss() * (0.1 + 0.3 * r);
+            const arm = i % 4;
+            a = arm * Math.PI / 2 + r * 5.0 + gauss() * (0.07 + 0.22 * r);
             hii = rnd() < 0.06;
         } else if (i < N_ARM + N_BULGE) {
             r = Math.pow(rnd(), 2) * 0.24;
@@ -192,8 +195,8 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
     const hr = new Float32Array(N_HAZE), ha = new Float32Array(N_HAZE), hw = new Float32Array(N_HAZE), hs = new Float32Array(N_HAZE), hc = new Uint8Array(N_HAZE);
     for (let i = 0; i < N_HAZE; i++) {
         const r = 0.08 + 0.9 * Math.pow(rnd(), 0.9);
-        hr[i] = r; ha[i] = (i % 2) * Math.PI + r * 5.4 + gauss() * (0.1 + 0.25 * r);
-        hw[i] = omega(r); hs[i] = 0.05 + rnd() * 0.08; hc[i] = rnd() < 0.5 ? 0 : 1;
+        hr[i] = r; ha[i] = (i % 4) * Math.PI / 2 + r * 5.0 + gauss() * (0.07 + 0.2 * r);
+        hw[i] = omega(r); hs[i] = 0.05 + rnd() * 0.08; hc[i] = Math.floor(rnd() * 4);
     }
     function sprite(rgb) {
         const c = document.createElement('canvas'); c.width = c.height = 64;
@@ -202,7 +205,7 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
         g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
         return c;
     }
-    const HAZE = [sprite('110,150,255'), sprite('255,190,140')];
+    const HAZE = [sprite('110,150,255'), sprite('255,170,190'), sprite('120,205,190'), sprite('255,190,130')];
 
     /* ----- geometry ----- */
     let W = 0, H = 0, DPR = 1, cx = 0, cy = 0, R = 0, tilt = 0.52, cphi = 1, sphi = 0;
@@ -256,10 +259,11 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
         ctx.save();
         ctx.translate(cx, cy); ctx.rotate(PHI); ctx.scale(1, tilt);
         const disc = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 1.05);
-        disc.addColorStop(0, 'rgba(255,226,170,0.30)');
-        disc.addColorStop(0.18, 'rgba(255,190,120,0.12)');
-        disc.addColorStop(0.55, 'rgba(110,140,255,0.06)');
-        disc.addColorStop(1, 'rgba(60,80,200,0)');
+        disc.addColorStop(0, 'rgba(255,213,145,0.46)');
+        disc.addColorStop(0.18, 'rgba(255,177,145,0.20)');
+        disc.addColorStop(0.42, 'rgba(142,166,255,0.12)');
+        disc.addColorStop(0.72, 'rgba(114,208,198,0.08)');
+        disc.addColorStop(1, 'rgba(120,150,230,0)');
         ctx.fillStyle = disc;
         ctx.beginPath(); ctx.arc(0, 0, R * 1.05, 0, TAU); ctx.fill();
         ctx.restore();
@@ -269,7 +273,7 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
             const r = hr[i], a = ha[i];
             const X = Math.cos(a) * r * R, Y = Math.sin(a) * r * R * tilt;
             const x = cx + X * cphi - Y * sphi, y = cy + X * sphi + Y * cphi, s = hs[i] * R * 2;
-            ctx.globalAlpha = 0.07;
+            ctx.globalAlpha = 0.12;
             ctx.drawImage(HAZE[hc[i]], x - s / 2, y - s / 2, s, s);
         }
         ctx.globalAlpha = 1;
@@ -284,8 +288,8 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
         }
 
         /* bright core */
-        drawGlow(cx, cy, R * 0.16, '255,236,200', 0.55);
-        drawGlow(cx, cy, R * 0.05, '255,255,255', 0.9);
+        drawGlow(cx, cy, R * 0.19, '255,214,150', 0.48);
+        drawGlow(cx, cy, R * 0.07, '255,255,255', 0.95);
         ctx.globalCompositeOperation = 'source-over';
 
         /* orbit rings of the labelled stars */
@@ -333,13 +337,13 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
                 x = left ? s.sx - 14 - bw : s.sx + 14; y = s.sy - bh / 2;
             }
             s.lx = x; s.ly = y; s.lw = bw; s.lh = bh;
-            ctx.fillStyle = on ? 'rgba(14,20,40,0.92)' : 'rgba(7,10,18,0.82)';
-            ctx.strokeStyle = on ? 'rgba(' + (isHome ? '255,226,170' : s.color.join(',')) + ',0.9)' : 'rgba(255,255,255,0.14)';
+            ctx.fillStyle = on ? 'rgba(255,255,255,0.99)' : 'rgba(255,255,255,0.91)';
+            ctx.strokeStyle = on ? 'rgba(' + (isHome ? '220,155,70' : s.color.join(',')) + ',0.95)' : 'rgba(91,111,148,0.25)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, bh / 2); else ctx.rect(x, y, bw, bh);
             ctx.fill(); ctx.stroke();
-            ctx.fillStyle = on ? '#fff' : '#d4daee';
+            ctx.fillStyle = '#24344f';
             ctx.textAlign = 'left';
             ctx.fillText(text, x + padX, y + bh / 2 + (isHome ? 1 : 0.5));
         }
@@ -351,9 +355,9 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
             const tw = ctx.measureText(hovered.desc).width;
             let x = hovered.lx, y = hovered.ly + hovered.lh + 12;
             if (x + tw > W - 10) x = W - 10 - tw;
-            ctx.fillStyle = 'rgba(7,10,18,0.8)';
+            ctx.fillStyle = 'rgba(255,255,255,0.96)';
             ctx.fillRect(x - 6, y - 9, tw + 12, 18);
-            ctx.fillStyle = '#aab3cf';
+            ctx.fillStyle = '#52627d';
             ctx.fillText(hovered.desc, x, y);
         }
     }
