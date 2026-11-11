@@ -1,7 +1,6 @@
 /* =====================================================
-   Galaxy layout: full-screen spinning galaxy, labelled stars
-   open a side panel. Loaded after style.css, which still
-   provides the content styles (rows, defs, paper, sim ...).
+   Galaxy layout: full-screen galaxy, labelled stars
+   open a full-page panel with telescope effect.
    ===================================================== */
 
 html, body { height: 100%; }
@@ -57,56 +56,95 @@ body { overflow: hidden; background: #f7f8fc; color: var(--ink); }
 .si-list button small { font-weight: 400; font-size: .74rem; color: #68768d; }
 .si-list button:hover, .si-list button:focus-visible { background: rgba(48,92,160,.08); }
 
-/* ---------- side panel ---------- */
+/* ---------- full-page panel with telescope effect ---------- */
 .scrim {
-    position: fixed; inset: 0; z-index: 50; background: rgba(31, 45, 70, .22);
-    opacity: 0; visibility: hidden; transition: opacity .35s, visibility .35s;
+    position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.6);
+    opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s;
 }
 .scrim.open { opacity: 1; visibility: visible; }
 
-/* The panel carries its own colours, so it is always opaque and readable
-   whatever style.css does. Light = paper, dark = night. */
-.panel {
+.fullpage {
     --bg: #f6f5f0; --bg-alt: #eeece4; --card: #ffffff; --ink: #161922; --ink-2: #383d4b;
     --muted: #5a5f6e; --rule: #d9d6cb; --link: #2b40bd; --kick: #8a4a00;
+    position: fixed; inset: 0; z-index: 60;
+    background-color: var(--bg); color: var(--ink);
+    overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; visibility: hidden;
+    transform: scale(0.92);
+    transition: opacity .5s cubic-bezier(.4, 0, .2, 1), visibility .5s, transform .6s cubic-bezier(.34, 1.56, .64, 1);
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
 }
-[data-theme="dark"] .panel {
+.fullpage.open {
+    opacity: 1; visibility: visible;
+    transform: scale(1);
+    border-radius: 0;
+    box-shadow: none;
+}
+.fullpage:focus { outline: none; }
+
+[data-theme="dark"] .fullpage {
     --bg: #0b0f1c; --bg-alt: #101626; --card: #121a2e; --ink: #e6e9f4; --ink-2: #c0c7da;
     --muted: #97a1b8; --rule: #232b42; --link: #9db0ff; --kick: #f2b84b;
 }
-.panel {
-    position: fixed; top: 0; right: 0; bottom: 0; z-index: 60;
-    width: min(54rem, 100vw);
-    background-color: var(--bg); color: var(--ink); border-left: 1px solid var(--rule);
-    overflow-y: auto; overscroll-behavior: contain;
-    transform: translateX(100%); visibility: hidden;
-    transition: transform .45s cubic-bezier(.2, .8, .2, 1), visibility .45s;
-    box-shadow: -30px 0 80px -30px rgba(0, 0, 0, .6);
-}
-.panel.open { transform: none; visibility: visible; }
-.panel:focus { outline: none; }
 
-.panel-bar {
+.fullpage-bar {
     position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
     padding: .7rem 1rem .7rem clamp(1.25rem, 4vw, 3rem);
     background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule);
 }
-.panel-crumb { font-family: var(--mono); font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--kick); }
-.panel-close {
+.fullpage-crumb { font-family: var(--mono); font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--kick); }
+.fullpage-close {
     width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%;
     border: 1px solid var(--rule); background: var(--card); color: var(--ink); font-size: 1.05rem; cursor: pointer;
-    transition: transform .2s, border-color .2s;
+    transition: transform .3s, border-color .2s, background .2s;
 }
-.panel-close:hover { border-color: var(--ink-2); transform: rotate(90deg); }
+.fullpage-close:hover { border-color: var(--ink-2); transform: rotate(90deg); background: var(--bg-alt); }
 
-.panel-body { padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem; }
+.fullpage-body { padding: clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) 4rem; max-width: 72rem; margin: 0 auto; }
 .pane .kicker:first-child { margin-top: 0; }
 .pane-divider { height: 1px; background: var(--rule); margin: 3rem 0 2.6rem; }
 .pane .site-footer { padding: 3rem 0 0; text-align: left; }
 .pane .footer-quote { margin-left: 0; }
 
-/* the old per-section scroll offsets are no longer needed */
-html { scroll-behavior: auto; }
+/* Telescope zoom-in animation for content */
+@keyframes telescope-in {
+    from { opacity: 0; transform: scale(0.95) translateY(20px); filter: blur(4px); }
+    to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+.pane:not([hidden]) { animation: telescope-in .6s cubic-bezier(.34, 1.56, .64, 1) both; }
+
+/* Research subsections */
+.research-subsection { margin: 1.2rem 0; }
+.research-subsection h4 { margin: 0 0 .5rem; color: var(--ink); font-size: .95rem; font-weight: 600; }
+.formula { padding: .6rem 1rem; background: var(--bg-alt); border-radius: 6px; font-family: var(--mono); font-size: .9rem; text-align: center; }
+
+.criteria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: .8rem 0; }
+.criteria-item { padding: .6rem .8rem; background: var(--bg-alt); border-radius: 6px; text-align: center; }
+.criteria-item strong { display: block; color: var(--ink); font-size: .85rem; }
+.criteria-item span { display: block; margin-top: .2rem; color: var(--muted); font: .72rem var(--mono); }
+
+.results-table { margin: .8rem 0; overflow-x: auto; }
+.results-table table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+.results-table th, .results-table td { padding: .5rem .8rem; border: 1px solid var(--rule); text-align: left; }
+.results-table th { background: var(--bg-alt); color: var(--ink); font-weight: 600; }
+.results-table td { color: var(--ink-2); }
+
+/* Training timeline improvements */
+.training-timeline { display: grid; gap: 0; margin-top: 1.5rem; }
+.training-year { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--rule); }
+.training-year h3 { margin: 0; color: var(--kick); font: 400 1.6rem var(--serif); }
+.training-list { display: grid; gap: .85rem; margin: 0; padding: 0; list-style: none; }
+.training-list li { display: grid; grid-template-columns: 8.2rem 1fr; gap: .8rem; align-items: start; }
+.training-list time { color: var(--muted); font: 500 .7rem var(--mono); padding-top: .12rem; }
+.training-list b { display: block; color: var(--ink); font-size: .9rem; line-height: 1.4; }
+.training-list span { display: block; margin-top: .2rem; color: var(--muted); font-size: .8rem; }
+
+@media (max-width: 720px) {
+    .training-year { grid-template-columns: 3.5rem 1fr; }
+    .training-list li { grid-template-columns: 1fr; gap: .2rem; }
+    .criteria-grid { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 640px) {
     .g-head { padding: .8rem .9rem; }
@@ -115,16 +153,12 @@ html { scroll-behavior: auto; }
     .g-hint { bottom: 4.2rem; }
     .star-index { left: 50%; transform: translateX(-50%); bottom: 1rem; }
     .si-list { left: 50%; transform: translateX(-50%); }
+    .fullpage { border-radius: 12px; }
 }
+
 @media print {
     body { overflow: visible; }
     #galaxy, .g-head, .g-hint, .star-index, .scrim { display: none !important; }
-    .panel { position: static; transform: none; visibility: visible; width: auto; box-shadow: none; border: none; }
+    .fullpage { position: static; transform: none; visibility: visible; opacity: 1; box-shadow: none; border-radius: 0; }
     .pane[hidden] { display: block !important; }
 }
-
-/* Light galaxy finishing touches */
-.g-head { text-shadow: 0 1px 14px rgba(255,255,255,.9); }
-.g-name { color: #182844; }
-.g-icon:focus-visible, .si-btn:focus-visible, .panel-close:focus-visible { outline: 3px solid #6c8ee0; outline-offset: 3px; }
-@media (max-width: 640px) { .g-head .btn { padding: .48rem .7rem; } .g-tools { gap: .08rem; } }
