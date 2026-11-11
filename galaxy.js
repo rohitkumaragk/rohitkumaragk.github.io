@@ -302,7 +302,7 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
         }
 
         /* labelled stars + labels */
-        const fs = W < 640 ? 11 : 13;
+        const fs = W < 640 ? 12 : 14;
         const pulse = reduceMotion ? 0 : Math.sin(clock * 2.2);
         HOME.sx = cx; HOME.sy = cy;
         for (const s of STARS) {
@@ -312,8 +312,8 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
         ctx.globalCompositeOperation = 'lighter';
         for (const s of STARS) {
             const on = s === hovered, rgb = s.color.join(',');
-            const rad = (on ? 7 : 5) + pulse * 0.8;
-            drawGlow(s.sx, s.sy, rad * 5, rgb, on ? 0.6 : 0.38);
+            const rad = (on ? 8 : 6) + pulse * 0.8;
+            drawGlow(s.sx, s.sy, rad * 5, rgb, on ? 0.7 : 0.5);
             drawGlow(s.sx, s.sy, rad * 1.6, '255,255,255', 0.85);
         }
         ctx.globalCompositeOperation = 'source-over';
@@ -333,7 +333,7 @@ document.addEventListener('click', e => { if (!indexList.hidden && !e.target.clo
                 x = left ? s.sx - 14 - bw : s.sx + 14; y = s.sy - bh / 2;
             }
             s.lx = x; s.ly = y; s.lw = bw; s.lh = bh;
-            ctx.fillStyle = on ? 'rgba(14,20,40,0.92)' : 'rgba(7,10,18,0.62)';
+            ctx.fillStyle = on ? 'rgba(14,20,40,0.92)' : 'rgba(7,10,18,0.82)';
             ctx.strokeStyle = on ? 'rgba(' + (isHome ? '255,226,170' : s.color.join(',')) + ',0.9)' : 'rgba(255,255,255,0.14)';
             ctx.lineWidth = 1;
             ctx.beginPath();

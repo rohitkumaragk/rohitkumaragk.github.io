@@ -64,10 +64,20 @@ body { overflow: hidden; background: #03050d; color: var(--ink); }
 }
 .scrim.open { opacity: 1; visibility: visible; }
 
+/* The panel carries its own colours, so it is always opaque and readable
+   whatever style.css does. Light = paper, dark = night. */
+.panel {
+    --bg: #f6f5f0; --bg-alt: #eeece4; --card: #ffffff; --ink: #161922; --ink-2: #383d4b;
+    --muted: #5a5f6e; --rule: #d9d6cb; --link: #2b40bd; --kick: #8a4a00;
+}
+[data-theme="dark"] .panel {
+    --bg: #0b0f1c; --bg-alt: #101626; --card: #121a2e; --ink: #e6e9f4; --ink-2: #c0c7da;
+    --muted: #97a1b8; --rule: #232b42; --link: #9db0ff; --kick: #f2b84b;
+}
 .panel {
     position: fixed; top: 0; right: 0; bottom: 0; z-index: 60;
     width: min(54rem, 100vw);
-    background: var(--bg); color: var(--ink); border-left: 1px solid var(--rule);
+    background-color: var(--bg); color: var(--ink); border-left: 1px solid var(--rule);
     overflow-y: auto; overscroll-behavior: contain;
     transform: translateX(100%); visibility: hidden;
     transition: transform .45s cubic-bezier(.2, .8, .2, 1), visibility .45s;
