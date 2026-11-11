@@ -1,4 +1,4 @@
-/* Load recent Blogger posts through its public JSONP feed. Static featured posts remain as fallback. */
+/* Load recent Blogger posts through its public JSONP feed. */
 (function () {
   const target = document.getElementById('blogPosts');
   const note = document.getElementById('blogFeedNote');
@@ -7,7 +7,7 @@
   const callback = 'renderQuestionEverythingFeed';
   const script = document.createElement('script');
   let finished = false;
-  const timeout = setTimeout(() => { if (!finished && note) note.textContent = 'Showing selected articles. Open the blog archive for the complete and latest list.'; }, 6500);
+  const timeout = setTimeout(() => { if (!finished && note) note.textContent = 'Showing selected articles. Open the blog archive for the complete list.'; }, 6500);
   window[callback] = function (feed) {
     finished = true; clearTimeout(timeout);
     const entries = (feed && feed.feed && feed.feed.entry) || [];
@@ -26,9 +26,9 @@
       card.append(type,h,p,read); return card;
     });
     target.replaceChildren(...cards);
-    if (note) note.textContent = 'Recent posts are loaded from the public blog feed. Use the topic links above to explore more.';
+    if (note) note.textContent = 'Recent posts loaded from the public blog feed.';
   };
-  script.onerror = function () { clearTimeout(timeout); if (note) note.textContent = 'Showing selected articles. The live blog feed could not be reached; the archive link remains available.'; };
+  script.onerror = function () { clearTimeout(timeout); if (note) note.textContent = 'Showing selected articles. The live feed could not be reached.'; };
   script.src = 'https://questioneverythingagk.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=12&callback=' + callback;
   document.head.appendChild(script);
   window.addEventListener('pagehide', () => { try { delete window[callback]; } catch (e) {} });
